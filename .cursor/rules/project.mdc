@@ -1,0 +1,91 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+{
+  "projectType": "Neovim Configuration",
+  "framework": "LazyVim",
+  "projectPurpose": "A customized Neovim setup based on LazyVim with tailored plugins and configuration",
+  "structure": {
+    "rootFiles": {
+      "init.lua": "Entry point that loads the Lazy plugin manager configuration",
+      "lazy-lock.json": "Lock file containing exact plugin versions",
+      "stylua.toml": "Configuration for Lua code formatting",
+      ".neoconf.json": "Neovim LSP configuration"
+    },
+    "mainDirectories": {
+      "lua": {
+        "config": {
+          "description": "Core Neovim configuration files",
+          "files": {
+            "lazy.lua": "Plugin manager setup and core plugin imports",
+            "options.lua": "Vim options configuration",
+            "keymaps.lua": "Key mapping definitions",
+            "autocmds.lua": "Autocommand definitions"
+          }
+        },
+        "plugins": {
+          "description": "Plugin-specific configurations",
+          "files": {
+            "example.lua": "Example plugin configuration (not loaded)",
+            "colorscheme.lua": "Theme configuration",
+            "cmp.lua": "Completion plugin configuration",
+            "ai.lua": "AI-related plugins configuration",
+            "copilot-chat.lua": "GitHub Copilot Chat configuration",
+            "spectre.lua": "Search and replace plugin configuration",
+            "visualmulti.lua": "Multiple cursor configuration"
+          }
+        },
+        "themes": {
+          "description": "Custom color themes",
+          "files": {
+            "cursor_dark.lua": "Custom dark theme with Cursor-specific highlights",
+            "dark_void2.lua": "Alternative dark theme"
+          }
+        }
+      }
+    }
+  },
+  "keyFeatures": {
+    "pluginSystem": "Uses lazy.nvim for plugin management with LazyVim as the base configuration",
+    "lspSupport": "Multiple language server configurations for TypeScript, JSON, and other languages",
+    "colorScheme": "Custom themes with dynamic highlight configuration",
+    "aiFeatures": "GitHub Copilot integration with both completion and chat features",
+    "uiEnhancements": "Various UI improvements including animations, statusline customization, and buffer management"
+  },
+  "pluginCategories": {
+    "core": ["LazyVim", "lazy.nvim", "plenary.nvim", "nui.nvim"],
+    "lsp": ["nvim-lspconfig", "mason.nvim", "mason-lspconfig.nvim", "SchemaStore.nvim"],
+    "completion": ["nvim-cmp", "blink.cmp", "friendly-snippets"],
+    "treesitter": ["nvim-treesitter", "nvim-treesitter-textobjects", "nvim-ts-autotag", "ts-comments.nvim"],
+    "ui": ["lualine.nvim", "bufferline.nvim", "mini.animate", "mini.icons", "which-key.nvim", "noice.nvim", "trouble.nvim", "todo-comments.nvim"],
+    "themes": ["catppuccin", "tokyonight.nvim"],
+    "ai": ["copilot.lua", "CopilotChat.nvim"],
+    "editing": ["mini.pairs", "mini.ai", "vim-visual-multi", "flash.nvim", "nvim-spectre"],
+    "git": ["gitsigns.nvim"],
+    "tools": ["telescope.nvim", "persistence.nvim", "conform.nvim", "nvim-lint"]
+  },
+  "customizations": {
+    "keyMappings": "Custom command line access with <leader><CR>",
+    "themes": "Custom themes with specific highlight groups",
+    "plugins": "Extensions to the LazyVim defaults with additional AI tools, visual-multi support, and language-specific enhancements"
+  },
+  "developerContext": {
+    "configurationStyle": "Modular configuration split into separate files for easier maintenance",
+    "extensionPattern": "LazyVim configuration is extended rather than replaced, maintaining compatibility with upstream updates",
+    "pluginPattern": "Plugins are configured with the LazyVim spec format using return tables with configuration options"
+  },
+  "fileNamingConventions": {
+    "luaFiles": "Lowercase with underscore separators for multi-word filenames",
+    "configFiles": "Named after their purpose (options.lua, keymaps.lua, etc.)",
+    "pluginFiles": "Named after the plugin they configure"
+  },
+  "bestPracticesForModification": {
+    "addingPlugins": "Create new files in lua/plugins/ with proper configuration format",
+    "customizingExisting": "Override options of LazyVim plugins using the opts parameter",
+    "themingChanges": "Modify lua/themes/ or lua/plugins/colorscheme.lua",
+    "keyMappingChanges": "Add to lua/config/keymaps.lua",
+    "vimOptions": "Add to lua/config/options.lua"
+  }
+} 
