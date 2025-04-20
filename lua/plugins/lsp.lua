@@ -1,4 +1,5 @@
 return {
+
   -- Override default LSP configuration
   {
     "neovim/nvim-lspconfig",
@@ -34,4 +35,3 @@ return {
     end,
   },
 }
-
