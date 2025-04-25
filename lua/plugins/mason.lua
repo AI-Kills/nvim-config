@@ -9,17 +9,16 @@ return {
         "clangd",
         "json-lsp",
         "typescript-language-server",
-        
         -- Formatters
         "stylua",
         "rustfmt",
         "clang-format",
         "prettierd",
-        
         -- Linters
         "shellcheck",
         "luacheck",
       },
     },
   },
-} 
+}
+

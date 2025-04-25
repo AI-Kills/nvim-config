@@ -20,6 +20,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.rust" }, -- add Rust language support
+    { import = "lazyvim.plugins.extras.lang.python" }, -- add Python language support
     { import = "plugins" },
   },
   defaults = {

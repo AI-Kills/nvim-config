@@ -4,5 +4,3 @@
 vim.opt.termguicolors = true
 vim.api.nvim_set_option("winblend", 0)
 vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
--- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "pyright"
