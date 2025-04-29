@@ -32,7 +32,7 @@ return {
     ["@variable.builtin"] = { fg = "#569CD6" }, -- this, arguments, etc.
 
     -- Functions
-    ["@function"] = { fg = "#efb080", bold = true }, -- Dichiarazioni di funzione
+    ["@function"] = { fg = "#efb080", bold = false }, -- Dichiarazioni di funzione
     ["@function.call"] = { fg = "#efb080", bold = false }, -- Chiamate di funzione
     ["@function.builtin"] = { fg = "#569CD6" }, -- Funzioni JS standard (es. parseInt)
 
