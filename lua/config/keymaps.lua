@@ -23,4 +23,4 @@ vim.keymap.set("n", "<leader>h", ":split<CR>", { noremap = true, silent = true, 
 
 -- move among splits
 vim.keymap.set("n", "<leader>,", "<C-w>l", { noremap = true, silent = true, desc = "close buffer" })
-vim.keymap.set("n", "<leader>;", "<C-w>h", { noremap = true, silent = true, desc = "close buffer" })
+vim.keymap.set("n", "<leader>-", "<C-w>h", { noremap = true, silent = true, desc = "close buffer" })
