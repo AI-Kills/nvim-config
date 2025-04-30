@@ -4,3 +4,7 @@
 vim.opt.termguicolors = true
 vim.api.nvim_set_option("winblend", 0)
 vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
+
+vim.g.lazyvim_python_lsp = "pyright"
+-- Set to "ruff_lsp" to use the old LSP implementation version.
+vim.g.lazyvim_python_ruff = "ruff"

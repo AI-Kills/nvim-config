@@ -12,3 +12,15 @@ vim.api.nvim_set_keymap(
   ':lua require"telescope.builtin".find_files({ hidden = true })<CR>',
   { noremap = true, silent = true }
 )
+
+-- move among buffers
+vim.keymap.set("n", ".", ":bnext<CR>", { noremap = true, silent = true, desc = "go to next buffer" })
+vim.keymap.set("n", ",", ":bprevious<CR>", { noremap = true, silent = true, desc = "go to previous buffer" })
+
+-- create splits
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>", { noremap = true, silent = true, desc = "vertical split" })
+vim.keymap.set("n", "<leader>h", ":split<CR>", { noremap = true, silent = true, desc = "horizontal split" })
+
+-- move among splits
+vim.keymap.set("n", "<leader>,", "<C-w>l", { noremap = true, silent = true, desc = "close buffer" })
+vim.keymap.set("n", "<leader>;", "<C-w>h", { noremap = true, silent = true, desc = "close buffer" })

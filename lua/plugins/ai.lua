@@ -9,9 +9,6 @@ return {
         auto_trigger = true,
         keymap = {
           accept = "<Tab>",
-          next = "<C-n>",
-          prev = "<C-p>",
-          dismiss = "<C-h>",
         },
       },
       panel = { enabled = false },
