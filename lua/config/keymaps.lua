@@ -1,6 +1,3 @@
--- open the command line in normal mode with leader + enter
-vim.keymap.set("n", "<leader>d", ":", { noremap = true, silent = false, desc = "Open command line" })
-
 vim.keymap.set("n", "<leader>sa", ":wa<CR>", {
   noremap = true,
   silent = true,

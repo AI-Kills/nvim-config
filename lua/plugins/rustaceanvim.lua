@@ -62,9 +62,6 @@ return {
       if uname == "Linux" then
         library_path = package_path .. "/extension/lldb/lib/liblldb.so"
       end
-      opts.dap = {
-        adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
-      }
     end
     vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
     if vim.fn.executable("rust-analyzer") == 0 then
