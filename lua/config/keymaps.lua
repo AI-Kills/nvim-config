@@ -1,5 +1,11 @@
 -- open the command line in normal mode with leader + enter
-vim.keymap.set("n", "<leader><leader>", ":", { noremap = true, silent = false, desc = "Open command line" })
+vim.keymap.set("n", "<leader>d", ":", { noremap = true, silent = false, desc = "Open command line" })
+
+vim.keymap.set("n", "<leader>sa", ":wa<CR>", {
+  noremap = true,
+  silent = true,
+  desc = "Save all",
+})
 
 -- marks
 vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all local marks" })
