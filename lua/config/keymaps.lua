@@ -9,6 +9,9 @@ vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all loca
 
 vim.keymap.set("n", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
 
+-- Remove LazyVim's default <leader>qq mapping
+vim.keymap.del("n", "<leader>qq")
+
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>ff",
