@@ -52,6 +52,16 @@ return {
         },
       },
     },
+    -- Adding specific rustfmt configuration to avoid using rustup
+    tools = {
+      -- Configure rustfmt to not use rustup
+      rustfmt = {
+        -- Use cargo-installed rustfmt instead of rustup-installed version
+        rangeFormatting = {
+          enable = true,
+        },
+      },
+    },
   },
   config = function(_, opts)
     if LazyVim.has("mason.nvim") then

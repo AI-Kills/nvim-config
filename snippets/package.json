@@ -1,7 +1,7 @@
 {
-  "name": "c-snippets",
-  "displayName": "C Language Snippets",
-  "description": "Custom C language snippets for Neovim",
+  "name": "custom-snippets",
+  "displayName": "Custom Language Snippets",
+  "description": "Custom language snippets for Neovim",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.11.0"
@@ -11,6 +11,18 @@
       {
         "language": "c",
         "path": "./c/snippets.json"
+      },
+      {
+        "language": ["javascriptreact", "typescriptreact"],
+        "path": "./jsx/snippets.json"
+      },
+      {
+        "language": ["javascript", "typescript"],
+        "path": "./javascript/snippets.json"
+      },
+      {
+        "language": "python",
+        "path": "./python/snippets.json"
       }
     ]
   }

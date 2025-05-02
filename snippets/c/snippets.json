@@ -1,131 +1,26 @@
 {
-  "C Snippets": {
+  "Printf": {
+    "prefix": "pr",
+    "body": ["printf(\"${1:%s}\\n\"${1/[^%]*/%s/g}${1/[^%]*/%s/g:+, }$2);$0"],
+    "description": "Printf with newline"
+  },
+  "Main Function": {
     "prefix": "main",
-    "body": [
-      "#include <stdio.h>",
-      "",
-      "int main(int argc, char *argv[]) {",
-      "\t$0",
-      "\treturn 0;",
-      "}"
-    ],
-    "description": "Standard C main function"
+    "body": ["int main(int argc, char *argv[]) {", "\t$1", "\treturn 0;", "}"],
+    "description": "Main function custom"
   },
   "For Loop": {
     "prefix": "for",
     "body": [
-      "for (int ${1:i} = ${2:0}; ${1:i} < ${3:n}; ${1:i}++) {",
-      "\t$0",
+      "for (int ${1:i} = ${2:0}; ${1:i} < ${3:count}; ${1:i}${4:++}) {",
+      "\t$5",
       "}"
     ],
     "description": "For loop"
   },
-  "While Loop": {
-    "prefix": "while",
-    "body": [
-      "while (${1:condition}) {",
-      "\t$0",
-      "}"
-    ],
-    "description": "While loop"
-  },
   "If Statement": {
     "prefix": "if",
-    "body": [
-      "if (${1:condition}) {",
-      "\t$0",
-      "}"
-    ],
+    "body": ["if ($1) {", "\t$2", "}"],
     "description": "If statement"
-  },
-  "If-Else Statement": {
-    "prefix": "ifelse",
-    "body": [
-      "if (${1:condition}) {",
-      "\t$2",
-      "} else {",
-      "\t$0",
-      "}"
-    ],
-    "description": "If-else statement"
-  },
-  "Function": {
-    "prefix": "func",
-    "body": [
-      "${1:void} ${2:function_name}(${3:void}) {",
-      "\t$0",
-      "}"
-    ],
-    "description": "Function definition"
-  },
-  "Struct": {
-    "prefix": "struct",
-    "body": [
-      "struct ${1:name} {",
-      "\t$0",
-      "};"
-    ],
-    "description": "Struct definition"
-  },
-  "Include": {
-    "prefix": "inc",
-    "body": "#include <${1:stdio.h}>$0",
-    "description": "Include statement"
-  },
-  "Include Local": {
-    "prefix": "incl",
-    "body": "#include \"${1:header.h}\"$0",
-    "description": "Include local header"
-  },
-  "Printf": {
-    "prefix": "printf",
-    "body": "printf(\"${1:%s}\\n\"${1/([^%]|%%)*(%.)?.*/(?2:, :\\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\\);)/}",
-    "description": "Printf statement"
-  },
-  "Scanf": {
-    "prefix": "scanf",
-    "body": "scanf(\"${1:%d}\"${1/([^%]|%%)*(%.)?.*/(?2:, :\\);)/}&$2${1/([^%]|%%)*(%.)?.*/(?2:\\);)/}",
-    "description": "Scanf statement"
-  },
-  "Malloc": {
-    "prefix": "malloc",
-    "body": [
-      "${1:type} *${2:var} = (${1:type} *)malloc(${3:size} * sizeof(${1:type}));",
-      "if (${2:var} == NULL) {",
-      "\tfprintf(stderr, \"Memory allocation failed\\n\");",
-      "\t${4:exit(1);}",
-      "}",
-      "$0"
-    ],
-    "description": "Malloc with error checking"
-  },
-  "Calloc": {
-    "prefix": "calloc",
-    "body": [
-      "${1:type} *${2:var} = (${1:type} *)calloc(${3:count}, sizeof(${1:type}));",
-      "if (${2:var} == NULL) {",
-      "\tfprintf(stderr, \"Memory allocation failed\\n\");",
-      "\t${4:exit(1);}",
-      "}",
-      "$0"
-    ],
-    "description": "Calloc with error checking"
-  },
-  "Switch": {
-    "prefix": "switch",
-    "body": [
-      "switch (${1:expression}) {",
-      "\tcase ${2:value1}:",
-      "\t\t$3",
-      "\t\tbreak;",
-      "\tcase ${4:value2}:",
-      "\t\t$5",
-      "\t\tbreak;",
-      "\tdefault:",
-      "\t\t$0",
-      "\t\tbreak;",
-      "}"
-    ],
-    "description": "Switch statement"
   }
-} 
+}

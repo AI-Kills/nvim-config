@@ -1,0 +1,162 @@
+{
+  "useState Hook": {
+    "prefix": "us",
+    "body": [
+      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initialState});"
+    ],
+    "description": "Dichiarazione di useState hook"
+  },
+  "Import useState": {
+    "prefix": "usi",
+    "body": [
+      "import { useState } from 'react';"
+    ],
+    "description": "Import useState hook"
+  },
+  "useEffect Hook": {
+    "prefix": "ue",
+    "body": [
+      "useEffect(() => {",
+      "\t${1:// effect code}",
+      "\treturn () => {",
+      "\t\t${2:// cleanup code}",
+      "\t};",
+      "}, [${3:dependencies}]);"
+    ],
+    "description": "useEffect con cleanup"
+  },
+  "Import useEffect": {
+    "prefix": "uei",
+    "body": [
+      "import { useEffect } from 'react';"
+    ],
+    "description": "Import useEffect hook"
+  },
+  "useEffect Hook No Cleanup": {
+    "prefix": "uenc",
+    "body": [
+      "useEffect(() => {",
+      "\t${1:// effect code}",
+      "}, [${2:dependencies}]);"
+    ],
+    "description": "useEffect senza cleanup"
+  },
+  "useContext Hook": {
+    "prefix": "uc",
+    "body": [
+      "const ${1:contextValue} = useContext(${2:ContextName});"
+    ],
+    "description": "useContext hook"
+  },
+  "Import useContext": {
+    "prefix": "uci",
+    "body": [
+      "import { useContext } from 'react';"
+    ],
+    "description": "Import useContext hook"
+  },
+  "useRef Hook": {
+    "prefix": "ur",
+    "body": [
+      "const ${1:ref} = useRef(${2:initialValue});"
+    ],
+    "description": "useRef hook"
+  },
+  "Import useRef": {
+    "prefix": "uri",
+    "body": [
+      "import { useRef } from 'react';"
+    ],
+    "description": "Import useRef hook"
+  },
+  "useCallback Hook": {
+    "prefix": "ucb",
+    "body": [
+      "const ${1:callback} = useCallback(() => {",
+      "\t${2:// callback logic}",
+      "}, [${3:dependencies}]);"
+    ],
+    "description": "useCallback hook"
+  },
+  "Import useCallback": {
+    "prefix": "ucbi",
+    "body": [
+      "import { useCallback } from 'react';"
+    ],
+    "description": "Import useCallback hook"
+  },
+  "useMemo Hook": {
+    "prefix": "um",
+    "body": [
+      "const ${1:memoizedValue} = useMemo(() => ${2:computeExpensiveValue}(${3:a}, ${4:b}), [${5:a}, ${6:b}]);"
+    ],
+    "description": "useMemo hook"
+  },
+  "Import useMemo": {
+    "prefix": "umi",
+    "body": [
+      "import { useMemo } from 'react';"
+    ],
+    "description": "Import useMemo hook"
+  },
+  "Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "const ${1:ComponentName} = (${2:props}) => {",
+      "\treturn (",
+      "\t\t<${3:div}>",
+      "\t\t\t${4:content}",
+      "\t\t</${3:div}>",
+      "\t);",
+      "};",
+      "",
+      "export default ${1:ComponentName};"
+    ],
+    "description": "React functional component"
+  },
+  "Import React": {
+    "prefix": "reacti",
+    "body": [
+      "import React from 'react';"
+    ],
+    "description": "Import React"
+  },
+  "Functional Component with Props": {
+    "prefix": "rfcp",
+    "body": [
+      "const ${1:ComponentName} = ({ ${2:prop1}, ${3:prop2} }) => {",
+      "\treturn (",
+      "\t\t<${4:div}>",
+      "\t\t\t${5:content}",
+      "\t\t</${4:div}>",
+      "\t);",
+      "};",
+      "",
+      "export default ${1:ComponentName};"
+    ],
+    "description": "React functional component with destructured props"
+  },
+  "Fragment": {
+    "prefix": "frag",
+    "body": [
+      "<>",
+      "\t${1:content}",
+      "</>"
+    ],
+    "description": "React Fragment"
+  },
+  "Import common React hooks": {
+    "prefix": "reacthooksi",
+    "body": [
+      "import { useState, useEffect, useRef, useContext } from 'react';"
+    ],
+    "description": "Import common React hooks"
+  },
+  "Use Client": {
+    "prefix": "uc",
+    "body": [
+      "'use client';"
+    ],
+    "description": "Next.js use client directive"
+  }
+} 

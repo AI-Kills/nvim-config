@@ -11,7 +11,7 @@ return {
         "typescript-language-server",
         -- Formatters
         "stylua",
-        "rustfmt",
+        -- "rustfmt", -- Removing rustfmt as it should not be installed via rustup/mason
         "clang-format",
         "prettierd",
         -- Linters

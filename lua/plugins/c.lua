@@ -45,22 +45,6 @@ return {
     end,
   },
 
-  -- 4. Add snippets for C
-  {
-    "L3MON4D3/LuaSnip",
-    config = function(_, _)
-      -- Load our custom snippets
-      require("luasnip.loaders.from_vscode").lazy_load({
-        paths = { vim.fn.stdpath("config") .. "/snippets" },
-      })
-      -- Make sure C snippets from friendly-snippets are loaded as well
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end,
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-    },
-  },
-
   -- 5. Configure formatting for C files
   {
     "stevearc/conform.nvim",

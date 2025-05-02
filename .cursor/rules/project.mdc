@@ -34,14 +34,18 @@ alwaysApply: true
             "ai.lua": "AI-related plugins configuration",
             "copilot-chat.lua": "GitHub Copilot Chat configuration",
             "spectre.lua": "Search and replace plugin configuration",
-            "visualmulti.lua": "Multiple cursor configuration"
+            "visualmulti.lua": "Multiple cursor configuration",
+            "rustaceanvim.lua": "Rust development configuration",
+            "lsp.lua": "LSP client configuration",
+            "mason.lua": "LSP/DAP/linter installer configuration",
+            "harpoon.lua": "File navigation configuration",
+            "treesitter.lua": "Syntax highlighting configuration"
           }
         },
         "themes": {
           "description": "Custom color themes",
           "files": {
-            "cursor_dark.lua": "Custom dark theme with Cursor-specific highlights",
-            "dark_void2.lua": "Alternative dark theme"
+            "cursor_dark.lua": "Custom dark theme with Cursor-specific highlights"
           }
         }
       }
@@ -49,32 +53,41 @@ alwaysApply: true
   },
   "keyFeatures": {
     "pluginSystem": "Uses lazy.nvim for plugin management with LazyVim as the base configuration",
-    "lspSupport": "Multiple language server configurations for TypeScript, JSON, and other languages",
+    "lspSupport": "Multiple language server configurations for TypeScript, JSON, Rust and other languages",
     "colorScheme": "Custom themes with dynamic highlight configuration",
     "aiFeatures": "GitHub Copilot integration with both completion and chat features",
-    "uiEnhancements": "Various UI improvements including animations, statusline customization, and buffer management"
+    "uiEnhancements": "Various UI improvements including animations, statusline customization, and buffer management",
+    "customKeymaps": "Extended key mappings for buffer navigation, split management, and plugin shortcuts"
   },
   "pluginCategories": {
     "core": ["LazyVim", "lazy.nvim", "plenary.nvim", "nui.nvim"],
-    "lsp": ["nvim-lspconfig", "mason.nvim", "mason-lspconfig.nvim", "SchemaStore.nvim"],
-    "completion": ["nvim-cmp", "blink.cmp", "friendly-snippets"],
+    "lsp": ["nvim-lspconfig", "mason.nvim", "mason-lspconfig.nvim", "SchemaStore.nvim", "rustaceanvim"],
+    "completion": ["nvim-cmp", "blink.cmp", "friendly-snippets", "LuaSnip"],
     "treesitter": ["nvim-treesitter", "nvim-treesitter-textobjects", "nvim-ts-autotag", "ts-comments.nvim"],
     "ui": ["lualine.nvim", "bufferline.nvim", "mini.animate", "mini.icons", "which-key.nvim", "noice.nvim", "trouble.nvim", "todo-comments.nvim"],
     "themes": ["catppuccin", "tokyonight.nvim"],
     "ai": ["copilot.lua", "CopilotChat.nvim"],
-    "editing": ["mini.pairs", "mini.ai", "vim-visual-multi", "flash.nvim", "nvim-spectre"],
+    "editing": ["mini.pairs", "mini.ai", "vim-visual-multi", "visual-surround.nvim", "flash.nvim", "nvim-spectre"],
     "git": ["gitsigns.nvim"],
-    "tools": ["telescope.nvim", "persistence.nvim", "conform.nvim", "nvim-lint"]
+    "tools": ["telescope.nvim", "persistence.nvim", "conform.nvim", "nvim-lint", "harpoon"]
   },
   "customizations": {
-    "keyMappings": "Custom command line access with <leader><CR>",
-    "themes": "Custom themes with specific highlight groups",
-    "plugins": "Extensions to the LazyVim defaults with additional AI tools, visual-multi support, and language-specific enhancements"
+    "keyMappings": {
+      "fileSaving": "<leader>sa for save all files",
+      "bufferNavigation": ". for next buffer, , for previous buffer",
+      "splitManagement": "<leader>v for vertical split, <leader>h for horizontal split",
+      "markManagement": "<leader>dm to delete all marks, <leader>k to go to mark",
+      "fileSearch": "<Leader>ff for finding files with Telescope including hidden files",
+      "searchReplace": "<leader>sr to open Spectre for advanced search and replace"
+    },
+    "themes": "Custom cursor_dark theme with specific highlight groups for syntax elements and UI components",
+    "plugins": "Extensions to the LazyVim defaults with additional AI tools, Rust development support, and custom behavior for specific plugins like Spectre"
   },
   "developerContext": {
     "configurationStyle": "Modular configuration split into separate files for easier maintenance",
     "extensionPattern": "LazyVim configuration is extended rather than replaced, maintaining compatibility with upstream updates",
-    "pluginPattern": "Plugins are configured with the LazyVim spec format using return tables with configuration options"
+    "pluginPattern": "Plugins are configured with the LazyVim spec format using return tables with configuration options",
+    "autocommandsPattern": "Custom autocommands are defined to enhance specific features like diagnostic highlighting and plugin behavior"
   },
   "fileNamingConventions": {
     "luaFiles": "Lowercase with underscore separators for multi-word filenames",
@@ -84,8 +97,21 @@ alwaysApply: true
   "bestPracticesForModification": {
     "addingPlugins": "Create new files in lua/plugins/ with proper configuration format",
     "customizingExisting": "Override options of LazyVim plugins using the opts parameter",
-    "themingChanges": "Modify lua/themes/ or lua/plugins/colorscheme.lua",
+    "themingChanges": "Modify lua/themes/cursor_dark.lua or lua/plugins/colorscheme.lua",
     "keyMappingChanges": "Add to lua/config/keymaps.lua",
-    "vimOptions": "Add to lua/config/options.lua"
+    "vimOptions": "Add to lua/config/options.lua",
+    "autocommands": "Add to lua/config/autocmds.lua using vim.api.nvim_create_autocmd"
+  },
+  "aiIntegration": {
+    "copilot": {
+      "completion": "Configured with auto-trigger and Tab key for suggestion acceptance",
+      "chat": "CopilotChat configured with GPT-4 model for programming assistance"
+    }
+  },
+  "languageSupport": {
+    "typescript": "Included via LazyVim extras",
+    "json": "Included via LazyVim extras with SchemaStore integration",
+    "rust": "Custom configuration via rustaceanvim plugin",
+    "python": "Configured with Pyright LSP and Ruff for linting"
   }
-} 
+}

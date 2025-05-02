@@ -1,0 +1,456 @@
+{
+  "Import common data libraries": {
+    "prefix": "impdata",
+    "body": [
+      "import numpy as np",
+      "import pandas as pd",
+      "import matplotlib.pyplot as plt",
+      "import seaborn as sns"
+    ],
+    "description": "Import common data science libraries"
+  },
+  "Import NumPy": {
+    "prefix": "npi",
+    "body": [
+      "import numpy as np"
+    ],
+    "description": "Import NumPy"
+  },
+  "Import Pandas": {
+    "prefix": "pdi",
+    "body": [
+      "import pandas as pd"
+    ],
+    "description": "Import Pandas"
+  },
+  "Import Matplotlib": {
+    "prefix": "plti",
+    "body": [
+      "import matplotlib.pyplot as plt"
+    ],
+    "description": "Import Matplotlib pyplot"
+  },
+  "Import Seaborn": {
+    "prefix": "snsi",
+    "body": [
+      "import seaborn as sns"
+    ],
+    "description": "Import Seaborn"
+  },
+  "Import scikit-learn": {
+    "prefix": "impsklearn",
+    "body": [
+      "from sklearn.model_selection import train_test_split",
+      "from sklearn.preprocessing import StandardScaler",
+      "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score"
+    ],
+    "description": "Import scikit-learn utilities"
+  },
+  "Import sklearn train_test_split": {
+    "prefix": "ttsi",
+    "body": [
+      "from sklearn.model_selection import train_test_split"
+    ],
+    "description": "Import train_test_split"
+  },
+  "Import sklearn metrics": {
+    "prefix": "metrici",
+    "body": [
+      "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score"
+    ],
+    "description": "Import sklearn metrics"
+  },
+  "List comprehension": {
+    "prefix": "lcomp",
+    "body": [
+      "${1:result} = [${2:expression} for ${3:item} in ${4:iterable}]"
+    ],
+    "description": "List comprehension"
+  },
+  "List comprehension with condition": {
+    "prefix": "lcompc",
+    "body": [
+      "${1:result} = [${2:expression} for ${3:item} in ${4:iterable} if ${5:condition}]"
+    ],
+    "description": "List comprehension with condition"
+  },
+  "Dictionary comprehension": {
+    "prefix": "dcomp",
+    "body": [
+      "${1:result} = {${2:key}: ${3:value} for ${4:item} in ${5:iterable}}"
+    ],
+    "description": "Dictionary comprehension"
+  },
+  "Function definition": {
+    "prefix": "funcdef",
+    "body": [
+      "def ${1:function_name}(${2:parameters}):",
+      "\t\"\"\"${3:Docstring describing the function}",
+      "\t",
+      "\tArgs:",
+      "\t\t${4:param_name}: ${5:param_description}",
+      "\t",
+      "\tReturns:",
+      "\t\t${6:return_description}",
+      "\t\"\"\"",
+      "\t${7:pass}"
+    ],
+    "description": "Function definition with docstring"
+  },
+  "Class definition": {
+    "prefix": "classdef",
+    "body": [
+      "class ${1:ClassName}:",
+      "\t\"\"\"${2:Class docstring}\"\"\"",
+      "\t",
+      "\tdef __init__(self, ${3:parameters}):",
+      "\t\t\"\"\"Initialize the ${1:ClassName} instance.",
+      "\t\t",
+      "\t\tArgs:",
+      "\t\t\t${4:param_name}: ${5:param_description}",
+      "\t\t\"\"\"",
+      "\t\t${6:pass}",
+      "\t",
+      "\tdef ${7:method_name}(self, ${8:parameters}):",
+      "\t\t\"\"\"${9:Method docstring}",
+      "\t\t",
+      "\t\tArgs:",
+      "\t\t\t${10:param_name}: ${11:param_description}",
+      "\t\t",
+      "\t\tReturns:",
+      "\t\t\t${12:return_description}",
+      "\t\t\"\"\"",
+      "\t\t${13:pass}"
+    ],
+    "description": "Class definition with methods and docstrings"
+  },
+  "Try except": {
+    "prefix": "tryex",
+    "body": [
+      "try:",
+      "\t${1:# code that might raise an exception}",
+      "except ${2:Exception} as ${3:e}:",
+      "\t${4:# handle the exception}",
+      "\tprint(f\"Error: {${3:e}}\")"
+    ],
+    "description": "Try-except block"
+  },
+  "Try except else finally": {
+    "prefix": "tryexef",
+    "body": [
+      "try:",
+      "\t${1:# code that might raise an exception}",
+      "except ${2:Exception} as ${3:e}:",
+      "\t${4:# handle the exception}",
+      "\tprint(f\"Error: {${3:e}}\")",
+      "else:",
+      "\t${5:# code to run if no exception}",
+      "finally:",
+      "\t${6:# code to run always}"
+    ],
+    "description": "Try-except-else-finally block"
+  },
+  "With open file": {
+    "prefix": "withopen",
+    "body": [
+      "with open(${1:file_path}, '${2:r}') as ${3:f}:",
+      "\t${4:# file operations}"
+    ],
+    "description": "With statement for file operations"
+  },
+  "Import LangChain basic": {
+    "prefix": "implangchain",
+    "body": [
+      "from langchain.llms import OpenAI",
+      "from langchain.prompts import PromptTemplate",
+      "from langchain.chains import LLMChain",
+      "from langchain.memory import ConversationBufferMemory"
+    ],
+    "description": "Import LangChain basic components"
+  },
+  "Import LangChain OpenAI": {
+    "prefix": "lci",
+    "body": [
+      "from langchain.llms import OpenAI"
+    ],
+    "description": "Import LangChain OpenAI"
+  },
+  "Import LangChain PromptTemplate": {
+    "prefix": "lcprompti",
+    "body": [
+      "from langchain.prompts import PromptTemplate"
+    ],
+    "description": "Import LangChain PromptTemplate"
+  },
+  "Import LangChain LLMChain": {
+    "prefix": "lcllmchaini",
+    "body": [
+      "from langchain.chains import LLMChain"
+    ],
+    "description": "Import LangChain LLMChain"
+  },
+  "Import LangChain Memory": {
+    "prefix": "lcmemoryi",
+    "body": [
+      "from langchain.memory import ConversationBufferMemory"
+    ],
+    "description": "Import LangChain Memory"
+  },
+  "Import LangChain document loaders": {
+    "prefix": "implangchainloaders",
+    "body": [
+      "from langchain.document_loaders import TextLoader, PyPDFLoader, CSVLoader",
+      "from langchain.text_splitter import RecursiveCharacterTextSplitter",
+      "from langchain.embeddings import OpenAIEmbeddings",
+      "from langchain.vectorstores import Chroma"
+    ],
+    "description": "Import LangChain document loaders and related utilities"
+  },
+  "Import LangChain TextLoader": {
+    "prefix": "lcloaderi",
+    "body": [
+      "from langchain.document_loaders import TextLoader"
+    ],
+    "description": "Import LangChain TextLoader"
+  },
+  "Import LangChain TextSplitter": {
+    "prefix": "lcsplitteri",
+    "body": [
+      "from langchain.text_splitter import RecursiveCharacterTextSplitter"
+    ],
+    "description": "Import LangChain TextSplitter"
+  },
+  "Import LangChain Embeddings": {
+    "prefix": "lcembeddingsi",
+    "body": [
+      "from langchain.embeddings import OpenAIEmbeddings"
+    ],
+    "description": "Import LangChain Embeddings"
+  },
+  "Import LangChain Vectorstore": {
+    "prefix": "lcvectorei",
+    "body": [
+      "from langchain.vectorstores import Chroma"
+    ],
+    "description": "Import LangChain Vectorstore"
+  },
+  "Import LangChain ChatModel": {
+    "prefix": "lcchatmodeli",
+    "body": [
+      "from langchain.chat_models import ChatOpenAI"
+    ],
+    "description": "Import LangChain ChatOpenAI"
+  },
+  "Import LangChain Schema": {
+    "prefix": "lcschemai",
+    "body": [
+      "from langchain.schema import HumanMessage, AIMessage, SystemMessage"
+    ],
+    "description": "Import LangChain Schema for chat messages"
+  },
+  "LangChain LLM setup": {
+    "prefix": "lcllmsetup",
+    "body": [
+      "from langchain.llms import OpenAI",
+      "",
+      "# Initialize the OpenAI LLM",
+      "llm = OpenAI(",
+      "\ttemperature=${1:0.7},",
+      "\topenai_api_key=${2:\"your-api-key\"}",
+      ")"
+    ],
+    "description": "Set up a LangChain LLM"
+  },
+  "LangChain prompt template": {
+    "prefix": "lcprompt",
+    "body": [
+      "from langchain.prompts import PromptTemplate",
+      "",
+      "# Define a prompt template",
+      "prompt_template = PromptTemplate(",
+      "\tinput_variables=[\"${1:input_var}\"],",
+      "\ttemplate=\"\"\"${2:Your prompt template text with {$1} variable.}\"\"\"",
+      ")"
+    ],
+    "description": "Create a LangChain prompt template"
+  },
+  "LangChain chain": {
+    "prefix": "lcchain",
+    "body": [
+      "from langchain.llms import OpenAI",
+      "from langchain.prompts import PromptTemplate",
+      "from langchain.chains import LLMChain",
+      "",
+      "# Create a chain",
+      "llm = OpenAI(temperature=${1:0.7})",
+      "prompt = PromptTemplate(",
+      "\tinput_variables=[\"${2:input_var}\"],",
+      "\ttemplate=\"\"\"${3:Your prompt template text with {$2} variable.}\"\"\"",
+      ")",
+      "",
+      "chain = LLMChain(",
+      "\tllm=llm,",
+      "\tprompt=prompt",
+      ")",
+      "",
+      "# Run the chain",
+      "result = chain.run(${2:input_var}=\"${4:input value}\")"
+    ],
+    "description": "Create and run a LangChain LLMChain"
+  },
+  "LangChain RAG setup": {
+    "prefix": "lcrag",
+    "body": [
+      "from langchain.document_loaders import ${1:TextLoader}",
+      "from langchain.text_splitter import RecursiveCharacterTextSplitter",
+      "from langchain.embeddings import OpenAIEmbeddings",
+      "from langchain.vectorstores import Chroma",
+      "from langchain.chains import RetrievalQA",
+      "from langchain.llms import OpenAI",
+      "",
+      "# 1. Load documents",
+      "loader = ${1:TextLoader}(\"${2:path/to/document}\")",
+      "documents = loader.load()",
+      "",
+      "# 2. Split documents into chunks",
+      "text_splitter = RecursiveCharacterTextSplitter(",
+      "\tchunk_size=${3:1000},",
+      "\tchunk_overlap=${4:100}",
+      ")",
+      "chunks = text_splitter.split_documents(documents)",
+      "",
+      "# 3. Create embeddings and vectorstore",
+      "embeddings = OpenAIEmbeddings()",
+      "vectorstore = Chroma.from_documents(chunks, embeddings)",
+      "",
+      "# 4. Create a retrieval chain",
+      "qa_chain = RetrievalQA.from_chain_type(",
+      "\tllm=OpenAI(),",
+      "\tchain_type=\"stuff\",",
+      "\tretriever=vectorstore.as_retriever()",
+      ")",
+      "",
+      "# 5. Ask a question",
+      "result = qa_chain({\"query\": \"${5:Your question about the documents?}\"})"
+    ],
+    "description": "Set up a Retrieval Augmented Generation (RAG) system with LangChain"
+  },
+  "LangChain Chat model": {
+    "prefix": "lcchat",
+    "body": [
+      "from langchain.chat_models import ChatOpenAI",
+      "from langchain.schema import HumanMessage, AIMessage, SystemMessage",
+      "",
+      "# Initialize the chat model",
+      "chat = ChatOpenAI(",
+      "\tmodel_name=\"${1:gpt-3.5-turbo}\",",
+      "\ttemperature=${2:0.7}",
+      ")",
+      "",
+      "# Create messages",
+      "messages = [",
+      "\tSystemMessage(content=\"${3:You are a helpful assistant.}\"),",
+      "\tHumanMessage(content=\"${4:Hello, can you help me with something?}\"),",
+      "]",
+      "",
+      "# Get a response",
+      "response = chat(messages)",
+      "print(response.content)"
+    ],
+    "description": "Set up and use a ChatOpenAI model in LangChain"
+  },
+  "DataFrame creation": {
+    "prefix": "dfcreate",
+    "body": [
+      "import pandas as pd",
+      "",
+      "${1:df} = pd.DataFrame({",
+      "\t'${2:column1}': ${3:[1, 2, 3]},",
+      "\t'${4:column2}': ${5:['a', 'b', 'c']}",
+      "})"
+    ],
+    "description": "Create a pandas DataFrame"
+  },
+  "Numpy array": {
+    "prefix": "nparr",
+    "body": [
+      "import numpy as np",
+      "",
+      "${1:array} = np.array(${2:[1, 2, 3, 4, 5]})"
+    ],
+    "description": "Create a numpy array"
+  },
+  "Matplotlib plot": {
+    "prefix": "mplplot",
+    "body": [
+      "import matplotlib.pyplot as plt",
+      "import numpy as np",
+      "",
+      "# Generate data",
+      "x = np.linspace(${1:0}, ${2:10}, ${3:100})",
+      "y = ${4:np.sin(x)}",
+      "",
+      "# Create plot",
+      "plt.figure(figsize=(${5:10}, ${6:6}))",
+      "plt.plot(x, y, '${7:b-}', label='${8:Data}')",
+      "plt.title('${9:Title}')",
+      "plt.xlabel('${10:X axis}')",
+      "plt.ylabel('${11:Y axis}')",
+      "plt.legend()",
+      "plt.grid(True)",
+      "plt.show()"
+    ],
+    "description": "Create a matplotlib plot"
+  },
+  "Import TensorFlow": {
+    "prefix": "tfi",
+    "body": [
+      "import tensorflow as tf"
+    ],
+    "description": "Import TensorFlow"
+  },
+  "Import PyTorch": {
+    "prefix": "torchi",
+    "body": [
+      "import torch",
+      "import torch.nn as nn",
+      "import torch.optim as optim"
+    ],
+    "description": "Import PyTorch"
+  },
+  "Import requests": {
+    "prefix": "requestsi",
+    "body": [
+      "import requests"
+    ],
+    "description": "Import requests library"
+  },
+  "Import os": {
+    "prefix": "osi",
+    "body": [
+      "import os"
+    ],
+    "description": "Import os module"
+  },
+  "Import sys": {
+    "prefix": "sysi",
+    "body": [
+      "import sys"
+    ],
+    "description": "Import sys module"
+  },
+  "Import pathlib": {
+    "prefix": "pathlibi",
+    "body": [
+      "from pathlib import Path"
+    ],
+    "description": "Import Path from pathlib"
+  },
+  "Import JSON": {
+    "prefix": "jsoni",
+    "body": [
+      "import json"
+    ],
+    "description": "Import json module"
+  }
+} 

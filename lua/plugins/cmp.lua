@@ -39,10 +39,8 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.confirm({ select = true })
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
           else
-            fallback()
+            fallback() -- Allow Tab to be handled by Copilot or as normal Tab
           end
         end, { "i", "s" }),
       }),
