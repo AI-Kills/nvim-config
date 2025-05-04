@@ -1,14 +1,23 @@
 return {
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = function()
-        local theme = require("themes.cursor_dark")
-        vim.opt.background = theme.background
-        for group, opts in pairs(theme.highlights) do
-          vim.api.nvim_set_hl(0, group, opts)
-        end
-      end,
+    {
+        "LazyVim/LazyVim",
+        opts = {
+            colorscheme = "darkvoid",
+        },
     },
-  },
+    {
+        "aliqyan-21/darkvoid.nvim",
+        priority = 1000, -- Ensure it loads early
+        opts = {
+            style = "dark", -- The theme comes in "dark" and "darker" variants
+            transparent = true, -- Enable transparent background
+            term_colors = true, -- Enable terminal colors
+            styles = {
+                comments = { italic = true },
+                keywords = { italic = true },
+                functions = {},
+                variables = {},
+            },
+        },
+    },
 }

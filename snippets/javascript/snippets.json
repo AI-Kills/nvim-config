@@ -106,7 +106,7 @@
     "description": "Object destructuring"
   },
   "Arrow function": {
-    "prefix": "arrow",
+    "prefix": "afn",
     "body": [
       "const ${1:functionName} = (${2:params}) => {",
       "\t${3:// code}",
@@ -116,28 +116,28 @@
     "description": "Arrow function"
   },
   "Arrow function one-liner": {
-    "prefix": "arrowo",
+    "prefix": "sfn",
     "body": [
-      "const ${1:functionName} = ${2:params} => ${3:expression};"
+      "(${1:params}) => ${2:expression};"
     ],
     "description": "One line arrow function"
   },
   "Object keys": {
-    "prefix": "okeys",
+    "prefix": "okey",
     "body": [
       "const ${1:keys} = Object.keys(${2:object});"
     ],
     "description": "Object.keys"
   },
   "Object values": {
-    "prefix": "ovalues",
+    "prefix": "oval",
     "body": [
       "const ${1:values} = Object.values(${2:object});"
     ],
     "description": "Object.values"
   },
   "Object entries": {
-    "prefix": "oentries",
+    "prefix": "oent",
     "body": [
       "const ${1:entries} = Object.entries(${2:object});"
     ],
@@ -280,4 +280,4 @@
     ],
     "description": "ES named export"
   }
-} 
+}

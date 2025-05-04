@@ -2,7 +2,7 @@
   "useState Hook": {
     "prefix": "us",
     "body": [
-      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initialState});"
+      "const [${1:state}, set${1:state}] = useState(${2:initialState});"
     ],
     "description": "Dichiarazione di useState hook"
   },
@@ -69,39 +69,10 @@
     ],
     "description": "Import useRef hook"
   },
-  "useCallback Hook": {
-    "prefix": "ucb",
-    "body": [
-      "const ${1:callback} = useCallback(() => {",
-      "\t${2:// callback logic}",
-      "}, [${3:dependencies}]);"
-    ],
-    "description": "useCallback hook"
-  },
-  "Import useCallback": {
-    "prefix": "ucbi",
-    "body": [
-      "import { useCallback } from 'react';"
-    ],
-    "description": "Import useCallback hook"
-  },
-  "useMemo Hook": {
-    "prefix": "um",
-    "body": [
-      "const ${1:memoizedValue} = useMemo(() => ${2:computeExpensiveValue}(${3:a}, ${4:b}), [${5:a}, ${6:b}]);"
-    ],
-    "description": "useMemo hook"
-  },
-  "Import useMemo": {
-    "prefix": "umi",
-    "body": [
-      "import { useMemo } from 'react';"
-    ],
-    "description": "Import useMemo hook"
-  },
   "Functional Component": {
     "prefix": "rfc",
     "body": [
+      "import React from 'react';",
       "const ${1:ComponentName} = (${2:props}) => {",
       "\treturn (",
       "\t\t<${3:div}>",
@@ -121,32 +92,8 @@
     ],
     "description": "Import React"
   },
-  "Functional Component with Props": {
-    "prefix": "rfcp",
-    "body": [
-      "const ${1:ComponentName} = ({ ${2:prop1}, ${3:prop2} }) => {",
-      "\treturn (",
-      "\t\t<${4:div}>",
-      "\t\t\t${5:content}",
-      "\t\t</${4:div}>",
-      "\t);",
-      "};",
-      "",
-      "export default ${1:ComponentName};"
-    ],
-    "description": "React functional component with destructured props"
-  },
-  "Fragment": {
-    "prefix": "frag",
-    "body": [
-      "<>",
-      "\t${1:content}",
-      "</>"
-    ],
-    "description": "React Fragment"
-  },
   "Import common React hooks": {
-    "prefix": "reacthooksi",
+    "prefix": "hoo",
     "body": [
       "import { useState, useEffect, useRef, useContext } from 'react';"
     ],
@@ -158,5 +105,286 @@
       "'use client';"
     ],
     "description": "Next.js use client directive"
+  },
+  "Array map": {
+    "prefix": "amap",
+    "body": [
+      "const ${1:result} = ${2:array}.map(${3:item} => {",
+      "\t${4:return ${3:item};}",
+      "});"
+    ],
+    "description": "Array.map method"
+  },
+  "Array map one-liner": {
+    "prefix": "amapo",
+    "body": [
+      "const ${1:result} = ${2:array}.map(${3:item} => ${4:expression});"
+    ],
+    "description": "Array.map one line"
+  },
+  "Array filter": {
+    "prefix": "afil",
+    "body": [
+      "const ${1:result} = ${2:array}.filter(${3:item} => {",
+      "\t${4:return ${3:item} === condition;}",
+      "});"
+    ],
+    "description": "Array.filter method"
+  },
+  "Array filter one-liner": {
+    "prefix": "afilo",
+    "body": [
+      "const ${1:result} = ${2:array}.filter(${3:item} => ${4:condition});"
+    ],
+    "description": "Array.filter one line"
+  },
+  "Array reduce": {
+    "prefix": "ared",
+    "body": [
+      "const ${1:result} = ${2:array}.reduce((${3:accumulator}, ${4:current}) => {",
+      "\t${5:return ${3:accumulator} + ${4:current};}",
+      "}, ${6:initialValue});"
+    ],
+    "description": "Array.reduce method"
+  },
+  "Array reduce one-liner": {
+    "prefix": "aredo",
+    "body": [
+      "const ${1:result} = ${2:array}.reduce((${3:acc}, ${4:curr}) => ${5:acc + curr}, ${6:0});"
+    ],
+    "description": "Array.reduce one line"
+  },
+  "Array forEach": {
+    "prefix": "afe",
+    "body": [
+      "${1:array}.forEach(${2:item} => {",
+      "\t${3:// action}",
+      "});"
+    ],
+    "description": "Array.forEach method"
+  },
+  "Array find": {
+    "prefix": "afind",
+    "body": [
+      "const ${1:result} = ${2:array}.find(${3:item} => ${4:condition});"
+    ],
+    "description": "Array.find method"
+  },
+  "Array some": {
+    "prefix": "asome",
+    "body": [
+      "const ${1:hasMatch} = ${2:array}.some(${3:item} => ${4:condition});"
+    ],
+    "description": "Array.some method"
+  },
+  "Array every": {
+    "prefix": "aevery",
+    "body": [
+      "const ${1:allMatch} = ${2:array}.every(${3:item} => ${4:condition});"
+    ],
+    "description": "Array.every method"
+  },
+  "Create array": {
+    "prefix": "arr",
+    "body": [
+      "const ${1:array} = [${2:items}];"
+    ],
+    "description": "Create array"
+  },
+  "Array from range": {
+    "prefix": "arange",
+    "body": [
+      "const ${1:array} = Array.from({ length: ${2:length} }, (_, ${3:i}) => ${4:i});"
+    ],
+    "description": "Create array from range"
+  },
+  "Array destructuring": {
+    "prefix": "arrdest",
+    "body": [
+      "const [${1:first}, ${2:second}] = ${3:array};"
+    ],
+    "description": "Array destructuring"
+  },
+  "Object destructuring": {
+    "prefix": "objdest",
+    "body": [
+      "const { ${1:prop1}, ${2:prop2} } = ${3:object};"
+    ],
+    "description": "Object destructuring"
+  },
+  "Arrow function": {
+    "prefix": "afn",
+    "body": [
+      "const ${1:functionName} = (${2:params}) => {",
+      "\t${3:// code}",
+      "\treturn ${4:result};",
+      "};"
+    ],
+    "description": "Arrow function"
+  },
+  "Arrow function one-liner": {
+    "prefix": "sfn",
+    "body": [
+      "(${1:params}) => ${2:expression};"
+    ],
+    "description": "One line arrow function"
+  },
+  "Object keys": {
+    "prefix": "okey",
+    "body": [
+      "const ${1:keys} = Object.keys(${2:object});"
+    ],
+    "description": "Object.keys"
+  },
+  "Object values": {
+    "prefix": "oval",
+    "body": [
+      "const ${1:values} = Object.values(${2:object});"
+    ],
+    "description": "Object.values"
+  },
+  "Object entries": {
+    "prefix": "oent",
+    "body": [
+      "const ${1:entries} = Object.entries(${2:object});"
+    ],
+    "description": "Object.entries"
+  },
+  "Array from": {
+    "prefix": "afrom",
+    "body": [
+      "const ${1:array} = Array.from(${2:iterable});"
+    ],
+    "description": "Array.from"
+  },
+  "Spread array": {
+    "prefix": "spread",
+    "body": [
+      "const ${1:newArray} = [...${2:array}];"
+    ],
+    "description": "Spread operator for array"
+  },
+  "Spread object": {
+    "prefix": "ospread",
+    "body": [
+      "const ${1:newObject} = { ...${2:object} };"
+    ],
+    "description": "Spread operator for object"
+  },
+  "Promise then catch": {
+    "prefix": "pthen",
+    "body": [
+      "${1:promise}",
+      "\t.then(${2:result} => {",
+      "\t\t${3:// success}",
+      "\t})",
+      "\t.catch(${4:error} => {",
+      "\t\t${5:// error handling}",
+      "\t});"
+    ],
+    "description": "Promise with then/catch"
+  },
+  "Promise async/await": {
+    "prefix": "pasync",
+    "body": [
+      "try {",
+      "\tconst ${1:result} = await ${2:promise};",
+      "\t${3:// success}",
+      "} catch (${4:error}) {",
+      "\t${5:// error handling}",
+      "}"
+    ],
+    "description": "Async/await with try/catch"
+  },
+  "JSON stringify": {
+    "prefix": "jstringify",
+    "body": [
+      "JSON.stringify(${1:object}, null, ${2:2})"
+    ],
+    "description": "JSON.stringify with formatting"
+  },
+  "JSON parse": {
+    "prefix": "jparse",
+    "body": [
+      "JSON.parse(${1:jsonString})"
+    ],
+    "description": "JSON.parse"
+  },
+  "Import lodash": {
+    "prefix": "lodashi",
+    "body": [
+      "import _ from 'lodash';"
+    ],
+    "description": "Import entire lodash library"
+  },
+  "Import lodash methods": {
+    "prefix": "lodashmi",
+    "body": [
+      "import { ${1:map}, ${2:filter} } from 'lodash';"
+    ],
+    "description": "Import specific lodash methods"
+  },
+  "Import axios": {
+    "prefix": "axii",
+    "body": [
+      "import axios from 'axios';"
+    ],
+    "description": "Import axios"
+  },
+  "Import date-fns": {
+    "prefix": "datei",
+    "body": [
+      "import { ${1:format}, ${2:parseISO} } from 'date-fns';"
+    ],
+    "description": "Import date-fns methods"
+  },
+  "Import fs": {
+    "prefix": "fsi",
+    "body": [
+      "import fs from 'fs';"
+    ],
+    "description": "Import Node.js fs module"
+  },
+  "Import fs promises": {
+    "prefix": "fspi",
+    "body": [
+      "import { promises as fs } from 'fs';"
+    ],
+    "description": "Import Node.js fs promises"
+  },
+  "Import path": {
+    "prefix": "pathi",
+    "body": [
+      "import path from 'path';"
+    ],
+    "description": "Import Node.js path module"
+  },
+  "Import express": {
+    "prefix": "expressi",
+    "body": [
+      "import express from 'express';"
+    ],
+    "description": "Import express framework"
+  },
+  "ES module import": {
+    "prefix": "impes",
+    "body": [
+      "import ${1:module} from '${2:module-name}';"
+    ],
+    "description": "ES module import"
+  },
+  "ES module export": {
+    "prefix": "expes",
+    "body": [
+      "export default ${1:objectOrFunction};"
+    ],
+    "description": "ES module export default"
+  },
+  "ES named export": {
+    "prefix": "expnamed",
+    "body": [
+      "export const ${1:name} = ${2:value};"
+    ],
+    "description": "ES named export"
   }
-} 
+}

@@ -1,3 +1,10 @@
+-- custom commandline
+vim.keymap.set("n", ";", ":", {
+  noremap = true,
+  silent = true,
+  desc = "Command line",
+})
+-- Save all
 vim.keymap.set("n", "<leader>sa", ":wa<CR>", {
   noremap = true,
   silent = true,
@@ -8,9 +15,6 @@ vim.keymap.set("n", "<leader>sa", ":wa<CR>", {
 vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all local marks" })
 
 vim.keymap.set("n", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
-
--- Remove LazyVim's default <leader>qq mapping
-vim.keymap.del("n", "<leader>qq")
 
 vim.api.nvim_set_keymap(
   "n",
@@ -29,4 +33,4 @@ vim.keymap.set("n", "<leader>h", ":split<CR>", { noremap = true, silent = true, 
 
 -- move among splits
 vim.keymap.set("n", "<leader>,", "<C-w>l", { noremap = true, silent = true, desc = "close buffer" })
-vim.keymap.set("n", "<leader>-", "<C-w>h", { noremap = true, silent = true, desc = "close buffer" })
+vim.keymap.set("n", "<leader>.", "<C-w>h", { noremap = true, silent = true, desc = "close buffer" })

@@ -17,23 +17,51 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       rust = { "rustfmt" },
+      python = { "ruff_format" },
+      c = { "clang-format" },
+      sh = { "shfmt" },
       -- Add other filetypes as needed
     },
     formatters = {
       -- Override the rustfmt configuration to use cargo-installed version
       rustfmt = {
-        -- Use the cargo-installed rustfmt
         command = "rustfmt",
-        -- Don't use rustup to run rustfmt
         args = { "--emit=stdout" },
-        -- Add stdin capability if needed
         stdin = true,
       },
+      -- Configure stylua with increased timeout
+      stylua = {
+        command = "stylua",
+        args = { "--search-parent-directories", "--stdin-filepath", "$FILENAME", "-" },
+        stdin = true,
+        timeout = 5000, -- Increase timeout for larger files
+      },
+      -- Configure ruff_format with increased timeout
+      ruff_format = {
+        command = "ruff",
+        args = { "format", "--stdin-filename", "$FILENAME", "-" },
+        stdin = true,
+        timeout = 5000, -- Increase timeout for larger files
+      },
     },
-    -- Format on save
-    format_on_save = {
-      lsp_format = "fallback",
-      timeout_ms = 3000,
-    },
+    -- Format on save with longer timeout and better error handling
+    format_on_save = function(bufnr)
+      -- Don't autoformat files in gitcommit mode
+      if vim.bo[bufnr].filetype == "gitcommit" then
+        return
+      end
+
+      -- Don't format if file has problems
+      local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+      if vim.tbl_isempty(lines) or (#lines == 1 and lines[1] == "") then
+        return
+      end
+
+      return {
+        lsp_format = "fallback",
+        timeout_ms = 5000,
+      }
+    end,
   },
-} 
+}
+
