@@ -2,8 +2,8 @@ return {
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "darkvoid",
-        },
+            colorscheme = "darkvoid"
+        }
     },
     {
         "aliqyan-21/darkvoid.nvim",
@@ -16,8 +16,8 @@ return {
                 comments = { italic = true },
                 keywords = { italic = true },
                 functions = {},
-                variables = {},
-            },
-        },
-    },
+                variables = {}
+            }
+        }
+    }
 }

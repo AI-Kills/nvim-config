@@ -10,8 +10,8 @@ return {
         require("conform").format({ timeout_ms = 3000, lsp_format = "fallback" })
       end,
       mode = { "n", "v" },
-      desc = "Format",
-    },
+      desc = "Format"
+    }
   },
   opts = {
     formatters_by_ft = {
@@ -27,22 +27,22 @@ return {
       rustfmt = {
         command = "rustfmt",
         args = { "--emit=stdout" },
-        stdin = true,
+        stdin = true
       },
       -- Configure stylua with increased timeout
       stylua = {
         command = "stylua",
         args = { "--search-parent-directories", "--stdin-filepath", "$FILENAME", "-" },
         stdin = true,
-        timeout = 5000, -- Increase timeout for larger files
+        timeout = 5000 -- Increase timeout for larger files
       },
       -- Configure ruff_format with increased timeout
       ruff_format = {
         command = "ruff",
         args = { "format", "--stdin-filename", "$FILENAME", "-" },
         stdin = true,
-        timeout = 5000, -- Increase timeout for larger files
-      },
+        timeout = 5000 -- Increase timeout for larger files
+      }
     },
     -- Format on save with longer timeout and better error handling
     format_on_save = function(bufnr)
@@ -59,9 +59,9 @@ return {
 
       return {
         lsp_format = "fallback",
-        timeout_ms = 5000,
+        timeout_ms = 5000
       }
-    end,
-  },
+    end
+  }
 }
 

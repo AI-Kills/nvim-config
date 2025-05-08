@@ -79,6 +79,6 @@ return {
     ["@variable.object.property"] = { fg = "#FFFFFF" }, -- Proprietà riferite tramite this
 
     -- Modules
-    ["@module"] = { fg = "#c792ea" }, -- Import/export statements
-  },
+    ["@module"] = { fg = "#c792ea" } -- Import/export statements
+  }
 }
