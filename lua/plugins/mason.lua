@@ -9,6 +9,7 @@ return {
         "clangd",
         "json-lsp",
         "typescript-language-server",
+        "intelephense",
         -- Formatters
         "stylua",
         -- "rustfmt", -- Removing rustfmt as it should not be installed via rustup/mason
