@@ -1,12 +1,33 @@
 {
   "Printf": {
     "prefix": "pr",
-    "body": ["printf(\"${1:%s}\\n\"${1/[^%]*/%s/g}${1/[^%]*/%s/g:+, }$2);$0"],
+    "body": [
+      "printf(\"${1:%s}\\n\"${1/[^%]*/%s/g}${1/[^%]*/%s/g:+, }$2);$0"
+    ],
     "description": "Printf with newline"
+  },
+  "Scanf": {
+    "prefix": "sc",
+    "body": [
+      "scanf(\"${1:%s}\"${1/[^%]*/%s/g}${1/[^%]*/%s/g:+, }$2);$0"
+    ],
+    "description": "Scanf with newline"
+  },
+  "Comment": {
+    "prefix": "cc",
+    "body": [
+      "/* $1 */"
+    ],
+    "description": "Comment block"
   },
   "Main Function": {
     "prefix": "main",
-    "body": ["int main(int argc, char *argv[]) {", "\t$1", "\treturn 0;", "}"],
+    "body": [
+      "int main(int argc, char *argv[]) {",
+      "\t$1",
+      "\treturn 0;",
+      "}"
+    ],
     "description": "Main function custom"
   },
   "For Loop": {
@@ -20,7 +41,72 @@
   },
   "If Statement": {
     "prefix": "if",
-    "body": ["if ($1) {", "\t$2", "}"],
+    "body": [
+      "if ($1) {",
+      "\t$2",
+      "}"
+    ],
     "description": "If statement"
+  },
+  "While Loop": {
+    "prefix": "while",
+    "body": [
+      "while ($1) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "While loop"
+  },
+  "Switch Statement": {
+    "prefix": "switch",
+    "body": [
+      "switch ($1) {",
+      "\tcase $2:",
+      "\t\t$3",
+      "\t\tbreak;",
+      "\tdefault:",
+      "\t\t$4",
+      "}"
+    ],
+    "description": "Switch statement"
+  },
+  "#include": {
+    "prefix": "inc",
+    "body": [
+      "#include \"${1:<header_file>}\""
+    ],
+    "description": "Include header file"
+  },
+  "#include standard io": {
+    "prefix": "incio",
+    "body": [
+      "#include <stdio.h>"
+    ],
+    "description": "Include header file"
+  },
+  "Struct Definition": {
+    "prefix": "struct",
+    "body": [
+      "struct ${1:StructName} {",
+      "\t$2",
+      "};"
+    ],
+    "description": "Struct definition"
+  },
+  "Function Declaration": {
+    "prefix": "func",
+    "body": [
+      "${1:returnType} ${2:functionName}(${3:params}) {",
+      "\t$4",
+      "}"
+    ],
+    "description": "Function declaration"
+  },
+  "define": {
+    "prefix": "def",
+    "body": [
+      "#define ${1:macro} ${2:value}"
+    ],
+    "description": "Define macro"
   }
 }

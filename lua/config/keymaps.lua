@@ -1,14 +1,14 @@
 -- custom commandline
 vim.keymap.set("n", ";", ":", {
-  noremap = true,
-  silent = true,
-  desc = "Command line",
+    noremap = true,
+    silent = true,
+    desc = "Command line",
 })
 -- Save all
 vim.keymap.set("n", "<leader>sa", ":wa<CR>", {
-  noremap = true,
-  silent = true,
-  desc = "Save all",
+    noremap = true,
+    silent = true,
+    desc = "Save all",
 })
 
 -- marks
@@ -17,10 +17,10 @@ vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all loca
 vim.keymap.set("n", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
 
 vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>ff",
-  ':lua require"telescope.builtin".find_files({ hidden = true })<CR>',
-  { noremap = true, silent = true }
+    "n",
+    "<Leader>ff",
+    ':lua require"telescope.builtin".find_files({ hidden = true })<CR>',
+    { noremap = true, silent = true }
 )
 
 -- move among buffers
@@ -34,3 +34,6 @@ vim.keymap.set("n", "<leader>h", ":split<CR>", { noremap = true, silent = true, 
 -- move among splits
 vim.keymap.set("n", "<leader>,", "<C-w>l", { noremap = true, silent = true, desc = "close buffer" })
 vim.keymap.set("n", "<leader>.", "<C-w>h", { noremap = true, silent = true, desc = "close buffer" })
+
+-- terminal mode
+vim.keymap.set("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true, desc = "Exit terminal insert mode with jj" })

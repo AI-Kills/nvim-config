@@ -23,7 +23,11 @@
       {
         "language": "python",
         "path": "./python/snippets.json"
+      },
+      {
+        "language": ["bash", "sh", "shellscript"],
+        "path": "./bash/snippets.json"
       }
     ]
   }
-} 
+}

@@ -1,0 +1,94 @@
+{
+  "Bash Script Template": {
+    "prefix": "ini",
+    "description": "Basic Bash script template with shebang and options",
+    "body": [
+      "#!/usr/bin/env bash"
+    ]
+  },
+  "If Statement": {
+    "prefix": "if",
+    "description": "If-else statement",
+    "body": [
+      "if [[ ${1:condition} ]]; then",
+      "    ${2:# code}",
+      "else",
+      "    ${3:# code}",
+      "fi"
+    ]
+  },
+  "For Loop": {
+    "prefix": "for",
+    "description": "For loop",
+    "body": [
+      "for ${1:item} in ${2:items}; do",
+      "    ${3:# code}",
+      "done"
+    ]
+  },
+  "While Loop": {
+    "prefix": "while",
+    "description": "While loop",
+    "body": [
+      "while [[ ${1:condition} ]]; do",
+      "    ${2:# code}",
+      "done"
+    ]
+  },
+  "Case Statement": {
+    "prefix": "case",
+    "description": "Case statement",
+    "body": [
+      "case ${1:expression} in",
+      "    ${2:pattern1})",
+      "        ${3:# code}",
+      "        ;;",
+      "    ${4:pattern2})",
+      "        ${5:# code}",
+      "        ;;",
+      "    *)",
+      "        ${6:# default code}",
+      "        ;;",
+      "esac"
+    ]
+  },
+  "Function Definition": {
+    "prefix": "func",
+    "description": "Function definition",
+    "body": [
+      "${1:function_name}() {",
+      "    ${2:# code}",
+      "    return 0",
+      "}"
+    ]
+  },
+  "Error Handling": {
+    "prefix": "err",
+    "description": "Error handling template",
+    "body": [
+      "# Error handling function",
+      "error_exit() {",
+      "    echo \"${1:Error message}\" >&2",
+      "    exit 1",
+      "}",
+      "",
+      "# Using trap for cleanup",
+      "cleanup() {",
+      "    ${2:# cleanup code}",
+      "    echo \"Cleaning up...\"",
+      "}",
+      "",
+      "trap cleanup EXIT",
+      "",
+      "# Example usage",
+      "command_that_might_fail || error_exit \"Command failed\""
+    ]
+  },
+  "realpath": {
+    "prefix": "absp",
+    "description": "Get the real path of a file or directory",
+    "body": [
+      "realpath ${1:filename}"
+    ]
+  }
+}
