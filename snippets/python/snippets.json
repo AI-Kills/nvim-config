@@ -68,7 +68,7 @@
     "description": "List comprehension"
   },
   "List comprehension with condition": {
-    "prefix": "lcompc",
+    "prefix": "spr",
     "body": [
       "${1:result} = [${2:expression} for ${3:item} in ${4:iterable} if ${5:condition}]"
     ],
@@ -82,7 +82,7 @@
     "description": "Dictionary comprehension"
   },
   "Function definition": {
-    "prefix": "funcdef",
+    "prefix": "fndef",
     "body": [
       "def ${1:function_name}(${2:parameters}):",
       "\t\"\"\"${3:Docstring describing the function}",
@@ -98,7 +98,7 @@
     "description": "Function definition with docstring"
   },
   "Class definition": {
-    "prefix": "classdef",
+    "prefix": "cldef",
     "body": [
       "class ${1:ClassName}:",
       "\t\"\"\"${2:Class docstring}\"\"\"",
@@ -176,14 +176,14 @@
     "description": "Import LangChain OpenAI"
   },
   "Import LangChain PromptTemplate": {
-    "prefix": "lcprompti",
+    "prefix": "prompti",
     "body": [
       "from langchain.prompts import PromptTemplate"
     ],
     "description": "Import LangChain PromptTemplate"
   },
   "Import LangChain LLMChain": {
-    "prefix": "lcllmchaini",
+    "prefix": "chaini",
     "body": [
       "from langchain.chains import LLMChain"
     ],
@@ -249,20 +249,20 @@
     "description": "Import LangChain Schema for chat messages"
   },
   "LangChain LLM setup": {
-    "prefix": "lcllmsetup",
+    "prefix": "llmini",
     "body": [
       "from langchain.llms import OpenAI",
       "",
       "# Initialize the OpenAI LLM",
       "llm = OpenAI(",
-      "\ttemperature=${1:0.7},",
+      "\ttemperature=0",
       "\topenai_api_key=${2:\"your-api-key\"}",
       ")"
     ],
     "description": "Set up a LangChain LLM"
   },
   "LangChain prompt template": {
-    "prefix": "lcprompt",
+    "prefix": "prompt",
     "body": [
       "from langchain.prompts import PromptTemplate",
       "",
@@ -275,14 +275,14 @@
     "description": "Create a LangChain prompt template"
   },
   "LangChain chain": {
-    "prefix": "lcchain",
+    "prefix": "chain",
     "body": [
       "from langchain.llms import OpenAI",
       "from langchain.prompts import PromptTemplate",
       "from langchain.chains import LLMChain",
       "",
       "# Create a chain",
-      "llm = OpenAI(temperature=${1:0.7})",
+      "llm = OpenAI(gpt-temperature=0)",
       "prompt = PromptTemplate(",
       "\tinput_variables=[\"${2:input_var}\"],",
       "\ttemplate=\"\"\"${3:Your prompt template text with {$2} variable.}\"\"\"",
@@ -334,30 +334,6 @@
       "result = qa_chain({\"query\": \"${5:Your question about the documents?}\"})"
     ],
     "description": "Set up a Retrieval Augmented Generation (RAG) system with LangChain"
-  },
-  "LangChain Chat model": {
-    "prefix": "lcchat",
-    "body": [
-      "from langchain.chat_models import ChatOpenAI",
-      "from langchain.schema import HumanMessage, AIMessage, SystemMessage",
-      "",
-      "# Initialize the chat model",
-      "chat = ChatOpenAI(",
-      "\tmodel_name=\"${1:gpt-3.5-turbo}\",",
-      "\ttemperature=${2:0.7}",
-      ")",
-      "",
-      "# Create messages",
-      "messages = [",
-      "\tSystemMessage(content=\"${3:You are a helpful assistant.}\"),",
-      "\tHumanMessage(content=\"${4:Hello, can you help me with something?}\"),",
-      "]",
-      "",
-      "# Get a response",
-      "response = chat(messages)",
-      "print(response.content)"
-    ],
-    "description": "Set up and use a ChatOpenAI model in LangChain"
   },
   "DataFrame creation": {
     "prefix": "dfcreate",
@@ -452,5 +428,35 @@
       "import json"
     ],
     "description": "Import json module"
+  },
+  "argparser": {
+    "prefix": "argp",
+    "body": [
+      "import argparse",
+      "",
+      "parser = argparse.ArgumentParser(description=\"${1:Description of your script}\")",
+      "",
+      "parser.add_argument('--${2:arg_name}', type=${3:str}, help='${4:Description of the argument}')",
+      "",
+      "args = parser.parse_args()",
+      "",
+      "print(args.${2:arg_name})",
+      "",
+      "if args.${2:arg_name} is None:",
+      "\ttry:",
+      "\t\tfilepath = input('Inserisci il dato').strip()",
+      "\texcept EOFError:",
+      "\t\tprint(\"EOFError: No input received\")",
+      "\t\treturn"
+    ],
+    "description": "Set up an argument parser"
+  },
+  "with open": {
+    "prefix": "withopen",
+    "body": [
+      "with open(${1:file_path}, '${2:r}', encoding='utf-8') as ${3:f}:",
+      "\t${4:# file operations}"
+    ],
+    "description": "With statement for file operations"
   }
-} 
+}

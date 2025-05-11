@@ -90,5 +90,12 @@
     "body": [
       "realpath ${1:filename}"
     ]
+  },
+  "getopts": {
+    "prefix": "opt",
+    "description": "Get options from command line arguments",
+    "body": [
+      "while getopts ':${1:options}' flag; do"
+    ]
   }
 }

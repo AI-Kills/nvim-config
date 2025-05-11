@@ -37,3 +37,16 @@ vim.keymap.set("n", "<leader>.", "<C-w>h", { noremap = true, silent = true, desc
 
 -- terminal mode
 vim.keymap.set("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true, desc = "Exit terminal insert mode with jj" })
+
+-- folding
+vim.keymap.set("n", "H", "zM", {
+    noremap = true,
+    silent = true,
+    desc = "close all folds",
+})
+
+vim.keymap.set("n", "h", "za", {
+    noremap = true,
+    silent = true,
+    desc = "open fold",
+})
