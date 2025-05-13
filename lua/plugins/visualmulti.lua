@@ -8,6 +8,7 @@ return {
     vim.keymap.set("n", "<leader>mn", "<Plug>(VM-Fnd-Under)", { desc = "Multi: Seleziona parola" })
     vim.keymap.set("n", "<leader>ma", "<Plug>(VM-Select-All)", { desc = "Multi: Seleziona tutte le occorrenze" })
     vim.keymap.set("n", "<leader>mj", "<Plug>(VM-Add-Cursor-Down)", { desc = "Multi: Cursore giù" })
+    vim.keymap.set("n", "<leader>j", "<Plug>(VM-Add-Cursor-Down)", { desc = "Multi: Cursore giù" })
     vim.keymap.set("n", "<leader>mk", "<Plug>(VM-Add-Cursor-Up)", { desc = "Multi: Cursore su" })
     vim.keymap.set("n", "<leader>md", "<Plug>(VM-Remove-Last-Cursor)", { desc = "Multi: Rimuovi ultimo cursore" })
 
