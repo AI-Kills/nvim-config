@@ -58,10 +58,18 @@ local function smart_percent()
         return "%"
     end
 
-    -- 3) altrimenti cerca backwards il primo tra ( [ {
-    --    '[([{]' = classe contenente '(', '[' o '{'
+    -- 3) altrimenti cerca backwards la prima parentesi (aperta o chiusa)
+    --    '[()[]{}]' = classe contenente qualsiasi tipo di parentesi
     --    'bW' = backwards, no wrap-around
-    vim.fn.search("[([{]", "bW")
+    local found = vim.fn.search("[()\\[\\]{}]", "bW")
+    
+    -- Se abbiamo trovato una parentesi, possiamo eseguire % su di essa
+    if found > 0 then
+        -- Esegui il % standard sulla parentesi trovata
+        vim.cmd("normal! %")
+        -- Torna alla parentesi originale
+        vim.cmd("normal! %")
+    end
 
     -- 4) ritorno vuoto perché la ricerca ha già spostato il cursore
     return ""
@@ -72,5 +80,5 @@ vim.keymap.set("n", "%", smart_percent, {
     expr = true,
     noremap = true,
     silent = true,
-    desc = "Smart %: match standard oppure previous tra '(', '[', '{'",
+    desc = "Smart %: match standard oppure previous tra '(', '[', '{', ')', ']', '}'",
 })
