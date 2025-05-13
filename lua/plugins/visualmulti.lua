@@ -10,7 +10,7 @@ return {
         vim.keymap.set("n", "<leader>mj", "<Plug>(VM-Find-Next)", { desc = "Multi: Prossima occorrenza" })
         vim.keymap.set("n", "<leader>j", "<Plug>(VM-Add-Cursor-Down)", { desc = "Multi: Cursore giù" })
         vim.keymap.set("n", "<leader>k", "<Plug>(VM-Add-Cursor-Up)", { desc = "Multi: Cursore su" })
-        vim.keymap.set("n", "<leader>mk", "<Plug>(VM-Add-Cursor-At-Prev)", { desc = "Multi: Cursore su occorrenza precedente" })
+        vim.keymap.set("n", "<leader>mk", "<Plug>(VM-Find-Prev)", { desc = "Multi: Occorrenza precedente" })
         vim.keymap.set("n", "<leader>md", "<Plug>(VM-Remove-Last-Cursor)", { desc = "Multi: Rimuovi ultimo cursore" })
 
         -- === VISUAL MODE ===
