@@ -44,41 +44,27 @@ vim.keymap.set("n", "h", "za", {
     desc = "open fold",
 })
 
--- Funzione “smart %” ottimizzata:
--- 1) se sei su () [] {} → salto standard
--- 2) altrimenti cerca all’indietro il primo tra ( [ {
+-- Smart %: jump se sei su (), [] o {} altrimenti
+-- vai all’indietro al primo fra (, [ o {
 local function smart_percent()
-    -- 1) carattere sotto il cursore
     local col = vim.fn.col(".")
     local line = vim.fn.getline(".")
     local char = line:sub(col, col)
 
-    -- 2) se è una parentesi, salto standard
-    if char:match("[%(%%)%[%]%{%}]") then
-        return "%"
+    -- 1) se siamo su una parentesi, salto standard
+    if char:match("[%(%)%[%]{}]") then
+        vim.cmd("normal! %")
+        return
     end
 
-    -- 3) altrimenti cerca backwards la prima parentesi (aperta o chiusa)
-    --    '[()[]{}]' = classe contenente qualsiasi tipo di parentesi
-    --    'bW' = backwards, no wrap-around
-    local found = vim.fn.search("[()\\[\\]{}]", "bW")
-    
-    -- Se abbiamo trovato una parentesi, possiamo eseguire % su di essa
-    if found > 0 then
-        -- Esegui il % standard sulla parentesi trovata
-        vim.cmd("normal! %")
-        -- Torna alla parentesi originale
-        vim.cmd("normal! %")
-    end
-
-    -- 4) ritorno vuoto perché la ricerca ha già spostato il cursore
-    return ""
+    -- 2) altrimenti cerca backwards '(', '[' o '{'
+    -- "[\\(\\[\\{]" diventa in Vim-regex: [\(\[\{] → literal '(', '[', '{'
+    vim.fn.search("[\\(\\[\\{]", "bW")
 end
 
--- Mapping “expr”: valuta smart_percent() e ne usa il risultato
+-- Mapping “callback” in Neovim (senza expr)
 vim.keymap.set("n", "%", smart_percent, {
-    expr = true,
     noremap = true,
     silent = true,
-    desc = "Smart %: match standard oppure previous tra '(', '[', '{', ')', ']', '}'",
+    desc = "Smart %: standard match o previous '(', '[' o '{'",
 })

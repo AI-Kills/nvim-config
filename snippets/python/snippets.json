@@ -1,4 +1,11 @@
 {
+  "print": {
+    "prefix": "prt",
+    "body": [
+      "print(${1:message})"
+    ],
+    "description": "Print statement"
+  },
   "Import common data libraries": {
     "prefix": "impdata",
     "body": [
@@ -9,73 +16,22 @@
     ],
     "description": "Import common data science libraries"
   },
-  "Import NumPy": {
-    "prefix": "npi",
-    "body": [
-      "import numpy as np"
-    ],
-    "description": "Import NumPy"
-  },
-  "Import Pandas": {
-    "prefix": "pdi",
-    "body": [
-      "import pandas as pd"
-    ],
-    "description": "Import Pandas"
-  },
-  "Import Matplotlib": {
-    "prefix": "plti",
-    "body": [
-      "import matplotlib.pyplot as plt"
-    ],
-    "description": "Import Matplotlib pyplot"
-  },
-  "Import Seaborn": {
-    "prefix": "snsi",
-    "body": [
-      "import seaborn as sns"
-    ],
-    "description": "Import Seaborn"
-  },
-  "Import scikit-learn": {
-    "prefix": "impsklearn",
-    "body": [
-      "from sklearn.model_selection import train_test_split",
-      "from sklearn.preprocessing import StandardScaler",
-      "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score"
-    ],
-    "description": "Import scikit-learn utilities"
-  },
-  "Import sklearn train_test_split": {
-    "prefix": "ttsi",
-    "body": [
-      "from sklearn.model_selection import train_test_split"
-    ],
-    "description": "Import train_test_split"
-  },
-  "Import sklearn metrics": {
-    "prefix": "metrici",
-    "body": [
-      "from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score"
-    ],
-    "description": "Import sklearn metrics"
-  },
   "List comprehension": {
-    "prefix": "lcomp",
+    "prefix": "cl",
     "body": [
       "${1:result} = [${2:expression} for ${3:item} in ${4:iterable}]"
     ],
     "description": "List comprehension"
   },
   "List comprehension with condition": {
-    "prefix": "spr",
+    "prefix": "clc",
     "body": [
       "${1:result} = [${2:expression} for ${3:item} in ${4:iterable} if ${5:condition}]"
     ],
     "description": "List comprehension with condition"
   },
   "Dictionary comprehension": {
-    "prefix": "dcomp",
+    "prefix": "cd",
     "body": [
       "${1:result} = {${2:key}: ${3:value} for ${4:item} in ${5:iterable}}"
     ],
@@ -151,152 +107,56 @@
     "description": "Try-except-else-finally block"
   },
   "With open file": {
-    "prefix": "withopen",
+    "prefix": "with",
     "body": [
       "with open(${1:file_path}, '${2:r}') as ${3:f}:",
       "\t${4:# file operations}"
     ],
     "description": "With statement for file operations"
   },
-  "Import LangChain basic": {
-    "prefix": "implangchain",
-    "body": [
-      "from langchain.llms import OpenAI",
-      "from langchain.prompts import PromptTemplate",
-      "from langchain.chains import LLMChain",
-      "from langchain.memory import ConversationBufferMemory"
-    ],
-    "description": "Import LangChain basic components"
-  },
-  "Import LangChain OpenAI": {
-    "prefix": "lci",
-    "body": [
-      "from langchain.llms import OpenAI"
-    ],
-    "description": "Import LangChain OpenAI"
-  },
-  "Import LangChain PromptTemplate": {
-    "prefix": "prompti",
-    "body": [
-      "from langchain.prompts import PromptTemplate"
-    ],
-    "description": "Import LangChain PromptTemplate"
-  },
-  "Import LangChain LLMChain": {
-    "prefix": "chaini",
-    "body": [
-      "from langchain.chains import LLMChain"
-    ],
-    "description": "Import LangChain LLMChain"
-  },
-  "Import LangChain Memory": {
-    "prefix": "lcmemoryi",
-    "body": [
-      "from langchain.memory import ConversationBufferMemory"
-    ],
-    "description": "Import LangChain Memory"
-  },
-  "Import LangChain document loaders": {
-    "prefix": "implangchainloaders",
-    "body": [
-      "from langchain.document_loaders import TextLoader, PyPDFLoader, CSVLoader",
-      "from langchain.text_splitter import RecursiveCharacterTextSplitter",
-      "from langchain.embeddings import OpenAIEmbeddings",
-      "from langchain.vectorstores import Chroma"
-    ],
-    "description": "Import LangChain document loaders and related utilities"
-  },
-  "Import LangChain TextLoader": {
-    "prefix": "lcloaderi",
-    "body": [
-      "from langchain.document_loaders import TextLoader"
-    ],
-    "description": "Import LangChain TextLoader"
-  },
-  "Import LangChain TextSplitter": {
-    "prefix": "lcsplitteri",
-    "body": [
-      "from langchain.text_splitter import RecursiveCharacterTextSplitter"
-    ],
-    "description": "Import LangChain TextSplitter"
-  },
-  "Import LangChain Embeddings": {
-    "prefix": "lcembeddingsi",
-    "body": [
-      "from langchain.embeddings import OpenAIEmbeddings"
-    ],
-    "description": "Import LangChain Embeddings"
-  },
-  "Import LangChain Vectorstore": {
-    "prefix": "lcvectorei",
-    "body": [
-      "from langchain.vectorstores import Chroma"
-    ],
-    "description": "Import LangChain Vectorstore"
-  },
-  "Import LangChain ChatModel": {
-    "prefix": "lcchatmodeli",
-    "body": [
-      "from langchain.chat_models import ChatOpenAI"
-    ],
-    "description": "Import LangChain ChatOpenAI"
-  },
-  "Import LangChain Schema": {
-    "prefix": "lcschemai",
-    "body": [
-      "from langchain.schema import HumanMessage, AIMessage, SystemMessage"
-    ],
-    "description": "Import LangChain Schema for chat messages"
-  },
-  "LangChain LLM setup": {
-    "prefix": "llmini",
-    "body": [
-      "from langchain.llms import OpenAI",
-      "",
-      "# Initialize the OpenAI LLM",
-      "llm = OpenAI(",
-      "\ttemperature=0",
-      "\topenai_api_key=${2:\"your-api-key\"}",
-      ")"
-    ],
-    "description": "Set up a LangChain LLM"
-  },
   "LangChain prompt template": {
-    "prefix": "prompt",
+    "prefix": "lcpt",
     "body": [
       "from langchain.prompts import PromptTemplate",
       "",
       "# Define a prompt template",
-      "prompt_template = PromptTemplate(",
-      "\tinput_variables=[\"${1:input_var}\"],",
-      "\ttemplate=\"\"\"${2:Your prompt template text with {$1} variable.}\"\"\"",
+      "prompt_template = PromptTemplate.from_template(",
+      "\"\"\"",
+      "${1:prompt_text}",
+      "Formato richiesto: {${2:format_instructions}}",
+      "Input JSON: {${3:input_json}}",
+      "\"\"\"",
       ")"
     ],
     "description": "Create a LangChain prompt template"
   },
-  "LangChain chain": {
-    "prefix": "chain",
+  "LangChain model": {
+    "prefix": "lcm",
     "body": [
-      "from langchain.llms import OpenAI",
-      "from langchain.prompts import PromptTemplate",
-      "from langchain.chains import LLMChain",
-      "",
-      "# Create a chain",
-      "llm = OpenAI(gpt-temperature=0)",
-      "prompt = PromptTemplate(",
-      "\tinput_variables=[\"${2:input_var}\"],",
-      "\ttemplate=\"\"\"${3:Your prompt template text with {$2} variable.}\"\"\"",
-      ")",
-      "",
-      "chain = LLMChain(",
-      "\tllm=llm,",
-      "\tprompt=prompt",
-      ")",
-      "",
-      "# Run the chain",
-      "result = chain.run(${2:input_var}=\"${4:input value}\")"
+      "from langchain.chat_models import init_chat_model",
+      "llm = init_chat_model(\"gpt-4o-mini\", model_provider=\"openai\", temperature=0.0)",
+      ")"
     ],
-    "description": "Create and run a LangChain LLMChain"
+    "description": "Initialize a LangChain model"
+  },
+  "Pydantic model": {
+    "prefix": "pyd",
+    "body": [
+      "from pydantic import BaseModel, Field",
+      "from typing import Optional",
+      "class ${1:Model}(BaseModel):",
+      "\t${2:field_name}: ${3:field_type} = Field(..., description=\"${4:Field description}\")"
+    ],
+    "description": "Create a Pydantic model"
+  },
+  "LangChain pydantic parser": {
+    "prefix": "lcpp",
+    "body": [
+      "from langchain.output_parsers import PydanticOutputParser",
+      "",
+      "${parser} = PydanticOutputParser(pydantic_object=${1:model_name})"
+    ],
+    "description": "Create a Pydantic output parser for LangChain"
   },
   "LangChain RAG setup": {
     "prefix": "lcrag",
@@ -335,99 +195,12 @@
     ],
     "description": "Set up a Retrieval Augmented Generation (RAG) system with LangChain"
   },
-  "DataFrame creation": {
-    "prefix": "dfcreate",
-    "body": [
-      "import pandas as pd",
-      "",
-      "${1:df} = pd.DataFrame({",
-      "\t'${2:column1}': ${3:[1, 2, 3]},",
-      "\t'${4:column2}': ${5:['a', 'b', 'c']}",
-      "})"
-    ],
-    "description": "Create a pandas DataFrame"
-  },
-  "Numpy array": {
-    "prefix": "nparr",
-    "body": [
-      "import numpy as np",
-      "",
-      "${1:array} = np.array(${2:[1, 2, 3, 4, 5]})"
-    ],
-    "description": "Create a numpy array"
-  },
-  "Matplotlib plot": {
-    "prefix": "mplplot",
-    "body": [
-      "import matplotlib.pyplot as plt",
-      "import numpy as np",
-      "",
-      "# Generate data",
-      "x = np.linspace(${1:0}, ${2:10}, ${3:100})",
-      "y = ${4:np.sin(x)}",
-      "",
-      "# Create plot",
-      "plt.figure(figsize=(${5:10}, ${6:6}))",
-      "plt.plot(x, y, '${7:b-}', label='${8:Data}')",
-      "plt.title('${9:Title}')",
-      "plt.xlabel('${10:X axis}')",
-      "plt.ylabel('${11:Y axis}')",
-      "plt.legend()",
-      "plt.grid(True)",
-      "plt.show()"
-    ],
-    "description": "Create a matplotlib plot"
-  },
-  "Import TensorFlow": {
-    "prefix": "tfi",
-    "body": [
-      "import tensorflow as tf"
-    ],
-    "description": "Import TensorFlow"
-  },
-  "Import PyTorch": {
-    "prefix": "torchi",
-    "body": [
-      "import torch",
-      "import torch.nn as nn",
-      "import torch.optim as optim"
-    ],
-    "description": "Import PyTorch"
-  },
-  "Import requests": {
-    "prefix": "requestsi",
-    "body": [
-      "import requests"
-    ],
-    "description": "Import requests library"
-  },
-  "Import os": {
-    "prefix": "osi",
-    "body": [
-      "import os"
-    ],
-    "description": "Import os module"
-  },
-  "Import sys": {
-    "prefix": "sysi",
-    "body": [
-      "import sys"
-    ],
-    "description": "Import sys module"
-  },
   "Import pathlib": {
     "prefix": "pathlibi",
     "body": [
       "from pathlib import Path"
     ],
     "description": "Import Path from pathlib"
-  },
-  "Import JSON": {
-    "prefix": "jsoni",
-    "body": [
-      "import json"
-    ],
-    "description": "Import json module"
   },
   "argparser": {
     "prefix": "argp",
@@ -452,7 +225,7 @@
     "description": "Set up an argument parser"
   },
   "with open": {
-    "prefix": "withopen",
+    "prefix": "opn",
     "body": [
       "with open(${1:file_path}, '${2:r}', encoding='utf-8') as ${3:f}:",
       "\t${4:# file operations}"
