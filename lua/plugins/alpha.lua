@@ -1,6 +1,6 @@
--- ~/.config/nvim/lua/plugins/dashboard.lua
 return {
     "goolord/alpha-nvim",
+    event = "VimEnter",
     opts = function(_, opts)
         -- Imposta un logo personalizzato (header)
         opts.section.header.val = {
@@ -14,7 +14,16 @@ return {
             [[     Mio Signore AI - Dev Environment  ]],
         }
 
-        -- (opzionale) aggiorna il layout dopo aver cambiato il valore
-        pcall(vim.cmd.AlphaRedraw)
+        -- Assicurati che il layout venga aggiornato
+        if vim.fn.has("nvim-0.9.0") == 1 then
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "AlphaReady",
+                callback = function()
+                    pcall(vim.cmd.AlphaRedraw)
+                end,
+            })
+        else
+            pcall(vim.cmd.AlphaRedraw)
+        end
     end,
 }
