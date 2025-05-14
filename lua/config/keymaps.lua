@@ -70,11 +70,5 @@ vim.keymap.set("n", "%", smart_percent, {
 })
 
 -- insert mode remappings
-vim.keymap.set("i", "h", "(", { noremap = true, silent = true })
-vim.keymap.set("i", "j", "[", { noremap = true, silent = true })
-vim.keymap.set("i", "y", "{", { noremap = true, silent = true })
 vim.keymap.set("i", "à", "<", { noremap = true, silent = true })
 vim.keymap.set("i", "ù", ">", { noremap = true, silent = true })
-vim.keymap.set("i", "H", ")", { noremap = true, silent = true })
-vim.keymap.set("i", "J", "]", { noremap = true, silent = true })
-vim.keymap.set("i", "Y", "}", { noremap = true, silent = true })

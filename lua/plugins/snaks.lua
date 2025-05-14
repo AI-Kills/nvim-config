@@ -20,28 +20,28 @@ return {
       / /| |  / / \__ \/ / / / /_    / /   
      / ___ |_/ / ___/ / /_/ / __/   / /    
       /_/  |_/___//____/\____/_/     /_/\_/\~zZ
-                                          ( - - )   ...
-                                          \_~_~_/   anya
+                                      ( - - )   
+                                      \_~_~_/   
 
         ]],
 
                 -- 2. Tasti rapidi (vengono mostrati dalla sezione “keys”)
                 keys = {
-                    { icon = "🌐 The Only", key = "LIMIT 🌐", desc = "", action = ":Telescope find_files" },
+                    { icon = "🌐 THE ONLY", key = "LIMIT 🌐", desc = "", action = ":Telescope find_files" },
                     {
                         icon = "🩸 IS",
-                        key = "Your Mind 🩸",
+                        key = "YOUR MIND 🩸",
                         desc = "",
                         action = ":lua Snacks.dashboard.pick('oldfiles')",
                     },
                     {
-                        icon = "🔥 A.I.",
-                        key = "IS 🔥",
+                        icon = ".",
+                        key = ".",
                         desc = "",
                         action = ":Lazy",
                         enabled = package.loaded.lazy ~= nil,
                     },
-                    { icon = "🥇 N.", key = "1 🥇", desc = "", action = ":qa" },
+                    { icon = ".", key = ".", desc = "", action = ":qa" },
                 },
             },
 
