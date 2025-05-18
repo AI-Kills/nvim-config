@@ -35,8 +35,6 @@ vim.keymap.set("n", "<leader>h", ":split<CR>", { noremap = true, silent = true, 
 vim.keymap.set("n", "<leader>,", "<C-w>l", { noremap = true, silent = true, desc = "close buffer" })
 vim.keymap.set("n", "<leader>.", "<C-w>h", { noremap = true, silent = true, desc = "close buffer" })
 
--- terminal mode
-vim.keymap.set("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true, desc = "Exit terminal insert mode with jj" })
 -- folding
 vim.keymap.set("n", "-h", "zM", {
     noremap = true,
