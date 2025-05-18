@@ -37,7 +37,6 @@ vim.keymap.set("n", "<leader>.", "<C-w>h", { noremap = true, silent = true, desc
 
 -- terminal mode
 vim.keymap.set("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true, desc = "Exit terminal insert mode with jj" })
-
 -- folding
 vim.keymap.set("n", "-h", "zM", {
     noremap = true,
@@ -76,6 +75,18 @@ vim.keymap.set("n", "%", smart_percent, {
     desc = "Smart %: standard match o previous '(', '[' o '{'",
 })
 
--- insert mode remappings
-vim.keymap.set("i", "à", "<", { noremap = true, silent = true })
-vim.keymap.set("i", "ù", ">", { noremap = true, silent = true })
+-- normal mode keys remappings
+vim.keymap.set("n", "=", "<Cmd>normal :<CR>", { noremap = true })
+vim.keymap.set("n", "=", ":", { noremap = true })
+
+vim.keymap.set("n", "|", "$", { noremap = true, silent = true })
+vim.keymap.set("n", "D", "_", { noremap = true, silent = true })
+vim.keymap.set("n", "l", smart_percent, { noremap = true, silent = true })
+
+-- visual mode keys remappings
+vim.keymap.set("v", "|", "$", { noremap = true, silent = true })
+vim.keymap.set("v", "D", "_", { noremap = true, silent = true })
+vim.keymap.set("v", "l", "%", { noremap = true, silent = true })
+
+-- insert mode keys remappings
+vim.keymap.set("i", "D", "_", { noremap = true, silent = true })
