@@ -13,11 +13,17 @@
         "path": "./c/snippets.json"
       },
       {
-        "language": ["javascriptreact", "typescriptreact"],
+        "language": [
+          "javascriptreact",
+          "typescriptreact"
+        ],
         "path": "./jsx/snippets.json"
       },
       {
-        "language": ["javascript", "typescript"],
+        "language": [
+          "javascript",
+          "typescript"
+        ],
         "path": "./javascript/snippets.json"
       },
       {
@@ -25,8 +31,16 @@
         "path": "./python/snippets.json"
       },
       {
-        "language": ["bash", "sh", "shellscript"],
+        "language": [
+          "bash",
+          "sh",
+          "shellscript"
+        ],
         "path": "./bash/snippets.json"
+      },
+      {
+        "language": "*",
+        "path": "./global/snippets.json"
       }
     ]
   }

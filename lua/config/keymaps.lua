@@ -5,10 +5,17 @@ vim.keymap.set("n", "<leader>sa", ":wa<CR>", {
     desc = "Save all",
 })
 
+vim.keymap.set("n", ".", ":bd<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "delete buffer",
+})
+
 -- marks
 vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all local marks" })
 
 vim.keymap.set("n", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
+vim.keymap.set("v", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
 
 vim.api.nvim_set_keymap(
     "n",
@@ -32,7 +39,7 @@ vim.keymap.set("n", "<leader>.", "<C-w>h", { noremap = true, silent = true, desc
 vim.keymap.set("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true, desc = "Exit terminal insert mode with jj" })
 
 -- folding
-vim.keymap.set("n", "H", "zM", {
+vim.keymap.set("n", "-h", "zM", {
     noremap = true,
     silent = true,
     desc = "close all folds",

@@ -12,8 +12,6 @@
     "body": [
       "if [[ ${1:condition} ]]; then",
       "    ${2:# code}",
-      "else",
-      "    ${3:# code}",
       "fi"
     ]
   },
@@ -53,10 +51,10 @@
     ]
   },
   "Function Definition": {
-    "prefix": "func",
+    "prefix": "fn",
     "description": "Function definition",
     "body": [
-      "${1:function_name}() {",
+      "function ${1:function_name}() {",
       "    ${2:# code}",
       "    return 0",
       "}"
@@ -84,9 +82,18 @@
       "command_that_might_fail || error_exit \"Command failed\""
     ]
   },
+  "while": {
+    "prefix": "while",
+    "description": "While loop with condition",
+    "body": [
+      "while [[ ${1:condition} ]]; do",
+      "    ${2:# code}",
+      "done"
+    ]
+  },
   "realpath": {
     "prefix": "absp",
-    "description": "Get the real path of a file or directory",
+    "description": "Get the absolute  path of a file or directory",
     "body": [
       "realpath ${1:filename}"
     ]

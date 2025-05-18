@@ -35,13 +35,13 @@ return {
                         action = ":lua Snacks.dashboard.pick('oldfiles')",
                     },
                     {
-                        icon = ".",
+                        icon = "",
                         key = ".",
                         desc = "",
                         action = ":Lazy",
                         enabled = package.loaded.lazy ~= nil,
                     },
-                    { icon = ".", key = ".", desc = "", action = ":qa" },
+                    { icon = "", key = ".", desc = "", action = ":qa" },
                 },
             },
 

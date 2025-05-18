@@ -6,6 +6,38 @@
     ],
     "description": "Print statement"
   },
+  "with open read": {
+    "prefix": "wor",
+    "body": [
+      "with open(${1:file_path}, 'r') as ${2:f}:",
+      "\t${3:# file operations}"
+    ],
+    "description": "With statement for reading files"
+  },
+  "with open write": {
+    "prefix": "wow",
+    "body": [
+      "with open(${1:file_path}, 'w') as ${2:f}:",
+      "\t${3:# file operations}"
+    ],
+    "description": "With statement for writing files"
+  },
+  "counter": {
+    "prefix": "cnt",
+    "body": [
+      "from collections import Counter",
+      "",
+      "c = Counter(${1:iterable})"
+    ],
+    "description": "Counter from collections"
+  },
+  "patate debug": {
+    "prefix": "ptt",
+    "body": [
+      "print(\"🥔🥔🥔\", ${1:var})"
+    ],
+    "description": "patate debug"
+  },
   "Import common data libraries": {
     "prefix": "impdata",
     "body": [
@@ -158,6 +190,26 @@
     ],
     "description": "Create a Pydantic output parser for LangChain"
   },
+  "LangChain  basic chain": {
+    "prefix": "lcc",
+    "body": [
+      "from langchain.output_parsers import PydanticOutputParser",
+      "from langchain.chat_models import init_chat_model",
+      "from langchain.prompts import PromptTemplate",
+      "",
+      "prompt = PromptTemplate.from_template(",
+      "\"\"\"",
+      "prompt_text",
+      "Formato richiesto: {format_instructions}",
+      "Input JSON: {input_json}",
+      "\"\"\"",
+      ")",
+      "llm = init_chat_model(\"gpt-4o-mini\", model_provider=\"openai\", temperature=0.0)",
+      "${parser} = PydanticOutputParser(pydantic_object=model)",
+      "similarity_llm = prompt | llm | parser"
+    ],
+    "description": "Create a Pydantic output parser for LangChain"
+  },
   "LangChain RAG setup": {
     "prefix": "lcrag",
     "body": [
@@ -231,5 +283,50 @@
       "\t${4:# file operations}"
     ],
     "description": "With statement for file operations"
+  },
+  "cli multimode": {
+    "prefix": "clit",
+    "body": [
+      "import argparse",
+      "",
+      "def cli():",
+      "\tparser = argparse.ArgumentParser(description=\"${1:CLI con più modalità}\")",
+      "\tparser.add_argument('--parse', type=str, help='Modalità parse, nome file da analizzare')",
+      "\tparser.add_argument('-a', type=str, help='Modalità analisi, nome file da analizzare')",
+      "\tparser.add_argument('-b', nargs=2, help='Modalità confronto, due nomi di file')",
+      "\targs = parser.parse_args()",
+      "",
+      "\tmodes = {",
+      "\t\t\"parse\": args.parse,",
+      "\t\t\"a\": args.a,",
+      "\t\t\"b\": args.b",
+      "\t}",
+      "",
+      "\tselected_mode_key = [k for k, v in modes.items() if v is not None]",
+      "",
+      "\tif not selected_mode_key:",
+      "\t\tparser.print_help()",
+      "\t\treturn",
+      "",
+      "\tmatch selected_mode_key[0]:",
+      "\t\tcase \"parse\":",
+      "\t\t\tpdf_name = modes[\"parse\"]",
+      "\t\t\tprint(f\"Parse mode selected for {pdf_name}\")",
+      "",
+      "\t\tcase \"a\":",
+      "\t\t\tpdf_name = modes[\"a\"]",
+      "\t\t\tprint(f\"Analisi mode selected for {pdf_name}\")",
+      "",
+      "\t\tcase \"b\":",
+      "\t\t\tpdf_paths = [f\"./out_analisi/{x}\" for x in modes[\"b\"]]",
+      "\t\t\tprint(f\"Confronto emendativo tra {pdf_paths[0]} e {pdf_paths[1]}\")",
+      "",
+      "\t\tcase _:",
+      "\t\t\tprint(\"Modalità non riconosciuta.\")",
+      "",
+      "if __name__ == '__main__':",
+      "\tcli()"
+    ],
+    "description": "CLI multimodale con argparse e match-case"
   }
 }

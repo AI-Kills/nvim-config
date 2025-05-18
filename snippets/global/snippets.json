@@ -1,0 +1,18 @@
+{
+  "bash functiontion": {
+    "prefix": "bfn",
+    "body": [
+      "function ${1:function_name}() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Print Hello World"
+  },
+  "Date Now": {
+    "prefix": "now",
+    "body": [
+      "const now = new Date();"
+    ],
+    "description": "Get current date"
+  }
+}
