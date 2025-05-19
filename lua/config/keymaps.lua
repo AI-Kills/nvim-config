@@ -159,21 +159,46 @@ local function prev_textline()
     -- Niente da fare → rimani dov’eri
 end
 
--------------------------------------------------
---  Mapping: rimpiazza definitivamente j / k
--------------------------------------------------
-vim.keymap.set("n", "j", next_textline, { desc = "Salta giù alla prossima riga con testo o fold" })
-vim.keymap.set("n", "k", prev_textline, { desc = "Salta su alla precedente riga con testo o fold" })
+local function prev_textline_with_count()
+    local count = vim.v.count
+    if count > 0 then
+        -- Comportamento di default: muovi verso l'alto di 'count' righe
+        vim.cmd("normal! " .. count .. "k")
+    else
+        -- Comportamento custom: salta alla precedente riga con testo (o fold)
+        prev_textline()
+    end
+end
+
+local function next_textline_with_count()
+    local count = vim.v.count
+    if count > 0 then
+        -- Comportamento di default: muovi verso il basso di 'count' righe
+        vim.cmd("normal! " .. count .. "j")
+    else
+        -- Comportamento custom: salta alla prossima riga con testo (o fold)
+        next_textline()
+    end
+end
+
 -- normal mode keys remappings
 vim.keymap.set("n", "=", "<Cmd>normal :<CR>", { noremap = true })
 vim.keymap.set("n", "=", ":", { noremap = true })
 
-vim.keymap.set("n", "|", "$", { noremap = true, silent = true })
-vim.keymap.set("n", "D", "_", { noremap = true, silent = true })
+vim.keymap.set("n", "H", "_", { noremap = true, silent = true })
 
 -- visual mode keys remappings
-vim.keymap.set("v", "|", "$", { noremap = true, silent = true })
-vim.keymap.set("v", "D", "_", { noremap = true, silent = true })
+vim.keymap.set("v", "H", "_", { noremap = true, silent = true })
+vim.keymap.set("i", "H", "_", { noremap = true, silent = true })
+
+-- j and k + option for "?" and "!"
+
+vim.keymap.set("n", "ª", "?", { noremap = true, silent = true })
+vim.keymap.set("v", "ª", "?", { noremap = true, silent = true })
+vim.keymap.set("n", "º", "!", { noremap = true, silent = true })
+vim.keymap.set("v", "º", "!", { noremap = true, silent = true })
+vim.keymap.set("i", "º", "!", { noremap = true, silent = true })
+vim.keymap.set("i", "ª", "?", { noremap = true, silent = true })
 
 -- ### moving ###
 
@@ -189,20 +214,39 @@ vim.keymap.set("v", "b", smart_percent, { noremap = true, silent = true })
 vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
 
 -- vertical
-
-vim.keymap.set("n", "j", next_textline, { noremap = true, silent = true })
-vim.keymap.set("n", "k", prev_textline, { noremap = true, silent = true })
-vim.keymap.set("v", "j", next_textline, { noremap = true, silent = true })
-vim.keymap.set("v", "k", prev_textline, { noremap = true, silent = true })
+vim.keymap.set(
+    "n",
+    "k",
+    prev_textline_with_count,
+    { desc = "k con count → normale; senza count → skip a testo/fold" }
+)
+vim.keymap.set(
+    "n",
+    "j",
+    next_textline_with_count,
+    { desc = "j con count → normale; senza count → skip a testo/fold" }
+)
+vim.keymap.set(
+    "v",
+    "k",
+    prev_textline_with_count,
+    { desc = "k con count → normale; senza count → skip a testo/fold" }
+)
+vim.keymap.set(
+    "v",
+    "j",
+    next_textline_with_count,
+    { desc = "j con count → normale; senza count → skip a testo/fold" }
+)
 
 -- folding
-vim.keymap.set("n", "-n", "zM", {
+vim.keymap.set("n", "-∆", "zM", {
     noremap = true,
     silent = true,
     desc = "close all folds",
 })
 
-vim.keymap.set("n", "n", "za", {
+vim.keymap.set("n", "∆", "za", {
     noremap = true,
     silent = true,
     desc = "open fold",
