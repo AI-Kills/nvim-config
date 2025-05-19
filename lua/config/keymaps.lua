@@ -27,27 +27,6 @@ vim.api.nvim_set_keymap(
 -- move among buffers
 vim.keymap.set("n", ",", ":bprevious<CR>", { noremap = true, silent = true, desc = "go to previous buffer" })
 
--- create splits
-vim.keymap.set("n", "<leader>v", ":vsplit<CR>", { noremap = true, silent = true, desc = "vertical split" })
-vim.keymap.set("n", "<leader>h", ":split<CR>", { noremap = true, silent = true, desc = "horizontal split" })
-
--- move among splits
-vim.keymap.set("n", "<leader>,", "<C-w>l", { noremap = true, silent = true, desc = "close buffer" })
-vim.keymap.set("n", "<leader>.", "<C-w>h", { noremap = true, silent = true, desc = "close buffer" })
-
--- folding
-vim.keymap.set("n", "-h", "zM", {
-    noremap = true,
-    silent = true,
-    desc = "close all folds",
-})
-
-vim.keymap.set("n", "h", "za", {
-    noremap = true,
-    silent = true,
-    desc = "open fold",
-})
-
 -- Smart %: jump se sei su (), [] o {} altrimenti
 -- vai all’indietro al primo fra (, [ o {
 local function smart_percent()
@@ -66,25 +45,165 @@ local function smart_percent()
     vim.fn.search("[\\(\\[\\{]", "bW")
 end
 
--- Mapping “callback” in Neovim (senza expr)
-vim.keymap.set("n", "%", smart_percent, {
-    noremap = true,
-    silent = true,
-    desc = "Smart %: standard match o previous '(', '[' o '{'",
-})
+-- Salta alla prossima parentesi utile.
+-- • Se il cursore è su una parentesi, fa il salto “%” standard.
+-- • Altrimenti avanza alla prossima parentesi chiusura “) ] }”.
+local function smart_percent_next()
+    local col = vim.fn.col(".")
+    local line = vim.fn.getline(".")
+    local char = line:sub(col, col)
 
+    -- 1) Siamo già su una parentesi → salto abbinato standard
+    if char:match("[%(%)%[%]{}]") then
+        vim.cmd("normal! %")
+        return
+    end
+
+    -- 2) Non siamo su una parentesi → cerca in avanti la prossima
+    --    parentesi di chiusura “)”, “]” o “}”.
+    --    Vim-regex: [\)\]\}]  (backslash per escapare nell’argomento Lua)
+    vim.fn.search("[\\)\\]\\}]", "W")
+end
+
+--- Salta in **alto** alla prima linea non-vuota.
+--- Mantiene la colonna, salvo che la riga di destinazione sia più corta.
+local function prev_textline()
+    local pos = vim.api.nvim_win_get_cursor(0) -- {row, col}
+    local row = pos[1]
+    local col = pos[2]
+
+    for target = row - 1, 1, -1 do
+        local line = vim.fn.getline(target)
+        if line:match("%S") then
+            vim.api.nvim_win_set_cursor(0, { target, math.min(col, #line) })
+            return
+        end
+    end
+    -- Nessuna linea non‐vuota sopra: resta fermo.
+end
+
+-------------------------------------------------------------
+--  Salta GIÙ alla prossima riga “utile” (testo o fold chiuso)
+-------------------------------------------------------------
+local function next_textline()
+    local pos = vim.api.nvim_win_get_cursor(0) -- {row, col}
+    local row = pos[1]
+    local col = pos[2]
+    local last = vim.fn.line("$")
+
+    -- Se siamo su un fold chiuso, parti dopo il fold
+    if vim.fn.foldclosed(row) == row then
+        row = vim.fn.foldclosedend(row)
+    end
+
+    local target = row + 1
+    while target <= last do
+        -----------------------------------------------------------------
+        -- 1) Fold chiuso trovato → trattalo come “una riga sola” di testo
+        -----------------------------------------------------------------
+        local fstart = vim.fn.foldclosed(target)
+        if fstart ~= -1 then -- siamo DENTRO (o all’inizio) di un fold chiuso
+            vim.api.nvim_win_set_cursor(0, { fstart, math.min(col, #vim.fn.getline(fstart)) })
+            return
+        end
+
+        --------------------------------------------------
+        -- 2) Linea normale con qualcosa di non-whitespace
+        --------------------------------------------------
+        local line = vim.fn.getline(target)
+        if line:match("%S") then
+            vim.api.nvim_win_set_cursor(0, { target, math.min(col, #line) })
+            return
+        end
+
+        target = target + 1
+    end
+    -- Niente da fare → rimani dov’eri
+end
+
+-------------------------------------------------------------
+--  Salta SU alla precedente riga “utile” (testo o fold chiuso)
+-------------------------------------------------------------
+local function prev_textline()
+    local pos = vim.api.nvim_win_get_cursor(0) -- {row, col}
+    local row = pos[1]
+    local col = pos[2]
+
+    -- Se siamo su un fold chiuso, parti prima del fold
+    if vim.fn.foldclosed(row) == row then
+        row = vim.fn.foldclosed(row) - 1
+    end
+
+    local target = row - 1
+    while target >= 1 do
+        -----------------------------------------------------------------
+        -- 1) Fold chiuso trovato → trattalo come “una riga sola” di testo
+        -----------------------------------------------------------------
+        local fstart = vim.fn.foldclosed(target)
+        if fstart ~= -1 then -- siamo DENTRO (o all’inizio) di un fold chiuso
+            vim.api.nvim_win_set_cursor(0, { fstart, math.min(col, #vim.fn.getline(fstart)) })
+            return
+        end
+
+        --------------------------------------------------
+        -- 2) Linea normale con qualcosa di non-whitespace
+        --------------------------------------------------
+        local line = vim.fn.getline(target)
+        if line:match("%S") then
+            vim.api.nvim_win_set_cursor(0, { target, math.min(col, #line) })
+            return
+        end
+
+        target = target - 1
+    end
+    -- Niente da fare → rimani dov’eri
+end
+
+-------------------------------------------------
+--  Mapping: rimpiazza definitivamente j / k
+-------------------------------------------------
+vim.keymap.set("n", "j", next_textline, { desc = "Salta giù alla prossima riga con testo o fold" })
+vim.keymap.set("n", "k", prev_textline, { desc = "Salta su alla precedente riga con testo o fold" })
 -- normal mode keys remappings
 vim.keymap.set("n", "=", "<Cmd>normal :<CR>", { noremap = true })
 vim.keymap.set("n", "=", ":", { noremap = true })
 
 vim.keymap.set("n", "|", "$", { noremap = true, silent = true })
 vim.keymap.set("n", "D", "_", { noremap = true, silent = true })
-vim.keymap.set("n", "l", smart_percent, { noremap = true, silent = true })
 
 -- visual mode keys remappings
 vim.keymap.set("v", "|", "$", { noremap = true, silent = true })
 vim.keymap.set("v", "D", "_", { noremap = true, silent = true })
-vim.keymap.set("v", "l", smart_percent, { noremap = true, silent = true })
 
--- insert mode keys remappings
-vim.keymap.set("i", "D", "_", { noremap = true, silent = true })
+-- ### moving ###
+
+-- horizontal
+vim.keymap.set("n", "h", "b", { noremap = true, silent = true })
+vim.keymap.set("n", "l", "e", { noremap = true, silent = true })
+vim.keymap.set("v", "h", "b", { noremap = true, silent = true })
+vim.keymap.set("v", "l", "e", { noremap = true, silent = true })
+
+vim.keymap.set("n", "b", smart_percent, { noremap = true, silent = true })
+vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
+vim.keymap.set("v", "b", smart_percent, { noremap = true, silent = true })
+vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
+
+-- vertical
+
+vim.keymap.set("n", "j", next_textline, { noremap = true, silent = true })
+vim.keymap.set("n", "k", prev_textline, { noremap = true, silent = true })
+vim.keymap.set("v", "j", next_textline, { noremap = true, silent = true })
+vim.keymap.set("v", "k", prev_textline, { noremap = true, silent = true })
+
+-- folding
+vim.keymap.set("n", "-n", "zM", {
+    noremap = true,
+    silent = true,
+    desc = "close all folds",
+})
+
+vim.keymap.set("n", "n", "za", {
+    noremap = true,
+    silent = true,
+    desc = "open fold",
+})
