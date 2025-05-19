@@ -84,7 +84,7 @@ vim.keymap.set("n", "l", smart_percent, { noremap = true, silent = true })
 -- visual mode keys remappings
 vim.keymap.set("v", "|", "$", { noremap = true, silent = true })
 vim.keymap.set("v", "D", "_", { noremap = true, silent = true })
-vim.keymap.set("v", "l", "%", { noremap = true, silent = true })
+vim.keymap.set("v", "l", smart_percent, { noremap = true, silent = true })
 
 -- insert mode keys remappings
 vim.keymap.set("i", "D", "_", { noremap = true, silent = true })
