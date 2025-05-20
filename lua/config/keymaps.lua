@@ -185,11 +185,7 @@ end
 vim.keymap.set("n", "=", "<Cmd>normal :<CR>", { noremap = true })
 vim.keymap.set("n", "=", ":", { noremap = true })
 
-vim.keymap.set("n", "H", "_", { noremap = true, silent = true })
-
 -- visual mode keys remappings
-vim.keymap.set("v", "H", "_", { noremap = true, silent = true })
-vim.keymap.set("i", "H", "_", { noremap = true, silent = true })
 
 -- j and k + option for "?" and "!"
 
@@ -212,6 +208,16 @@ vim.keymap.set("n", "b", smart_percent, { noremap = true, silent = true })
 vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
 vim.keymap.set("v", "b", smart_percent, { noremap = true, silent = true })
 vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
+
+-- extremal horizontal
+
+vim.keymap.set("v", "µ", "_", { noremap = true, silent = true })
+vim.keymap.set("n", "µ", "_", { noremap = true, silent = true })
+vim.keymap.set("i", "µ", "_", { noremap = true, silent = true })
+
+vim.keymap.set("i", "∂", "$", { noremap = true, silent = true })
+vim.keymap.set("n", "∂", "$", { noremap = true, silent = true })
+vim.keymap.set("v", "∂", "$", { noremap = true, silent = true })
 
 -- vertical
 vim.keymap.set(
