@@ -257,3 +257,26 @@ vim.keymap.set("n", "∆", "za", {
     silent = true,
     desc = "open fold",
 })
+
+-- navigating through indentation --- questo serve per python...
+
+-- Funzione locale che effettua il require solo al primo utilizzo
+local function jump_prev_less_indent()
+    require("utils.indent_nav").jump_prev_less_indent()
+end
+vim.keymap.set(
+    "n", -- normal-mode
+    "gk", -- la tua combinazione
+    jump_prev_less_indent,
+    { desc = "Jump to previous lower indent", silent = true }
+)
+
+local function jump_next_greater_indent()
+    require("utils.indent_nav").jump_next_greater_indent()
+end
+vim.keymap.set(
+    "n", -- normal-mode
+    "gj", -- la tua combinazione
+    jump_next_greater_indent,
+    { desc = "Jump to next greater indent", silent = true }
+)
