@@ -253,12 +253,24 @@ vim.keymap.set(
     jump_prev_less_indent,
     { desc = "Jump to previous lower indent", silent = true }
 )
+vim.keymap.set(
+    "v", -- normal-mode
+    "gk", -- la tua combinazione
+    jump_prev_less_indent,
+    { desc = "Jump to previous lower indent", silent = true }
+)
 
 local function jump_next_greater_indent()
     require("utils.indent_nav").jump_next_greater_indent()
 end
 vim.keymap.set(
     "n", -- normal-mode
+    "gj", -- la tua combinazione
+    jump_next_greater_indent,
+    { desc = "Jump to next greater indent", silent = true }
+)
+vim.keymap.set(
+    "v", -- normal-mode
     "gj", -- la tua combinazione
     jump_next_greater_indent,
     { desc = "Jump to next greater indent", silent = true }
