@@ -65,23 +65,6 @@ local function smart_percent_next()
     vim.fn.search("[\\)\\]\\}]", "W")
 end
 
---- Salta in **alto** alla prima linea non-vuota.
---- Mantiene la colonna, salvo che la riga di destinazione sia più corta.
-local function prev_textline()
-    local pos = vim.api.nvim_win_get_cursor(0) -- {row, col}
-    local row = pos[1]
-    local col = pos[2]
-
-    for target = row - 1, 1, -1 do
-        local line = vim.fn.getline(target)
-        if line:match("%S") then
-            vim.api.nvim_win_set_cursor(0, { target, math.min(col, #line) })
-            return
-        end
-    end
-    -- Nessuna linea non‐vuota sopra: resta fermo.
-end
-
 -------------------------------------------------------------
 --  Salta GIÙ alla prossima riga “utile” (testo o fold chiuso)
 -------------------------------------------------------------
