@@ -35,25 +35,21 @@ vim.api.nvim_set_keymap("n", "<leader>%", ":lua smart_percent()<CR>", { noremap 
 -- Salta alla prossima parentesi utile.
 -- • Se il cursore è su una parentesi, fa il salto “%” standard.
 -- • Altrimenti avanza alla prossima parentesi chiusura “) ] }”.
-
 local function smart_percent_next()
-    local row, col0 = unpack(vim.api.nvim_win_get_cursor(0))
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local col = vim.fn.col(".")
+    local line = vim.fn.getline(".")
+    local char = line:sub(col, col)
 
-    for r = row, #lines do
-        local line = lines[r]
-        -- escludi il carattere corrente: in avanti
-        local start_c = (r == row) and (col0 + 2) or 1
-        for c = start_c, #line do
-            local ch = line:sub(c, c)
-            -- verifica parentesi chiusa: ')', ']' o '}'
-            if ch:match("[%)%]%}]") then
-                vim.api.nvim_win_set_cursor(0, { r, c - 1 })
-                return
-            end
-        end
+    -- 1) Siamo già su una parentesi → salto abbinato standard
+    if char:match("[%(%)%[%]{}]") then
+        vim.cmd("normal! %")
+        return
     end
-    print("Nessuna parentesi chiusa trovata nel testo successivo.")
+
+    -- 2) Non siamo su una parentesi → cerca in avanti la prossima
+    --    parentesi di chiusura “)”, “]” o “}”.
+    --    Vim-regex: [\)\]\}]  (backslash per escapare nell’argomento Lua)
+    vim.fn.search("[\\)\\]\\}]", "W")
 end
 
 local function smart_percent()
