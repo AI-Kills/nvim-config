@@ -10,6 +10,7 @@ return {
         "json-lsp",
         "typescript-language-server",
         "intelephense",
+        "css-lsp",
         -- Formatters
         "stylua",
         -- "rustfmt", -- Removing rustfmt as it should not be installed via rustup/mason

@@ -29,41 +29,75 @@ vim.keymap.set("n", ",", ":bprevious<CR>", { noremap = true, silent = true, desc
 
 -- Smart %: jump se sei su (), [] o {} altrimenti
 -- vai all’indietro al primo fra (, [ o {
-local function smart_percent()
-    local col = vim.fn.col(".")
-    local line = vim.fn.getline(".")
-    local char = line:sub(col, col)
 
-    -- 1) se siamo su una parentesi, salto standard
-    if char:match("[%(%)%[%]{}]") then
-        vim.cmd("normal! %")
-        return
-    end
-
-    -- 2) altrimenti cerca backwards '(', '[' o '{'
-    -- "[\\(\\[\\{]" diventa in Vim-regex: [\(\[\{] → literal '(', '[', '{'
-    vim.fn.search("[\\(\\[\\{]", "bW")
-end
-
+-- Mapping CLI (esempio)
+vim.api.nvim_set_keymap("n", "<leader>%", ":lua smart_percent()<CR>", { noremap = true, silent = true })
 -- Salta alla prossima parentesi utile.
 -- • Se il cursore è su una parentesi, fa il salto “%” standard.
 -- • Altrimenti avanza alla prossima parentesi chiusura “) ] }”.
-local function smart_percent_next()
-    local col = vim.fn.col(".")
-    local line = vim.fn.getline(".")
-    local char = line:sub(col, col)
 
-    -- 1) Siamo già su una parentesi → salto abbinato standard
-    if char:match("[%(%)%[%]{}]") then
-        vim.cmd("normal! %")
-        return
+local function smart_percent_next()
+    local row, col0 = unpack(vim.api.nvim_win_get_cursor(0))
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+
+    for r = row, #lines do
+        local line = lines[r]
+        -- escludi il carattere corrente: in avanti
+        local start_c = (r == row) and (col0 + 2) or 1
+        for c = start_c, #line do
+            local ch = line:sub(c, c)
+            -- verifica parentesi chiusa: ')', ']' o '}'
+            if ch:match("[%)%]%}]") then
+                vim.api.nvim_win_set_cursor(0, { r, c - 1 })
+                return
+            end
+        end
+    end
+    print("Nessuna parentesi chiusa trovata nel testo successivo.")
+end
+
+local function smart_percent()
+    -- Ottieni posizione del cursore (riga, colonna zero-index)
+    local row, col0 = unpack(vim.api.nvim_win_get_cursor(0))
+    -- Leggi tutte le righe del buffer
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+
+    -- Scansione inversa: riga per riga, colonna per colonna
+    for r = row, 1, -1 do
+        local line = lines[r]
+        -- Determina la colonna di partenza per la scansione inversa
+        local start_c
+        if r == row then
+            -- Se siamo sulla riga corrente, inizia prima del carattere attuale
+            if col0 >= 1 then
+                start_c = col0 -- esclude il carattere sotto il cursore
+            else
+                -- Se siamo in col0=0 (prima colonna), salta a fine riga
+                start_c = #line
+            end
+        else
+            -- Per righe precedenti, inizia dalla fine
+            start_c = #line
+        end
+        for c = start_c, 1, -1 do
+            local ch = line:sub(c, c)
+            -- Verifica se è una parentesi aperta: (, [ o {
+            if ch:match("[%(%%[%{]") then
+                -- Imposta il cursore sulla parentesi aperta trovata (colonna zero-index)
+                vim.api.nvim_win_set_cursor(0, { r, c - 1 })
+                return
+            end
+        end
     end
 
-    -- 2) Non siamo su una parentesi → cerca in avanti la prossima
-    --    parentesi di chiusura “)”, “]” o “}”.
-    --    Vim-regex: [\)\]\}]  (backslash per escapare nell’argomento Lua)
-    vim.fn.search("[\\)\\]\\}]", "W")
+    print("Nessuna parentesi aperta trovata.")
 end
+
+-- Mappatura CLI: premi <leader>% per smart_percent
+vim.api.nvim_set_keymap("n", "<leader>%", ":lua smart_percent()<CR>", { noremap = true, silent = true })
+
+-- Mappatura CLI: premi <leader>% per smart_percent
+vim.api.nvim_set_keymap("n", "<leader>%", ":lua smart_percent()<CR>", { noremap = true, silent = true })
 
 -------------------------------------------------------------
 --  Salta GIÙ alla prossima riga “utile” (testo o fold chiuso)
