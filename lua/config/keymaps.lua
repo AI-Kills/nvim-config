@@ -11,6 +11,13 @@ vim.keymap.set("n", ".", ":bd<CR>", {
     desc = "delete buffer",
 })
 
+vim.keymap.set("n", "<leader>i", "K", {
+    noremap = true,
+    silent = true,
+
+    desc = "delete see documentation",
+})
+
 -- marks
 vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all local marks" })
 
@@ -305,3 +312,38 @@ vim.keymap.set(
     jump_next_greater_indent,
     { desc = "Jump to next greater indent", silent = true }
 )
+
+vim.keymap.set(
+    "n", -- normal-mode
+    "°", -- la tua combinazione
+    "]",
+    {
+        remap = true,
+        silent = true,
+        desc = "close ]",
+    }
+)
+
+vim.keymap.set(
+    "i", -- normal-mode
+    "°", -- la tua combinazione
+    "]",
+    {
+        remap = true,
+        silent = true,
+        desc = "close ]",
+    }
+)
+
+vim.keymap.set(
+    "v", -- normal-mode
+    "°", -- la tua combinazione
+    "]",
+    {
+        remap = true,
+        silent = true,
+        desc = "close ]",
+    }
+)
+
+-- closing parenterses
