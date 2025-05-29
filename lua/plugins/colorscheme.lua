@@ -5,46 +5,46 @@ return {
             colorscheme = "darkvoid",
         },
     },
+
     {
         "aliqyan-21/darkvoid.nvim",
         priority = 1000,
         opts = {
             transparent = false,
+            glow = true,
             show_end_of_buffer = true,
-            glow = false,
+
             colors = {
-                fg = "#c0c0c0",
-                bg = "#1c1c1c",
-                cursor = "#bdfe58",
-                line_nr = "#404040",
-                visual = "#303030",
-                comment = "#585858",
-                string = "#d1d1d1",
-                func = "#e1e1e1",
-                kw = "#f1f1f1",
-                identifier = "#b1b1b1",
-                type = "#a1a1a1",
-                type_builtin = "#c5c5c5",
-                search_highlight = "#1bfd9c",
-                operator = "#1bfd9c",
-                bracket = "#e6e6e6",
-                preprocessor = "#4b8902",
-                bool = "#66b2b2",
-                constant = "#b2d8d8",
+                ----------------------------------------------------------------------
+                --  Core Darkness ----------------------------------------------------
+                ----------------------------------------------------------------------
+                fg = "#c0c0c0", -- Testo principale
+                bg = "#1c1c1c", -- Sfondo
+                cursor = "#bdfe58", -- Verde tossico
+                line_nr = "#353535", -- Numeri di linea
+                visual = "#252525", -- Selezione
 
-                plugins = {
-                    gitsigns = true,
-                    nvim_cmp = true,
-                    treesitter = true,
-                    nvimtree = true,
-                    telescope = true,
-                    lualine = true,
-                    bufferline = true,
-                    oil = true,
-                    whichkey = true,
-                    nvim_notify = true,
-                },
+                ----------------------------------------------------------------------
+                --  Syntax (grigi ottimizzati) --------------------------------------
+                ----------------------------------------------------------------------
+                comment = "#4d4d4d", -- Commenti: scuro ma leggibile
+                string = "#b3b3b3", -- Stringhe: medio–chiaro
+                identifier = "#e0e0e0", -- Variabili: quasi bianco
+                func = "#f0f0f0", -- Nomi di funzione: quasi puro
+                kw = "#ffffff", -- Keywords: bianco pieno
+                type = "#8c8c8c", -- Tipi: scuro–medio
+                type_builtin = "#aaaaaa", -- Tipi built-in: grigio chiaro
+                constant = "#9fcfcf", -- Costanti: ciano tenue
+                bool = "#6faaaa", -- Booleani: blu-grigio
+                operator = "#1bfd9c", -- Operatori: verde vivo
+                search_highlight = "#1bfd9c", -- Evidenziatore di ricerca
 
+                bracket = "#d0d0d0", -- Parentesi e simboli
+                preprocessor = "#4b8902", -- Direttive preprocessor
+
+                ----------------------------------------------------------------------
+                --  Diff & Popup -----------------------------------------------------
+                ----------------------------------------------------------------------
                 added = "#baffc9",
                 changed = "#ffffba",
                 removed = "#ffb3ba",
@@ -55,21 +55,18 @@ return {
 
                 eob = "#3c3c3c",
 
-                border = "#585858",
+                border = "#666666",
                 title = "#bdfe58",
-
                 bufferline_selection = "#1bfd9c",
 
+                ----------------------------------------------------------------------
+                --  Diagnostics ------------------------------------------------------
+                ----------------------------------------------------------------------
                 error = "#dea6a0",
                 warning = "#d6efd8",
                 hint = "#bedc74",
                 info = "#7fa1c3",
             },
         },
-    },
-    {
-        "nvim-lualine/lualine.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        enabled = true,
     },
 }
