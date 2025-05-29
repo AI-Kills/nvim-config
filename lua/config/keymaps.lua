@@ -11,7 +11,7 @@ vim.keymap.set("n", ".", ":bd<CR>", {
     desc = "delete buffer",
 })
 
-vim.keymap.set("n", "<leader>i", "K", {
+vim.keymap.set("n", "<leader>i", ":lua vim.lsp.buf.hover()<CR>", {
     noremap = true,
     silent = true,
 
