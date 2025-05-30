@@ -30,7 +30,7 @@ return {
                     bg = "#0d0d0d",
                     cursor = "#bdfe58",
                     line_nr = "#2a2a2a",
-                    visual = "#252525",
+                    visual = "#3a2a2a", -- evidenziazione visual mode rosso scuro
 
                     --------------------------------------------------------------------
                     -- Syntax ----------------------------------------------------------
