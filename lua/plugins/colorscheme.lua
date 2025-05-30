@@ -7,65 +7,93 @@ return {
     },
 
     {
-        "aliqyan-21/darkvoid.nvim",
-        priority = 1000,
-        opts = {
-            transparent = false,
-            glow = true,
-            show_end_of_buffer = true,
+        {
+            "LazyVim/LazyVim",
+            opts = {
+                colorscheme = "darkvoid",
+            },
+        },
 
-            colors = {
-                ----------------------------------------------------------------------
-                --  Core Darkness ----------------------------------------------------
-                ----------------------------------------------------------------------
-                fg = "#c0c0c0", -- Testo principale
-                bg = "#1c1c1c", -- Sfondo
-                cursor = "#bdfe58", -- Verde tossico
-                line_nr = "#353535", -- Numeri di linea
-                visual = "#252525", -- Selezione
+        {
+            "aliqyan-21/darkvoid.nvim",
+            priority = 1000,
+            opts = {
+                transparent = false,
+                glow = true,
+                show_end_of_buffer = true,
 
-                ----------------------------------------------------------------------
-                --  Syntax (grigi ottimizzati) --------------------------------------
-                ----------------------------------------------------------------------
-                comment = "#4d4d4d", -- Commenti: scuro ma leggibile
-                string = "#b3b3b3", -- Stringhe: medio–chiaro
-                identifier = "#e0e0e0", -- Variabili: quasi bianco
-                func = "#f0f0f0", -- Nomi di funzione: quasi puro
-                kw = "#ffffff", -- Keywords: bianco pieno
-                type = "#8c8c8c", -- Tipi: scuro–medio
-                type_builtin = "#aaaaaa", -- Tipi built-in: grigio chiaro
-                constant = "#9fcfcf", -- Costanti: ciano tenue
-                bool = "#6faaaa", -- Booleani: blu-grigio
-                operator = "#1bfd9c", -- Operatori: verde vivo
-                search_highlight = "#1bfd9c", -- Evidenziatore di ricerca
+                colors = {
+                    --------------------------------------------------------------------
+                    -- Core Darkness ---------------------------------------------------
+                    --------------------------------------------------------------------
+                    fg = "#c0c0c0",
+                    bg = "#0d0d0d",
+                    cursor = "#bdfe58",
+                    line_nr = "#2a2a2a",
+                    visual = "#252525",
 
-                bracket = "#d0d0d0", -- Parentesi e simboli
-                preprocessor = "#4b8902", -- Direttive preprocessor
+                    --------------------------------------------------------------------
+                    -- Syntax ----------------------------------------------------------
+                    --------------------------------------------------------------------
+                    comment = "#4d4d4d",
+                    type = "#5f666c",
+                    type_builtin = "#888888",
+                    bracket = "#9a9a9a",
+                    identifier = "#b0b0b0",
+                    string = "#8fae96", -- Verde-grigio per le stringhe
+                    func = "#f0f0f0",
+                    kw = "#ffffff", -- tutte le keyword bianche
+                    constant = "#c07f3f",
+                    number = "#c07f3f",
+                    bool = "#6faaaa",
+                    operator = "#1bfd9c", -- unico tocco turchese
 
-                ----------------------------------------------------------------------
-                --  Diff & Popup -----------------------------------------------------
-                ----------------------------------------------------------------------
-                added = "#baffc9",
-                changed = "#ffffba",
-                removed = "#ffb3ba",
+                    -- Rosso usato SOLO per return, function e class
+                    keyword_return = "#e06c75",
+                    keyword_function = "#e06c75",
+                    keyword_class = "#e06c75",
 
-                pmenu_bg = "#1c1c1c",
-                pmenu_sel_bg = "#1bfd9c",
-                pmenu_fg = "#c0c0c0",
+                    search_highlight = "#1bfd9c",
 
-                eob = "#3c3c3c",
+                    --------------------------------------------------------------------
+                    -- Diff & Popup ----------------------------------------------------
+                    --------------------------------------------------------------------
+                    added = "#baffc9",
+                    changed = "#ffffba",
+                    removed = "#ffb3ba",
 
-                border = "#666666",
-                title = "#bdfe58",
-                bufferline_selection = "#1bfd9c",
+                    pmenu_bg = "#0d0d0d",
+                    pmenu_sel_bg = "#1bfd9c",
+                    pmenu_fg = "#c0c0c0",
+                    eob = "#2a2a2a",
+                    border = "#666666",
+                    title = "#bdfe58",
+                    bufferline_selection = "#1bfd9c",
 
-                ----------------------------------------------------------------------
-                --  Diagnostics ------------------------------------------------------
-                ----------------------------------------------------------------------
-                error = "#dea6a0",
-                warning = "#d6efd8",
-                hint = "#bedc74",
-                info = "#7fa1c3",
+                    --------------------------------------------------------------------
+                    -- Diagnostics -----------------------------------------------------
+                    --------------------------------------------------------------------
+                    error = "#dea6a0",
+                    warning = "#d6efd8",
+                    hint = "#bedc74",
+                    info = "#7fa1c3",
+
+                    --------------------------------------------------------------------
+                    -- Plugin Support --------------------------------------------------
+                    --------------------------------------------------------------------
+                    plugins = {
+                        gitsigns = true,
+                        nvim_cmp = true,
+                        treesitter = true,
+                        nvimtree = true,
+                        telescope = true,
+                        lualine = true,
+                        bufferline = true,
+                        oil = true,
+                        whichkey = true,
+                        nvim_notify = true,
+                    },
+                },
             },
         },
     },
