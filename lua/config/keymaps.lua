@@ -344,5 +344,3 @@ vim.keymap.set(
         desc = "close ]",
     }
 )
-
--- closing parenterses
