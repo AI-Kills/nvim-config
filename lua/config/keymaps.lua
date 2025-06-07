@@ -201,20 +201,19 @@ local function next_textline_with_count()
     end
 end
 
--- normal mode keys remappings
+--  keys remappings
 vim.keymap.set("n", "=", "<Cmd>normal :<CR>", { noremap = true })
 vim.keymap.set("n", "=", ":", { noremap = true })
-
--- visual mode keys remappings
 
 -- j and k + option for "?" and "!"
 
 vim.keymap.set("n", "ª", "?", { noremap = true, silent = true })
 vim.keymap.set("v", "ª", "?", { noremap = true, silent = true })
+vim.keymap.set("i", "ª", "?", { noremap = true, silent = true })
+
 vim.keymap.set("n", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("v", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("i", "º", "!", { noremap = true, silent = true })
-vim.keymap.set("i", "ª", "?", { noremap = true, silent = true })
 
 -- ### moving ###
 
@@ -231,13 +230,13 @@ vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
 
 -- extremal horizontal
 
-vim.keymap.set("v", "µ", "_", { noremap = true, silent = true })
-vim.keymap.set("n", "µ", "_", { noremap = true, silent = true })
-vim.keymap.set("i", "µ", "_", { noremap = true, silent = true })
+vim.keymap.set("v", "ƒ", "_", { noremap = true, silent = true })
+vim.keymap.set("n", "ƒ", "_", { noremap = true, silent = true })
+vim.keymap.set("i", "ƒ", "_", { noremap = true, silent = true })
 
-vim.keymap.set("i", "∂", "$", { noremap = true, silent = true })
-vim.keymap.set("n", "∂", "$", { noremap = true, silent = true })
-vim.keymap.set("v", "∂", "$", { noremap = true, silent = true })
+vim.keymap.set("i", "∂", "@", { noremap = true, silent = true })
+vim.keymap.set("n", "∂", "@", { noremap = true, silent = true })
+vim.keymap.set("v", "∂", "@", { noremap = true, silent = true })
 
 -- vertical
 vim.keymap.set(

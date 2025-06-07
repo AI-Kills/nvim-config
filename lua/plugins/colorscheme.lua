@@ -43,8 +43,8 @@ return {
                     string = "#8fae96", -- Verde-grigio per le stringhe
                     func = "#f0f0f0",
                     kw = "#ffffff", -- tutte le keyword bianche
-                    constant = "#c07f3f",
-                    number = "#c07f3f",
+                    constant = "#7a0f15",
+                    number = "#7a0f15",
                     bool = "#6faaaa",
                     operator = "#1bfd9c", -- unico tocco turchese
 
