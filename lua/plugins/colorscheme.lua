@@ -36,15 +36,15 @@ return {
                     -- Syntax ----------------------------------------------------------
                     --------------------------------------------------------------------
                     comment = "#4d4d4d",
-                    type = "#5f666c",
-                    type_builtin = "#888888",
+                    type = "#F5DEB3",
+                    type_builtin = "#F5DEB3",
                     bracket = "#9a9a9a",
                     identifier = "#b0b0b0",
                     string = "#8fae96", -- Verde-grigio per le stringhe
                     func = "#f0f0f0",
                     kw = "#ffffff", -- tutte le keyword bianche
-                    constant = "#7a0f15",
-                    number = "#7a0f15",
+                    constant = "#CD853F",
+                    number = "#CD853F",
                     bool = "#6faaaa",
                     operator = "#1bfd9c", -- unico tocco turchese
 
