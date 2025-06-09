@@ -344,3 +344,12 @@ vim.keymap.set(
         desc = "close ]",
     }
 )
+
+-- avante
+require("avante").setup({
+    mappings = {
+        suggestion = {
+            accept = "¬", -- pick whatever you like
+        },
+    },
+})
