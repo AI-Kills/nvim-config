@@ -5,3 +5,7 @@
 vim.opt.laststatus = 2
 vim.opt.ruler = true
 vim.opt.showmode = true
+
+-- non fare comparire numerazione delle righe
+vim.opt.number = false
+vim.opt.relativenumber = false
