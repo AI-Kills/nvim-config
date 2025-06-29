@@ -349,7 +349,9 @@ vim.keymap.set(
 require("avante").setup({
     mappings = {
         suggestion = {
-            accept = "¬", -- pick whatever you like
+            accept = "∆", -- pick whatever you like
         },
     },
 })
+
+vim.keymap.set("n", "<leader>p", "``")
