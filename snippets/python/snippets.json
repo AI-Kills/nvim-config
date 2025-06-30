@@ -1,4 +1,23 @@
 {
+  "subprocess": {
+    "prefix": "subp",
+    "body": [
+      "try:",
+      "\tsubprocess.run(",
+      "\t\t[",
+      "\t\t\t\"git\",",
+      "\t\t\t\"merge\", f\"{b}\"",
+      "\t\t],",
+      "\t\tcapture_output=True,",
+      "\t\tcheck=True,",
+      "\t\ttext=True",
+      "\t)",
+      "",
+      "except subprocess.CalledProcessError as e:",
+      "\tprint(f\"❌ Error merging branch develop on {b}: {e}\")"
+    ],
+    "description": "execute a subprocess with try except error handling"
+  },
   "with open read": {
     "prefix": "wor",
     "body": [

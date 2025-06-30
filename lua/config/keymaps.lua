@@ -1,5 +1,5 @@
 -- Save all
-vim.keymap.set("n", "<leader>sa", ":wa<CR>", {
+vim.keymap.set("n", "<leader>l", ":wa<CR>", {
     noremap = true,
     silent = true,
     desc = "Save all",
@@ -14,15 +14,16 @@ vim.keymap.set("n", ".", ":bd<CR>", {
 vim.keymap.set("n", "<leader>i", ":lua vim.lsp.buf.hover()<CR>", {
     noremap = true,
     silent = true,
-
-    desc = "delete see documentation",
+    desc = "see documentation",
 })
 
 -- marks
-vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all local marks" })
+--vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all local marks" })
 
 vim.keymap.set("n", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
 vim.keymap.set("v", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
+
+vim.keymap.set("n", "<leader>dm", ":delmarks ")
 
 vim.api.nvim_set_keymap(
     "n",
@@ -34,11 +35,6 @@ vim.api.nvim_set_keymap(
 -- move among buffers
 vim.keymap.set("n", ",", ":bprevious<CR>", { noremap = true, silent = true, desc = "go to previous buffer" })
 
--- Smart %: jump se sei su (), [] o {} altrimenti
--- vai all’indietro al primo fra (, [ o {
-
--- Mapping CLI (esempio)
-vim.api.nvim_set_keymap("n", "<leader>%", ":lua smart_percent()<CR>", { noremap = true, silent = true })
 -- Salta alla prossima parentesi utile.
 -- • Se il cursore è su una parentesi, fa il salto “%” standard.
 -- • Altrimenti avanza alla prossima parentesi chiusura “) ] }”.
@@ -56,51 +52,8 @@ local function smart_percent_next()
     -- 2) Non siamo su una parentesi → cerca in avanti la prossima
     --    parentesi di chiusura “)”, “]” o “}”.
     --    Vim-regex: [\)\]\}]  (backslash per escapare nell’argomento Lua)
-    vim.fn.search("[\\)\\]\\}]", "W")
+    vim.fn.search("[\\(\\)\\[\\]\\{\\}]", "W")
 end
-
-local function smart_percent()
-    -- Ottieni posizione del cursore (riga, colonna zero-index)
-    local row, col0 = unpack(vim.api.nvim_win_get_cursor(0))
-    -- Leggi tutte le righe del buffer
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-
-    -- Scansione inversa: riga per riga, colonna per colonna
-    for r = row, 1, -1 do
-        local line = lines[r]
-        -- Determina la colonna di partenza per la scansione inversa
-        local start_c
-        if r == row then
-            -- Se siamo sulla riga corrente, inizia prima del carattere attuale
-            if col0 >= 1 then
-                start_c = col0 -- esclude il carattere sotto il cursore
-            else
-                -- Se siamo in col0=0 (prima colonna), salta a fine riga
-                start_c = #line
-            end
-        else
-            -- Per righe precedenti, inizia dalla fine
-            start_c = #line
-        end
-        for c = start_c, 1, -1 do
-            local ch = line:sub(c, c)
-            -- Verifica se è una parentesi aperta: (, [ o {
-            if ch:match("[%(%%[%{]") then
-                -- Imposta il cursore sulla parentesi aperta trovata (colonna zero-index)
-                vim.api.nvim_win_set_cursor(0, { r, c - 1 })
-                return
-            end
-        end
-    end
-
-    print("Nessuna parentesi aperta trovata.")
-end
-
--- Mappatura CLI: premi <leader>% per smart_percent
-vim.api.nvim_set_keymap("n", "<leader>%", ":lua smart_percent()<CR>", { noremap = true, silent = true })
-
--- Mappatura CLI: premi <leader>% per smart_percent
-vim.api.nvim_set_keymap("n", "<leader>%", ":lua smart_percent()<CR>", { noremap = true, silent = true })
 
 -------------------------------------------------------------
 --  Salta GIÙ alla prossima riga “utile” (testo o fold chiuso)
@@ -223,9 +176,7 @@ vim.keymap.set("n", "l", "e", { noremap = true, silent = true })
 vim.keymap.set("v", "h", "b", { noremap = true, silent = true })
 vim.keymap.set("v", "l", "e", { noremap = true, silent = true })
 
-vim.keymap.set("n", "b", smart_percent, { noremap = true, silent = true })
 vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
-vim.keymap.set("v", "b", smart_percent, { noremap = true, silent = true })
 vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
 
 -- extremal horizontal
@@ -345,13 +296,12 @@ vim.keymap.set(
     }
 )
 
--- avante
-require("avante").setup({
-    mappings = {
-        suggestion = {
-            accept = "∆", -- pick whatever you like
-        },
-    },
-})
-
+-- mapping strategic movements in a file
 vim.keymap.set("n", "<leader>p", "``")
+
+-- deleting rows
+vim.keymap.set("n", "dj", ":+1d<CR>")
+vim.keymap.set("n", "dk", ":-1d<CR>")
+
+-- sostituzione
+vim.keymap.set("n", "S", ":%s/")
