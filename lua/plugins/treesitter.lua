@@ -23,5 +23,6 @@ return {
             "ninja",
             "rst",
         },
+        highlight = { enabled = true },
     },
 }
