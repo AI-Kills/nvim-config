@@ -305,3 +305,5 @@ vim.keymap.set("n", "dk", ":-1d<CR>")
 
 -- sostituzione
 vim.keymap.set("n", "S", ":%s/")
+
+vim.keymap.set("v", "$", "g_")
