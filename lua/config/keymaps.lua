@@ -175,12 +175,6 @@ vim.keymap.set("v", "l", "e", { noremap = true, silent = true })
 vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
 vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
 
--- extremal horizontal
-
-vim.keymap.set("v", "ƒ", "_", { noremap = true, silent = true })
-vim.keymap.set("n", "ƒ", "_", { noremap = true, silent = true })
-vim.keymap.set("i", "ƒ", "_", { noremap = true, silent = true })
-
 vim.keymap.set("i", "∂", "@", { noremap = true, silent = true })
 vim.keymap.set("n", "∂", "@", { noremap = true, silent = true })
 vim.keymap.set("v", "∂", "@", { noremap = true, silent = true })
