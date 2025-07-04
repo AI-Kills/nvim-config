@@ -160,10 +160,6 @@ vim.keymap.set("n", "=", ":", { noremap = true })
 
 -- j and k + option for "?" and "!"
 
-vim.keymap.set("n", "ª", "?", { noremap = true, silent = true })
-vim.keymap.set("v", "ª", "?", { noremap = true, silent = true })
-vim.keymap.set("i", "ª", "?", { noremap = true, silent = true })
-
 vim.keymap.set("n", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("v", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("i", "º", "!", { noremap = true, silent = true })
