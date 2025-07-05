@@ -158,6 +158,11 @@ end
 vim.keymap.set("n", "=", "<Cmd>normal :<CR>", { noremap = true })
 vim.keymap.set("n", "=", ":", { noremap = true })
 
+-- substitute the matches in the selected text
+--  just add \%V so that you get  :s/\%Vpippo\%V/carlino_bello/g
+--  ../g for global substitution in rows
+vim.keymap.set("v", "=", ":s/", { noremap = true })
+
 -- j and k + option for "?" and "!"
 
 vim.keymap.set("n", "º", "!", { noremap = true, silent = true })
