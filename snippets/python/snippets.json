@@ -18,6 +18,13 @@
     ],
     "description": "execute a subprocess with try except error handling"
   },
+  "script_dir": {
+    "prefix": "dir",
+    "body": [
+      "script_dir = os.path.dirname(os.path.abspath(__file__))"
+    ],
+    "description": "absolute path to the parent dir of the dir of this file"
+  },
   "with open read": {
     "prefix": "wor",
     "body": [

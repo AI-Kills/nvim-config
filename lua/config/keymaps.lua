@@ -297,3 +297,19 @@ vim.keymap.set("n", "dk", ":-1d<CR>")
 vim.keymap.set("n", "S", ":%s/")
 
 vim.keymap.set("v", "$", "g_")
+
+-- Salva in init.lua o in un modulo
+local function search_after_char()
+    -- 1. Chiedi il carattere / stringa di ricerca
+    local char = vim.fn.input("Carattere da cercare: ")
+    if char == "" then
+        return
+    end -- niente input → esci
+
+    local esc = char:gsub("\\", "\\\\") -- raddoppia eventuali '\'
+    vim.cmd(("normal! /%s\\zs.\r"):format(esc))
+end
+
+-- 4. Keymap (qui uso "ª" come da tuo esempio)
+vim.keymap.set("n", "ª", search_after_char, { desc = "Cerca carattere e vai sul successivo" })
+vim.keymap.set("v", "ª", search_after_char, { desc = "Cerca carattere e vai sul successivo" })
