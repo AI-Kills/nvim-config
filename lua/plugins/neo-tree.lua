@@ -18,8 +18,11 @@ return {
                 follow_current_file = { enabled = true },
                 use_libuv_file_watcher = true,
                 filtered_items = {
-                    hide_dotfiles = false,
-                    hide_gitignored = false,
+                    visible = false, -- di default non mostrarli
+                    hide_dotfiles = true, -- .env, .git, .eslintrc…
+                    hide_gitignored = true, -- node_modules/, dist/, ecc.
+                    hide_by_name = { "coverage", ".DS_Store" },
+                    hide_by_pattern = { "*.lock", "*.min.js" },
                 },
                 window = {
                     position = "left",
