@@ -22,7 +22,7 @@ return {
                     hide_dotfiles = true, -- .env, .git, .eslintrc…
                     hide_gitignored = true, -- node_modules/, dist/, ecc.
                     hide_by_name = { "coverage", ".DS_Store" },
-                    hide_by_pattern = { "*.lock", "*.min.js" },
+                    hide_by_pattern = { "*.lock", "*.min.js", "__*.py" },
                 },
                 window = {
                     position = "left",
