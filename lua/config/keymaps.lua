@@ -211,13 +211,13 @@ vim.keymap.set(
 )
 
 -- folding
-vim.keymap.set("n", "-∆", "zM", {
+vim.keymap.set("n", "--", "zM", {
     noremap = true,
     silent = true,
     desc = "close all folds",
 })
 
-vim.keymap.set("n", "∆", "za", {
+vim.keymap.set("n", "b", "zO", {
     noremap = true,
     silent = true,
     desc = "open fold",
