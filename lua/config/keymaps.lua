@@ -222,6 +222,11 @@ vim.keymap.set("n", "b", "zO", {
     silent = true,
     desc = "open fold",
 })
+vim.keymap.set("n", "B", "zc", {
+    noremap = true,
+    silent = true,
+    desc = "close fold",
+})
 
 -- navigating through indentation --- questo serve per python...
 
