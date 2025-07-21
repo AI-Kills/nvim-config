@@ -155,7 +155,6 @@ local function next_textline_with_count()
 end
 
 --  keys remappings
-vim.keymap.set("n", "=", "<Cmd>normal :<CR>", { noremap = true })
 vim.keymap.set("n", "=", ":", { noremap = true })
 
 -- substitute the matches in the selected text
@@ -323,3 +322,6 @@ end
 -- 4. Keymap (qui uso "ª" come da tuo esempio)
 vim.keymap.set("n", "ª", search_after_char, { desc = "Cerca carattere e vai sul successivo" })
 vim.keymap.set("v", "ª", search_after_char, { desc = "Cerca carattere e vai sul successivo" })
+
+-- terminal commands
+vim.keymap.set("n", "•", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
