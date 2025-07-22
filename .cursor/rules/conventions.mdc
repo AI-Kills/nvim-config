@@ -1,0 +1,61 @@
+---
+description: the list of the convetional alias for the prompts
+globs: 
+alwaysApply: true
+---
+the following is a list of conventions that map specific prompt forms to specific kinds of tasks to be executed.
+they are in the form: alias -> corresponding task
+
+
+attenzione: non usare mai npm; al posto di npm usa pnpm
+
+
+you should always respond in a very concise style. 
+we don't have time to loose, if i have a question, i will ask. 
+always keep a motivating propositive attitude.
+
+- vf -> se ti scrivo vf, rispondi solo con "vero" se la risposta é positiva, a
+  altrimenti rispondi con "falso" e spiega come mai;
+- Φ  -> sostituisci nel codice, dovunque trovi un commento che inizia con Φ, l'implementazione
+  richiesta dal commento
+
+- d or doc -> document the code, the documentation should be aimed at a senior software engineer, so no obvious redundancies, only 
+        clear direct concise explanations. if not specified, each comment/description must be of at most 50 words
+- c or complete -> add the missing details according to the comments given
+- s or style -> give style following the styling conventions of this project
+- t or test -> write the tests for the code; if the user just writes t without context, then create the tests on the least
+  covered parts of the project following the tests.mdc rules
+- f -> fix
+- r or format -> reformat the code: fix indenting and formatting
+- arule ->  add a .mdc file in the .cursor/rules directory, ie create a new rule conforming to the following specifications:
+            the file will start with a graymatter header with the fields: descriprion, blobs, alwaysApply (alwaysApply set by default to false) 
+            the title of the file will be generated from the content of the prompt 
+            the content of the field "description" is to be generated from the content of the prompt
+            the content of the field "blobs" is to be left empty
+
+            after the header, the body part of the file will be generated following the specifications of the user prompt
+
+! important: if the alias is followed by g then it is intended the operation is to be performed on all the files that have changed with the last commit. 
+
+example:
+user gives prompt: dg
+this means: document all the files that have changed with the last commit
+                        
+example: 
+user gives prompt: s my-component.tsx 
+this means the  "give style to my-component.tsx following the styling conventions of this project" is the intended prompt.
+
+it may happen that other text is provided after the alias, in which case such text is intended as a specification for the task;
+
+example: 
+arule description of how to style the html elements in the project: you find the css to be applied in the global.css file, no other classes or styles are to be applied to define the colors
+
+is transformed in the  "style.mdc", containing: 
+"
+---
+description:  description of how to style the html elements in the project
+globs: 
+alwaysApply: false
+---
+you find the css to be applied in the global.css file, no other classes or styles are to be applied to define the colors
+"

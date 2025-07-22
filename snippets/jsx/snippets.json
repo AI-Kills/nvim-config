@@ -386,5 +386,12 @@
       "export const ${1:name} = ${2:value};"
     ],
     "description": "ES named export"
+  },
+  "Quick JSX Tag": {
+    "prefix": "__",
+    "body": [
+      "<${1:}></${1:}>"
+    ],
+    "description": "Quick JSX tag: type __ + tag name, both tags sync automatically"
   }
 }

@@ -1,0 +1,36 @@
+---
+alwaysApply: false
+---
+# Regola: Minimal Complexity
+
+**⚠️ REGOLA DA LEGGERE SEMPRE ⚠️**
+
+## Obiettivo
+Dopo ogni generazione di codice, una volta verificato che la soluzione è funzionante, rivedere SEMPRE la soluzione generata per effettuare un refactoring mirato alla massima semplicità e pulizia.
+
+## Principi Fondamentali
+
+### 1. Refactoring Obbligatorio
+- ✅ **SEMPRE** rivedere il codice dopo aver verificato che funziona
+- ✅ Effettuare refactoring per ottenere la soluzione più pulita e semplice possibile
+- ✅ Mantenere solo il codice **strettamente necessario**
+- ✅ Al limite, effettuare **più refactoring consecutivi** fino a raggiungere la massima semplicità
+
+### 2. Massima Pulizia
+- 🧹 Eliminare codice ridondante
+- 🧹 Rimuovere variabili non utilizzate
+- 🧹 Semplificare logiche complesse
+- 🧹 Ottimizzare imports e dipendenze
+
+### 3. Implementazione Rigorosa
+- 🎯 Implementare **SOLO** le funzionalità espressamente richieste dall'utente
+- 🎯 **NULLA DI PIÙ** di quanto richiesto
+- 🎯 Evitare over-engineering
+
+## Processo di Verifica
+1. ✅ Il codice funziona correttamente?
+2. 🔄 Può essere semplificato mantenendo la funzionalità?
+3. 🧹 Tutto il codice presente è strettamente necessario?
+4. 🎯 Sto implementando solo quello che è stato richiesto?
+
+**Se la risposta a 2, 3 o 4 è "NO", effettuare refactoring.**
