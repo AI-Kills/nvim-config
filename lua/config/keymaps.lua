@@ -20,8 +20,35 @@ vim.keymap.set("n", "<leader>i", ":lua vim.lsp.buf.hover()<CR>", {
 -- marks
 --vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all local marks" })
 
-vim.keymap.set("n", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
-vim.keymap.set("v", "<leader>k", "'", { noremap = true, silent = true, desc = "Go to mark" })
+-- Funzione per creare mark con lettera maiuscola
+local function set_uppercase_mark()
+    local char = vim.fn.nr2char(vim.fn.getchar())
+    if char:match("[a-zA-Z]") then
+        local uppercase_char = char:upper()
+        vim.cmd("normal! m" .. uppercase_char)
+        print("Mark " .. uppercase_char .. " set")
+    else
+        print("Invalid mark character")
+    end
+end
+
+-- Funzione per andare al mark con lettera maiuscola
+local function goto_uppercase_mark()
+    local char = vim.fn.nr2char(vim.fn.getchar())
+    if char:match("[a-zA-Z]") then
+        local uppercase_char = char:upper()
+        vim.cmd("normal! '" .. uppercase_char)
+    else
+        print("Invalid mark character")
+    end
+end
+
+-- Rimappa 'm' per creare marks maiuscoli
+vim.keymap.set("n", "m", set_uppercase_mark, { noremap = true, silent = true, desc = "Set uppercase mark" })
+
+-- Rimappa leader+k per andare ai marks maiuscoli
+vim.keymap.set("n", "<leader>k", goto_uppercase_mark, { noremap = true, silent = true, desc = "Go to uppercase mark" })
+vim.keymap.set("v", "<leader>k", goto_uppercase_mark, { noremap = true, silent = true, desc = "Go to uppercase mark" })
 
 vim.keymap.set("n", "<leader>dm", ":delmarks ")
 
@@ -307,21 +334,134 @@ vim.keymap.set("n", "S", ":%s/")
 
 vim.keymap.set("v", "$", "g_")
 
--- Salva in init.lua o in un modulo
-local function search_after_char()
-    -- 1. Chiedi il carattere / stringa di ricerca
-    local char = vim.fn.input("Carattere da cercare: ")
-    if char == "" then
-        return
-    end -- niente input → esci
-
-    local esc = char:gsub("\\", "\\\\") -- raddoppia eventuali '\'
-    vim.cmd(("normal! /%s\\zs.\r"):format(esc))
-end
-
--- 4. Keymap (qui uso "ª" come da tuo esempio)
-vim.keymap.set("n", "ª", search_after_char, { desc = "Cerca carattere e vai sul successivo" })
-vim.keymap.set("v", "ª", search_after_char, { desc = "Cerca carattere e vai sul successivo" })
+vim.keymap.set("n", "ª", ":%s/", { desc = "Cerca carattere e vai sul successivo" })
 
 -- terminal commands
 vim.keymap.set("n", "•", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
+
+-- ### Moversi all'inzio o alla fine della funzione in cui ci si trova ###
+-- Funzione per andare alla fine della funzione corrente usando treesitter
+local function go_to_end_of_function()
+    local ts_utils = require("nvim-treesitter.ts_utils")
+    local parsers = require("nvim-treesitter.parsers")
+
+    -- Verifica se treesitter è disponibile per il buffer corrente
+    if not parsers.has_parser() then
+        vim.notify("Treesitter parser not available for this filetype", vim.log.levels.WARN)
+        return
+    end
+
+    -- Ottieni il nodo corrente sotto il cursore
+    local node = vim.treesitter.get_node()
+    if not node then
+        vim.notify("No treesitter node found", vim.log.levels.WARN)
+        return
+    end
+
+    -- Tipi di nodi che rappresentano funzioni per diversi linguaggi
+    local function_node_types = {
+        "function_definition", -- Python, Lua
+        "function_declaration", -- JavaScript, TypeScript, C
+        "function_item", -- Rust
+        "method_definition", -- Python (metodi di classe)
+        "arrow_function", -- JavaScript/TypeScript
+        "function_expression", -- JavaScript
+        "method_declaration", -- TypeScript/Java
+        "constructor_declaration", -- TypeScript/Java
+        "function", -- Generic
+    }
+
+    -- Cerca il nodo genitore che rappresenta una funzione
+    local function_node = node
+    while function_node do
+        local node_type = function_node:type()
+        for _, func_type in ipairs(function_node_types) do
+            if node_type == func_type then
+                -- Trovata la funzione! Vai alla fine
+                local end_row, end_col = function_node:end_()
+                -- Treesitter usa 0-based indexing, vim usa 1-based
+                vim.api.nvim_win_set_cursor(0, { end_row + 1, end_col })
+                vim.notify("Moved to end of " .. node_type, vim.log.levels.INFO)
+                return
+            end
+        end
+        function_node = function_node:parent()
+    end
+
+    vim.notify("Not inside a function", vim.log.levels.WARN)
+end
+
+-- Mappa gef in visual mode per andare alla fine della funzione
+vim.keymap.set("v", "gf", go_to_end_of_function, {
+    noremap = true,
+    silent = true,
+    desc = "Go to end of function (treesitter)",
+})
+vim.keymap.set("n", "gf", go_to_end_of_function, {
+    noremap = true,
+    silent = true,
+    desc = "Go to end of function (treesitter)",
+})
+
+-- Funzione per andare all'inizio della funzione corrente usando treesitter
+local function go_to_start_of_function()
+    local ts_utils = require("nvim-treesitter.ts_utils")
+    local parsers = require("nvim-treesitter.parsers")
+
+    -- Verifica se treesitter è disponibile per il buffer corrente
+    if not parsers.has_parser() then
+        vim.notify("Treesitter parser not available for this filetype", vim.log.levels.WARN)
+        return
+    end
+
+    -- Ottieni il nodo corrente sotto il cursore
+    local node = vim.treesitter.get_node()
+    if not node then
+        vim.notify("No treesitter node found", vim.log.levels.WARN)
+        return
+    end
+
+    -- Tipi di nodi che rappresentano funzioni per diversi linguaggi
+    local function_node_types = {
+        "function_definition", -- Python, Lua
+        "function_declaration", -- JavaScript, TypeScript, C
+        "function_item", -- Rust
+        "method_definition", -- Python (metodi di classe)
+        "arrow_function", -- JavaScript/TypeScript
+        "function_expression", -- JavaScript
+        "method_declaration", -- TypeScript/Java
+        "constructor_declaration", -- TypeScript/Java
+        "function", -- Generic
+    }
+
+    -- Cerca il nodo genitore che rappresenta una funzione
+    local function_node = node
+    while function_node do
+        local node_type = function_node:type()
+        for _, func_type in ipairs(function_node_types) do
+            if node_type == func_type then
+                -- Trovata la funzione! Vai all'inizio
+                local start_row, start_col = function_node:start()
+                -- Treesitter usa 0-based indexing, vim usa 1-based
+                vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
+                vim.notify("Moved to start of " .. node_type, vim.log.levels.INFO)
+                return
+            end
+        end
+        function_node = function_node:parent()
+    end
+
+    vim.notify("Not inside a function", vim.log.levels.WARN)
+end
+
+-- Mappa gsf in visual mode e normal mode per andare all'inizio della funzione
+vim.keymap.set("v", "gsf", go_to_start_of_function, {
+    noremap = true,
+    silent = true,
+    desc = "Go to start of function (treesitter)",
+})
+vim.keymap.set("n", "gsf", go_to_start_of_function, {
+    noremap = true,
+    silent = true,
+    desc = "Go to start of function (treesitter)",
+})

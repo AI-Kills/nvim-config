@@ -25,6 +25,13 @@
     ],
     "description": "absolute path to the parent dir of the dir of this file"
   },
+  "import_registry": {
+    "prefix": "reg",
+    "body": [
+      "from src.registry import *"
+    ],
+    "description": "import the registry for dependency injection end simplicity"
+  },
   "langgraph_imports": {
     "prefix": "lgi",
     "body": [
@@ -266,49 +273,11 @@
     ],
     "description": "Import Path from pathlib"
   },
-  "cli multimode": {
-    "prefix": "cli",
+  "main": {
+    "prefix": "main",
     "body": [
-      "import argparse",
-      "",
-      "def cli():",
-      "\tparser = argparse.ArgumentParser(description=\"${1:CLI con più modalità}\")",
-      "\tparser.add_argument('--parse', type=str, help='Modalità parse, nome file da analizzare')",
-      "\tparser.add_argument('-a', type=str, help='Modalità analisi, nome file da analizzare')",
-      "\tparser.add_argument('-b', nargs=2, help='Modalità confronto, due nomi di file')",
-      "\targs = parser.parse_args()",
-      "",
-      "\tmodes = {",
-      "\t\t\"parse\": args.parse,",
-      "\t\t\"a\": args.a,",
-      "\t\t\"b\": args.b",
-      "\t}",
-      "",
-      "\tselected_mode_key = [k for k, v in modes.items() if v is not None]",
-      "",
-      "\tif not selected_mode_key:",
-      "\t\tparser.print_help()",
-      "\t\treturn",
-      "",
-      "\tmatch selected_mode_key[0]:",
-      "\t\tcase \"parse\":",
-      "\t\t\tpdf_name = modes[\"parse\"]",
-      "\t\t\tprint(f\"Parse mode selected for {pdf_name}\")",
-      "",
-      "\t\tcase \"a\":",
-      "\t\t\tpdf_name = modes[\"a\"]",
-      "\t\t\tprint(f\"Analisi mode selected for {pdf_name}\")",
-      "",
-      "\t\tcase \"b\":",
-      "\t\t\tpdf_paths = [f\"./out_analisi/{x}\" for x in modes[\"b\"]]",
-      "\t\t\tprint(f\"Confronto emendativo tra {pdf_paths[0]} e {pdf_paths[1]}\")",
-      "",
-      "\t\tcase _:",
-      "\t\t\tprint(\"Modalità non riconosciuta.\")",
-      "",
-      "if __name__ == '__main__':",
-      "\tcli()"
+      "if __name__ == '__main__':"
     ],
-    "description": "CLI multimodale con argparse e match-case"
+    "description": "call a script directly"
   }
 }

@@ -1,0 +1,32 @@
+{
+  "python.analysis.typeCheckingMode": "off",
+  "python.linting.enabled": false,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": false,
+  "python.linting.autopep8Enabled": false,
+  "python.linting.mypyEnabled": false,
+  "python.linting.pycodestyleEnabled": false,
+  "python.linting.pydocstyleEnabled": false,
+  "python.linting.pylsEnabled": false,
+  "python.analysis.diagnosticMode": "off",
+  "python.analysis.autoImportCompletions": false,
+  "python.analysis.autoSearchPaths": false,
+  "python.analysis.diagnosticSeverityOverrides": {},
+  "python.analysis.disabled": [
+    "unreachable",
+    "unusedImport",
+    "unusedClass",
+    "unusedFunction",
+    "unusedVariable"
+  ],
+  "python.languageServer": "None",
+  "python.defaultInterpreterPath": "/dev/null",
+  "pylance.enabled": false,
+  "extensions.python.enabled": false,
+  "python.terminal.activateEnvironment": false,
+  "python.formatting.provider": "none",
+  "python.analysis.completeFunctionParens": false,
+  "python.analysis.exclude": ["**/*"],
+  "python.analysis.ignore": ["**/*"],
+  "ruff.enable": false
+} 

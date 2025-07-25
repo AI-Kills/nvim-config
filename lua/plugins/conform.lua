@@ -17,7 +17,6 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             rust = { "rustfmt" },
-            python = { "ruff_format" },
             c = { "clang-format" },
             sh = { "shfmt" },
             php = { "php_cs_fixer" },
@@ -34,13 +33,6 @@ return {
             stylua = {
                 command = "stylua",
                 args = { "--search-parent-directories", "--stdin-filepath", "$FILENAME", "-" },
-                stdin = true,
-                timeout = 5000, -- Increase timeout for larger files
-            },
-            -- Configure ruff_format with increased timeout
-            ruff_format = {
-                command = "ruff",
-                args = { "format", "--stdin-filename", "$FILENAME", "-" },
                 stdin = true,
                 timeout = 5000, -- Increase timeout for larger files
             },
