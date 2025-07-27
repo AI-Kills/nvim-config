@@ -33,12 +33,61 @@
     "description": "import the registry for dependency injection end simplicity"
   },
   "langgraph_node_function": {
-    "prefix": "lgnode",
+    "prefix": "Γan",
     "body": [
       "def ${1:node_name}(state: GraphState) -> GraphState:",
-      "Γ.add_node(${1:node_name})"
+      "\nreturn state",
+      "_g.add_node(\"${1:node_name}\", ${1:node_name})"
     ],
-    "description": "signature of a node function"
+    "description": "create a node"
+  },
+  "langgraph_state_init": {
+    "prefix": "Γini",
+    "body": [
+      "class GraphState(TypedDict):",
+      "\tmessage: str",
+      "\tmetadata: dict",
+      "\n_g = StateGraph(GraphState)",
+      "g=_g.compile()",
+      "show_mermaid(g)"
+    ],
+    "description": "init the graph: define the GraphState"
+  },
+  "langgraph_add_edge": {
+    "prefix": "Γae",
+    "body": [
+      "_g.add_edge(\"${1:origin_node}\", \"${2:destination_node}\")"
+    ],
+    "description": "add an edge to the state graph"
+  },
+  "langgraph_add_end_edge": {
+    "prefix": "Γaee",
+    "body": [
+      "def _end(state: GraphState) -> GraphState:",
+      "\tprint(\"end node\")",
+      "\treturn state",
+      "_g.add_node(\"_end\", _end)",
+      "_g.add_edge(\"_end\", END)"
+    ],
+    "description": "add the end edge"
+  },
+  "langgraph_add_start_edge": {
+    "prefix": "Γase",
+    "body": [
+      "def _start(state: GraphState) -> GraphState:",
+      "\tprint(\"start node\")",
+      "\treturn state",
+      "_g.add_node(\"_start\", _start)",
+      "_g.add_edge(START, \"_start\")"
+    ],
+    "description": "add the end edge"
+  },
+  "define a function": {
+    "prefix": "fnd",
+    "body": [
+      "def ${1:function_name}():"
+    ],
+    "description": "start the definition of a functiontion"
   },
   "with open read": {
     "prefix": "wor",
@@ -170,39 +219,23 @@
     "description": "Create a LangChain prompt template"
   },
   "LangChain model": {
-    "prefix": "lcm",
+    "prefix": "Λllm",
     "body": [
-      "from langchain.chat_models import init_chat_model",
       "llm = init_chat_model(\"gpt-4o-mini\", model_provider=\"openai\", temperature=0.0)"
     ],
     "description": "Initialize a LangChain model"
   },
   "Pydantic model": {
-    "prefix": "pydm",
+    "prefix": "Λpm",
     "body": [
-      "from pydantic import BaseModel, Field",
-      "from typing import Optional",
       "class ${1:Model}(BaseModel):",
       "\t${2:field_name}: ${3:field_type} = Field(..., description=\"${4:Field description}\")"
     ],
     "description": "Create a Pydantic model"
   },
-  "LangChain pydantic parser": {
-    "prefix": "lcpp",
-    "body": [
-      "from langchain.output_parsers import PydanticOutputParser",
-      "",
-      "${parser} = PydanticOutputParser(pydantic_object=${1:model_name})"
-    ],
-    "description": "Create a Pydantic output parser for LangChain"
-  },
   "LangChain  basic chain": {
-    "prefix": "lcc",
+    "prefix": "Λc",
     "body": [
-      "from langchain.output_parsers import PydanticOutputParser",
-      "from langchain.chat_models import init_chat_model",
-      "from langchain.prompts import PromptTemplate",
-      "",
       "prompt = PromptTemplate.from_template(",
       "\"\"\"",
       "prompt_text",
@@ -211,57 +244,13 @@
       "\"\"\"",
       ")",
       "llm = init_chat_model(\"gpt-4o-mini\", model_provider=\"openai\", temperature=0.0)",
-      "${parser} = PydanticOutputParser(pydantic_object=model)",
+      "parser = PydanticOutputParser(pydantic_object=model)",
       "similarity_llm = prompt | llm | parser"
     ],
     "description": "Create a Pydantic output parser for LangChain"
   },
-  "LangChain RAG setup": {
-    "prefix": "lcrag",
-    "body": [
-      "from langchain.document_loaders import ${1:TextLoader}",
-      "from langchain.text_splitter import RecursiveCharacterTextSplitter",
-      "from langchain.embeddings import OpenAIEmbeddings",
-      "from langchain.vectorstores import Chroma",
-      "from langchain.chains import RetrievalQA",
-      "from langchain.llms import OpenAI",
-      "",
-      "# 1. Load documents",
-      "loader = ${1:TextLoader}(\"${2:path/to/document}\")",
-      "documents = loader.load()",
-      "",
-      "# 2. Split documents into chunks",
-      "text_splitter = RecursiveCharacterTextSplitter(",
-      "\tchunk_size=${3:1000},",
-      "\tchunk_overlap=${4:100}",
-      ")",
-      "chunks = text_splitter.split_documents(documents)",
-      "",
-      "# 3. Create embeddings and vectorstore",
-      "embeddings = OpenAIEmbeddings()",
-      "vectorstore = Chroma.from_documents(chunks, embeddings)",
-      "",
-      "# 4. Create a retrieval chain",
-      "qa_chain = RetrievalQA.from_chain_type(",
-      "\tllm=OpenAI(),",
-      "\tchain_type=\"stuff\",",
-      "\tretriever=vectorstore.as_retriever()",
-      ")",
-      "",
-      "# 5. Ask a question",
-      "result = qa_chain({\"query\": \"${5:Your question about the documents?}\"})"
-    ],
-    "description": "Set up a Retrieval Augmented Generation (RAG) system with LangChain"
-  },
-  "Import pathlib": {
-    "prefix": "pathlibi",
-    "body": [
-      "from pathlib import Path"
-    ],
-    "description": "Import Path from pathlib"
-  },
   "main": {
-    "prefix": "main",
+    "prefix": "Μ",
     "body": [
       "if __name__ == '__main__':"
     ],

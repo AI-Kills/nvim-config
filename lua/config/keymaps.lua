@@ -20,12 +20,18 @@ vim.keymap.set("n", "<leader>i", ":lua vim.lsp.buf.hover()<CR>", {
 -- marks
 --vim.keymap.set("n", "<leader>dm", ":delmarks a-z<CR>", { desc = "Delete all local marks" })
 
+-- chiamalo con :Ml
+vim.api.nvim_create_user_command("Ml", function()
+    require("utils.marks").list_files_with_uppercase_marks()
+end, {})
+
 -- Funzione per creare mark con lettera maiuscola
 local function set_uppercase_mark()
     local char = vim.fn.nr2char(vim.fn.getchar())
     if char:match("[a-zA-Z]") then
         local uppercase_char = char:upper()
         vim.cmd("normal! m" .. uppercase_char)
+        vim.cmd("wshada!")
         print("Mark " .. uppercase_char .. " set")
     else
         print("Invalid mark character")
@@ -37,6 +43,7 @@ local function goto_uppercase_mark()
     local char = vim.fn.nr2char(vim.fn.getchar())
     if char:match("[a-zA-Z]") then
         local uppercase_char = char:upper()
+        vim.cmd("rshada!")
         vim.cmd("normal! '" .. uppercase_char)
     else
         print("Invalid mark character")
@@ -45,6 +52,11 @@ end
 
 -- Rimappa 'm' per creare marks maiuscoli
 vim.keymap.set("n", "m", set_uppercase_mark, { noremap = true, silent = true, desc = "Set uppercase mark" })
+
+vim.keymap.set("n", "<leader>dam", function()
+    vim.cmd("delmarks A-Z")
+    vim.cmd("wshada")
+end, { desc = "Delete global marks A-Z and save shada" })
 
 -- Rimappa leader+k per andare ai marks maiuscoli
 vim.keymap.set("n", "<leader>k", goto_uppercase_mark, { noremap = true, silent = true, desc = "Go to uppercase mark" })
