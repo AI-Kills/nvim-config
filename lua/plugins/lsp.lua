@@ -12,75 +12,35 @@ return {
     },
     ---@class PluginLspOpts
     opts = {
+        -- Configure diagnostics to show only errors
+        diagnostics = {
+            virtual_text = {
+                severity = vim.diagnostic.severity.ERROR,
+            },
+            signs = {
+                severity = vim.diagnostic.severity.ERROR,
+            },
+            underline = {
+                severity = vim.diagnostic.severity.ERROR,
+            },
+            update_in_insert = false,
+        },
         ---@type lspconfig.options
         servers = {
             -- tsserver will be automatically installed with mason and loaded with lspconfig
             tsserver = {},
             intelephense = {},
             html = {},
-            pylsp = { -- Python LSP con solo errori, no warnings + supporto star import da src
+            pyright = {
                 settings = {
-                    pylsp = {
-                        plugins = {
-                            -- Disabilita tutti i plugin che generano warnings
-                            pycodestyle = { enabled = false },
-                            pyflakes = { 
-                                enabled = true,
-                                config = {
-                                    -- Ignora solo star import warnings, mantieni errori sintattici
-                                    ignore = "F403,F405"
-                                }
-                            },
-                            pylint = { enabled = false },
-                            mccabe = { enabled = false },
-                            autopep8 = { enabled = false },
-                            yapf = { enabled = false },
-                            black = { enabled = false },
-                            isort = { enabled = false },
-                            rope_completion = { enabled = true },
-                            jedi_completion = { 
-                                enabled = true,
-                                fuzzy = true,
-                                resolve_eagerly = true
-                            },
-                            jedi_hover = { enabled = true },
-                            jedi_references = { enabled = true },
-                            jedi_signature_help = { enabled = true },
-                            jedi_symbols = { enabled = true },
-                            jedi_definition = { 
-                                enabled = true,
-                                follow_imports = true,
-                                follow_builtin_imports = true
-                            },
-                        },
-                        -- Configurazione globale per jedi - supporto star import
-                        jedi = {
-                            -- Path per risolvere import relativi
-                            extra_paths = { "." },
-                            environment = nil, -- Usa l'ambiente Python attivo
-                            -- Configurazioni per migliorare risoluzione star import
-                            completion = {
-                                enabled = true,
-                                disable_snippets = false,
-                                resolve_eagerly = true,
-                                cache_for = { "pandas", "numpy", "requests" }
-                            }
-                        },
-                    },
-                },
-                -- Setup automatico del Python path per star imports
-                on_attach = function(client, bufnr)
-                    -- Crea src/__init__.py se non esiste
-                    local cwd = vim.fn.getcwd()
-                    local src_path = cwd .. "/src"
-                    
-                    if vim.fn.isdirectory(src_path) == 1 then
-                        local init_file = src_path .. "/__init__.py"
-                        if vim.fn.filereadable(init_file) == 0 then
-                            vim.fn.writefile({}, init_file)
-                        end
-                    end
-                end,
+                    python = {
+                        analysis = {
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                            diagnosticMode = "workspace"
+                        }
+                    }
+                }
             },
         },
         -- you can do any additional lsp server setup here
@@ -93,7 +53,18 @@ return {
                 return true
             end,
             -- Specify * to use this function as a fallback for any server
-            -- ["*"] = function(server, opts) end,
+            ["*"] = function(server, opts)
+                -- Filter diagnostics to show only errors
+                local orig_handler = vim.lsp.handlers["textDocument/publishDiagnostics"]
+                vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+                    -- Filter to only show errors
+                    result.diagnostics = vim.tbl_filter(function(diagnostic)
+                        return diagnostic.severity == vim.diagnostic.severity.ERROR
+                    end, result.diagnostics)
+                    return orig_handler(_, result, ctx, config)
+                end
+                return false
+            end,
         },
     },
 }

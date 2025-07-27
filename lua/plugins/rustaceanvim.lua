@@ -22,11 +22,11 @@ return {
               enable = true,
             },
           },
-          -- Add clippy lints for Rust if using rust-analyzer
-          checkOnSave = diagnostics == "rust-analyzer",
-          -- Enable diagnostics if using rust-analyzer
+          -- Disable clippy linting but keep basic diagnostics
+          checkOnSave = false,
+          -- Enable basic diagnostics (syntax errors, type errors)
           diagnostics = {
-            enable = diagnostics == "rust-analyzer",
+            enable = true,
           },
           procMacro = {
             enable = true,

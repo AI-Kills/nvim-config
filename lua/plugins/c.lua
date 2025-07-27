@@ -16,7 +16,7 @@ return {
     opts = {
       servers = {
         clangd = {
-          cmd = { "clangd", "--background-index", "--clang-tidy" },
+          cmd = { "clangd", "--background-index" },
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(

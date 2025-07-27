@@ -20,6 +20,7 @@ return {
             c = { "clang-format" },
             sh = { "shfmt" },
             php = { "php_cs_fixer" },
+            python = { "ruff_format", "ruff_organize_imports" },
             -- Add other filetypes as needed
         },
         formatters = {
@@ -35,6 +36,17 @@ return {
                 args = { "--search-parent-directories", "--stdin-filepath", "$FILENAME", "-" },
                 stdin = true,
                 timeout = 5000, -- Increase timeout for larger files
+            },
+            -- Configure ruff for Python formatting
+            ruff_format = {
+                command = "ruff",
+                args = { "format", "--stdin-filename", "$FILENAME", "-" },
+                stdin = true,
+            },
+            ruff_organize_imports = {
+                command = "ruff",
+                args = { "check", "--select", "I", "--fix", "--stdin-filename", "$FILENAME", "-" },
+                stdin = true,
             },
         },
         -- Format on save with longer timeout and better error handling

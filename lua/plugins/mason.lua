@@ -16,9 +16,6 @@ return {
         -- "rustfmt", -- Removing rustfmt as it should not be installed via rustup/mason
         "clang-format",
         "prettierd",
-        -- Linters
-        "shellcheck",
-        "luacheck",
       },
     },
   },
