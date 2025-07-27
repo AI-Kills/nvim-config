@@ -32,23 +32,10 @@
     ],
     "description": "import the registry for dependency injection end simplicity"
   },
-  "langgraph_imports": {
-    "prefix": "lgi",
-    "body": [
-      "from typing import Dict, TypedDict",
-      "import os",
-      "import sys",
-      "sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))",
-      "from langgraph.graph import StateGraph",
-      "from utils.visualize_graph import visualize_graph",
-      "from langchain.chat_models import init_chat_model"
-    ],
-    "description": "signature of a node function"
-  },
   "langgraph_node_function": {
-    "prefix": "node",
+    "prefix": "lgnode",
     "body": [
-      "def ${1:node_name}(Σ: AgentState) -> AgentState:",
+      "def ${1:node_name}(state: GraphState) -> GraphState:",
       "Γ.add_node(${1:node_name})"
     ],
     "description": "signature of a node function"
