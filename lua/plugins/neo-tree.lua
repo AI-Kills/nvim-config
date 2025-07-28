@@ -9,7 +9,73 @@ return {
         },
         cmd = "Neotree",
         keys = {
-            { "<leader>e", "<cmd>Neotree toggle filesystem left<CR>", desc = "Neo-tree file explorer" },
+            {
+                "<leader>e",
+                function()
+                    -- Controlla se ci sono buffer con file aperti (esclusi neo-tree, buffer vuoti e altri speciali)
+                    local buffers = vim.api.nvim_list_bufs()
+                    local has_real_buffers = false
+
+                    for _, buf in ipairs(buffers) do
+                        if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_option(buf, "buflisted") then
+                            local buftype = vim.api.nvim_buf_get_option(buf, "buftype")
+                            local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
+                            local bufname = vim.api.nvim_buf_get_name(buf)
+
+                            -- Esclude buffer speciali come neo-tree, terminal, ecc.
+                            if buftype == "" and filetype ~= "neo-tree" then
+                                -- Controlla se è un buffer vuoto [No Name]
+                                local is_empty_buffer = (bufname == "" or bufname:match("%[No Name%]")) and 
+                                                       vim.api.nvim_buf_line_count(buf) <= 1 and
+                                                       vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] == ""
+                                
+                                -- Se non è un buffer vuoto, allora abbiamo un buffer reale
+                                if not is_empty_buffer then
+                                    has_real_buffers = true
+                                    break
+                                end
+                            end
+                        end
+                    end
+
+                    if has_real_buffers then
+                        -- Comportamento normale: larghezza 35
+                        vim.cmd("Neotree toggle filesystem left")
+                    else
+                        -- Nessun buffer aperto: apri a tutta larghezza
+                        vim.cmd("Neotree show filesystem left")
+                        -- Aspetta che neo-tree si apra e poi forza la larghezza completa
+                        vim.defer_fn(function()
+                            -- Chiudi tutte le finestre tranne neo-tree per forzare l'espansione
+                            local wins = vim.api.nvim_list_wins()
+                            local neotree_win = nil
+                            
+                            -- Trova la finestra neo-tree
+                            for _, win in ipairs(wins) do
+                                local buf = vim.api.nvim_win_get_buf(win)
+                                local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+                                if ft == "neo-tree" then
+                                    neotree_win = win
+                                    break
+                                end
+                            end
+                            
+                            if neotree_win then
+                                -- Chiudi tutte le altre finestre
+                                for _, win in ipairs(wins) do
+                                    if win ~= neotree_win then
+                                        pcall(vim.api.nvim_win_close, win, false)
+                                    end
+                                end
+                                
+                                -- Ora imposta una larghezza molto alta per forzare l'espansione
+                                vim.api.nvim_win_set_width(neotree_win, 9999)
+                            end
+                        end, 100)
+                    end
+                end,
+                desc = "Neo-tree file explorer (adaptive width)",
+            },
         },
         opts = {
             sources = { "filesystem", "buffers", "git_status" },
