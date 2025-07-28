@@ -14,7 +14,7 @@ return {
         opts = {
             sources = { "filesystem", "buffers", "git_status" },
             filesystem = {
-                bind_to_cwd = false,
+                bind_to_cwd = true, -- Ora neo-tree segue i cambiamenti di directory
                 follow_current_file = { enabled = true },
                 use_libuv_file_watcher = true,
                 filtered_items = {
