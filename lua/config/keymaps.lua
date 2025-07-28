@@ -481,3 +481,6 @@ vim.keymap.set("n", "gsf", go_to_start_of_function, {
     silent = true,
     desc = "Go to start of function (treesitter)",
 })
+
+-- go to note_veloci
+vim.keymap.set("n", "<leader>n", ":e $nt/note_veloci.md<CR>", { noremap = true })

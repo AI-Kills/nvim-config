@@ -28,7 +28,7 @@
   "import_registry": {
     "prefix": "reg",
     "body": [
-      "from src.registry import *"
+      "from registry import *"
     ],
     "description": "import the registry for dependency injection end simplicity"
   },
