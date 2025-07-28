@@ -9,3 +9,7 @@ vim.opt.showmode = true
 -- non fare comparire numerazione delle righe
 vim.opt.number = false
 vim.opt.relativenumber = false
+
+-- have functiontions and aliases in nvim cmdline
+vim.opt.shell = "/bin/zsh"
+vim.opt.shellcmdflag = "-i -c"

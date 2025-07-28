@@ -36,18 +36,36 @@
     "prefix": "Γan",
     "body": [
       "def ${1:node_name}(state: GraphState) -> GraphState:",
-      "\nreturn state",
+      "\treturn state",
       "_g.add_node(\"${1:node_name}\", ${1:node_name})"
     ],
     "description": "create a node"
   },
-  "langgraph_state_init": {
+  "pytorch": {
+    "prefix": "Τ",
+    "body": "torch",
+    "description": "pytorch"
+  },
+  "langgraph_init": {
     "prefix": "Γini",
     "body": [
       "class GraphState(TypedDict):",
       "\tmessage: str",
       "\tmetadata: dict",
       "\n_g = StateGraph(GraphState)",
+      "\n",
+      "def _start(state: GraphState) -> GraphState:",
+      "\tprint(\"start node\")",
+      "\treturn state",
+      "_g.add_node(\"_start\", _start)",
+      "_g.add_edge(START, \"_start\")",
+      "\n",
+      "def _end(state: GraphState) -> GraphState:",
+      "\tprint(\"end node\")",
+      "\treturn state",
+      "_g.add_node(\"_end\", _end)",
+      "_g.add_edge(\"_end\", END)",
+      "${1:logic}",
       "g=_g.compile()",
       "show_mermaid(g)"
     ],
@@ -59,28 +77,6 @@
       "_g.add_edge(\"${1:origin_node}\", \"${2:destination_node}\")"
     ],
     "description": "add an edge to the state graph"
-  },
-  "langgraph_add_end_edge": {
-    "prefix": "Γaee",
-    "body": [
-      "def _end(state: GraphState) -> GraphState:",
-      "\tprint(\"end node\")",
-      "\treturn state",
-      "_g.add_node(\"_end\", _end)",
-      "_g.add_edge(\"_end\", END)"
-    ],
-    "description": "add the end edge"
-  },
-  "langgraph_add_start_edge": {
-    "prefix": "Γase",
-    "body": [
-      "def _start(state: GraphState) -> GraphState:",
-      "\tprint(\"start node\")",
-      "\treturn state",
-      "_g.add_node(\"_start\", _start)",
-      "_g.add_edge(START, \"_start\")"
-    ],
-    "description": "add the end edge"
   },
   "define a function": {
     "prefix": "fnd",

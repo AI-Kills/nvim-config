@@ -206,6 +206,10 @@ vim.keymap.set("v", "=", ":s/", { noremap = true })
 vim.keymap.set("n", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("v", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("i", "º", "!", { noremap = true, silent = true })
+-- command mode, ie quando scrivi in cmdline
+vim.keymap.set("c", "º", function()
+    return "!"
+end, { noremap = true, expr = true })
 
 -- ### moving ###
 
