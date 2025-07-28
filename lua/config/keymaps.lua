@@ -203,7 +203,7 @@ vim.keymap.set("v", "=", ":s/", { noremap = true })
 
 -- j and k + option for "?" and "!"
 
-vim.keymap.set("n", "º", "!", { noremap = true, silent = true })
+vim.keymap.set("n", "º", ":!", { noremap = true })
 vim.keymap.set("v", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("i", "º", "!", { noremap = true, silent = true })
 -- command mode, ie quando scrivi in cmdline
