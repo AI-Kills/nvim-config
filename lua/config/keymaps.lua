@@ -484,3 +484,6 @@ vim.keymap.set("n", "gsf", go_to_start_of_function, {
 
 -- go to note_veloci
 vim.keymap.set("n", "<leader>n", ":e $nt/note_veloci.md<CR>", { noremap = true })
+
+-- copy abs path of file in current buffer
+vim.keymap.set("n", "å", ":let @+ = expand('%:p') <CR>", { noremap = true })

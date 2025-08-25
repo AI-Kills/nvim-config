@@ -1,4 +1,4 @@
--- Nel suo file di configurazione di plugin (es. ~/.config/nvim/lua/plugins/init.lua)
+-- Keybinding per incollare l'n-esimo elemento della yank history con leader + numero
 return {
     {
         "gbprod/yanky.nvim",
@@ -8,16 +8,22 @@ return {
         },
         opts = {
             ring = {
-                history_length = 100, -- Lunghezza della cronologia: quante copie memorizzare
+                history_length = 50, -- Lunghezza della cronologia: quante copie memorizzare
                 storage = "sqlite", -- Persistenza tra le sessioni di Neovim tramite SQLite
             },
-            -- Qui può aggiungere altre opzioni se desidera personalizzare ulteriormente yanky
+            -- Filtro per includere solo yank espliciti, escludendo cancellazioni
+            filter = function(regtype, regcontents)
+                local event = vim.v.event
+                if event and event.operator == "y" then
+                    return true -- Includi solo gli yank espliciti
+                end
+                return false -- Escludi cancellazioni (d) e cambiamenti (c)
+            end,
         },
         keys = {
             -- Mappatura per visualizzare la cronologia degli yank
-            -- Abbiamo cambiato '<leader>p' in '<leader>6'
             {
-                "<leader>6",
+                "<leader>y",
                 function()
                     require("telescope").extensions.yank_history.yank_history({})
                 end,
@@ -25,12 +31,26 @@ return {
                 desc = "Apri Cronologia Copie (Yank)",
             },
 
-            -- Mappature di default per incollare e ciclare la cronologia dopo l'incolla
-            -- Queste restano invariate rispetto alla configurazione standard di yanky.nvim
-            { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Incolla Testo Dopo Cursore" },
+            -- Keybinding per incollare l'n-esimo elemento della yank history (sempre prima del cursore)
+            {
+                "{p",
+                function()
+                    vim.cmd('normal! "2P')
+                end,
+                mode = { "n", "x", "c" },
+                desc = "Incolla 1° Elemento Yank Prima",
+            },
+            {
+                "]p",
+                function()
+                    vim.cmd('normal! "3P')
+                end,
+                mode = { "n", "x", "c" },
+                desc = "Incolla 2° Elemento Yank Prima",
+            },
             { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Incolla Testo Prima Cursore" },
             { "<c-n>", "<Plug>(YankyNextEntry)", mode = "n", desc = "Prossimo Elemento Cronologia" },
-            { "<c-p>", "<Plug>(YankyPreviousEntry)", mode = "n", desc = "Elemento Precedente Cronologia" },
+            { "<leader>@", "<Plug>(YankyPreviousEntry)", mode = "n", desc = "Elemento Precedente Cronologia" },
         },
     },
 }
