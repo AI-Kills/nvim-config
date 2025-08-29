@@ -488,7 +488,7 @@ vim.keymap.set("n", "<leader>n", ":e $nt/note_veloci.md<CR>", { noremap = true }
 -- copy abs path of file in current buffer
 vim.keymap.set("n", "5", ":terminal <CR>", { noremap = true })
 
---  terminal mode
+--  #terminal mode
 --
 --
 --
@@ -524,3 +524,9 @@ end, { noremap = true, silent = true })
 vim.keymap.set("t", "gg", function()
     vim.api.nvim_feedkeys("gcloud ", "t", false)
 end, { noremap = true, silent = true, nowait = true })
+
+-- Escape in terminal mode = exit terminal mode and go to previous buffer
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>:bprevious<CR>]], { noremap = true, silent = true, desc = "Exit terminal and go to previous buffer" })
+
+-- terminal mode mapping per chiudere terminal senza conferma
+vim.keymap.set("t", "jw", [[<C-\><C-n>:bd!<CR>]], { noremap = true, silent = true })
