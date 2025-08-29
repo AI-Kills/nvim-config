@@ -526,7 +526,12 @@ vim.keymap.set("t", "gg", function()
 end, { noremap = true, silent = true, nowait = true })
 
 -- Escape in terminal mode = exit terminal mode and go to previous buffer
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>:bprevious<CR>]], { noremap = true, silent = true, desc = "Exit terminal and go to previous buffer" })
+vim.keymap.set(
+    "t",
+    ",",
+    [[<C-\><C-n>:bprevious<CR>]],
+    { noremap = true, silent = true, desc = "Exit terminal and go to previous buffer" }
+)
 
 -- terminal mode mapping per chiudere terminal senza conferma
 vim.keymap.set("t", "jw", [[<C-\><C-n>:bd!<CR>]], { noremap = true, silent = true })
