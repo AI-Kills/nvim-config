@@ -486,4 +486,21 @@ vim.keymap.set("n", "gsf", go_to_start_of_function, {
 vim.keymap.set("n", "<leader>n", ":e $nt/note_veloci.md<CR>", { noremap = true })
 
 -- copy abs path of file in current buffer
-vim.keymap.set("n", "å", ":let @+ = expand('%:p') <CR>", { noremap = true })
+vim.keymap.set("n", "5", ":terminal <CR>", { noremap = true })
+
+-- clear terminal when in terminal mode
+vim.keymap.set("t", "<leader>l", function()
+    vim.api.nvim_feedkeys("clear", "t", false)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "t", false)
+end, { noremap = true, silent = true, desc = "Clear terminal" })
+
+-- interrupt current command (same as Ctrl+C)
+vim.keymap.set("t", "<leader>c", function()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "t", false)
+end, { noremap = true, silent = true, desc = "Interrupt command (Ctrl+C)" })
+
+-- map gg to the completion of the word "gcloud"
+
+vim.keymap.set("t", "gg", function()
+    vim.api.nvim_feedkeys("gcloud ", "t", false)
+end, { noremap = true, silent = true, nowait = true })

@@ -1,4 +1,5 @@
 -- Keybinding per incollare l'n-esimo elemento della yank history con leader + numero
+
 return {
     {
         "gbprod/yanky.nvim",
@@ -11,14 +12,6 @@ return {
                 history_length = 50, -- Lunghezza della cronologia: quante copie memorizzare
                 storage = "sqlite", -- Persistenza tra le sessioni di Neovim tramite SQLite
             },
-            -- Filtro per includere solo yank espliciti, escludendo cancellazioni
-            filter = function(regtype, regcontents)
-                local event = vim.v.event
-                if event and event.operator == "y" then
-                    return true -- Includi solo gli yank espliciti
-                end
-                return false -- Escludi cancellazioni (d) e cambiamenti (c)
-            end,
         },
         keys = {
             -- Mappatura per visualizzare la cronologia degli yank
