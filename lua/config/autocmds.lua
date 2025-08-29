@@ -62,3 +62,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
         vim.cmd("startinsert")
     end,
 })
+
+-- Ogni volta che entri in un buffer di terminale esistente, attiva terminal mode
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "term://*",
+    callback = function()
+        -- Controlla se siamo effettivamente in un buffer di terminale
+        if vim.bo.buftype == "terminal" then
+            vim.cmd("startinsert")
+        end
+    end,
+})
