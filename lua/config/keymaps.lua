@@ -488,19 +488,39 @@ vim.keymap.set("n", "<leader>n", ":e $nt/note_veloci.md<CR>", { noremap = true }
 -- copy abs path of file in current buffer
 vim.keymap.set("n", "5", ":terminal <CR>", { noremap = true })
 
+--  terminal mode
+--
+--
+--
+--
 -- clear terminal when in terminal mode
-vim.keymap.set("t", "<leader>l", function()
+vim.keymap.set("t", "jm", function()
     vim.api.nvim_feedkeys("clear", "t", false)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "t", false)
 end, { noremap = true, silent = true, desc = "Clear terminal" })
 
 -- interrupt current command (same as Ctrl+C)
-vim.keymap.set("t", "<leader>c", function()
+vim.keymap.set("t", "jn", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "t", false)
 end, { noremap = true, silent = true, desc = "Interrupt command (Ctrl+C)" })
 
--- map gg to the completion of the word "gcloud"
+-- Fine linea (Cmd+→)
+vim.keymap.set("t", "jl", [[<C-\><C-n>i<C-e>]], { noremap = true })
+-- Inizio linea (Cmd+←)
+vim.keymap.set("t", "jh", [[<C-\><C-n>i<C-a>]], { noremap = true })
 
+-- Leader + h in terminal mode = Alt-b (word back)
+vim.keymap.set("t", "jj", function()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<M-b>", true, false, true), "t", false)
+end, { noremap = true, silent = true })
+
+-- Leader + k in terminal mode = Alt-f (word forward)
+vim.keymap.set("t", "jk", function()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<M-f>", true, false, true), "t", false)
+end, { noremap = true, silent = true })
+
+-- mapping di chiavi a keywords in modalita terminale
+-- map gg to the completion of the word "gcloud"
 vim.keymap.set("t", "gg", function()
     vim.api.nvim_feedkeys("gcloud ", "t", false)
 end, { noremap = true, silent = true, nowait = true })

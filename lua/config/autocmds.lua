@@ -54,3 +54,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.keymap.set("n", "<leader>tt", function()
     vim.cmd("enew | terminal | startinsert")
 end, { desc = "Terminal: new buffer" })
+
+-- Ogni volta che apri un terminale, entra subito in modalità terminale
+vim.api.nvim_create_autocmd("TermOpen", {
+    pattern = "*",
+    callback = function()
+        vim.cmd("startinsert")
+    end,
+})
