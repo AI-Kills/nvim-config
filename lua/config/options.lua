@@ -4,12 +4,27 @@
 -- Enable Neovim's built-in status line after disabling lualine
 vim.opt.laststatus = 0
 vim.opt.ruler = true
-vim.opt.showmode = false -- non mostrare la mode (insert etc)
-vim.opt.cmdheight = 0 -- nascondi commandline quando inattivo
+vim.opt.showmode = false -- mosta la mode (insert etc)
+vim.opt.cmdheight = 1 -- nascondi commandline quando inattivo
 
 -- non fare comparire numerazione delle righe
 vim.opt.number = false
 vim.opt.relativenumber = false
+
+-- Folding settings (Treesitter based)
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldcolumn = "1" -- Mostra la colonna dei fold per chiarezza
+vim.opt.fillchars = {
+    foldopen = "▾",
+    foldclose = "▸",
+    fold = " ",
+    foldsep = " ",
+    diff = "╱",
+    eob = " ",
+}
 
 -- have functiontions and aliases in nvim cmdline
 vim.opt.shell = "/bin/zsh"

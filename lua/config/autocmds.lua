@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
     callback = function(ev)
         -- Opzioni locali pulite
         vim.opt_local.number = false
-        vim.opt_localrelativenumber = false
+        vim.opt_local.relativenumber = false
         vim.opt_local.signcolumn = "no"
         vim.opt_local.foldcolumn = "0"
 
@@ -42,34 +42,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
             "winhl",
             "Normal:TermTrans,NormalNC:TermTrans,SignColumn:TermTrans,EndOfBuffer:TermTrans"
         )
-
-        -- Keymaps locali al buffer terminale
-        local opts = { buffer = ev.buf, silent = true }
-        -- Esc: esci da terminal-mode -> normal-mode
-        vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
     end,
 })
 
--- Mapping: <leader>tt apre terminale in un NUOVO buffer (nella stessa finestra)
-vim.keymap.set("n", "<leader>tt", function()
-    vim.cmd("enew | terminal | startinsert")
-end, { desc = "Terminal: new buffer" })
-
--- Ogni volta che apri un terminale, entra subito in modalità terminale
+-- Ogni volta che apri un terminale, entra subito in modalità terminale e abilita vi-mode
 vim.api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
     callback = function()
         vim.cmd("startinsert")
-    end,
-})
-
--- Ogni volta che entri in un buffer di terminale esistente, attiva terminal mode
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "term://*",
-    callback = function()
-        -- Controlla se siamo effettivamente in un buffer di terminale
-        if vim.bo.buftype == "terminal" then
-            vim.cmd("startinsert")
-        end
     end,
 })

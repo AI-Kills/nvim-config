@@ -18,9 +18,9 @@ return {
                 follow_current_file = { enabled = false },
                 use_libuv_file_watcher = true,
                 filtered_items = {
-                    visible = false, -- di default non mostrarli
-                    hide_dotfiles = true, -- .env, .git, .eslintrc…
-                    hide_gitignored = true, -- node_modules/, dist/, ecc.
+                    visible = false,
+                    hide_dotfiles = true,
+                    hide_gitignored = true,
                     hide_by_name = { "coverage", ".DS_Store" },
                     hide_by_pattern = { "*.lock", "*.min.js", "__*.py" },
                 },
@@ -38,9 +38,10 @@ return {
             },
             default_component_configs = {
                 indent = {
-                    with_expanders = true,
-                    expander_collapsed = "",
-                    expander_expanded = "",
+                    with_expanders = true, -- Assicura che gli expander siano attivati
+                    expander_collapsed = "", -- Icona freccia destra (più compatibile)
+                    expander_expanded = "", -- Icona freccia giù (più compatibile)
+                    expander_highlight = "NeoTreeExpander",
                 },
                 git_status = {
                     symbols = { unstaged = "󰄱", staged = "✅" },
@@ -64,5 +65,11 @@ return {
                 },
             },
         },
+        config = function(_, opts)
+            -- Forziamo il colore delle frecce ad essere molto visibile (Bianco/Grigio chiaro)
+            vim.api.nvim_set_hl(0, "NeoTreeExpander", { fg = "#ffffff", bold = true })
+            
+            require("neo-tree").setup(opts)
+        end,
     },
 }

@@ -21,6 +21,7 @@ require("lazy").setup({
         { import = "lazyvim.plugins.extras.lang.json" },
         { import = "lazyvim.plugins.extras.lang.rust" }, -- add Rust language support (disabled to remove nvim-dap)
         { import = "lazyvim.plugins.extras.lang.python" }, -- add Python language support (disabled to remove nvim-dap)
+        { import = "lazyvim.plugins.extras.lang.terraform" },
         { import = "lazyvim.plugins.extras.editor.neo-tree" }, -- add Neo-tree file explorer
         { import = "plugins" },
     },

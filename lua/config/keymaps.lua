@@ -206,17 +206,22 @@ vim.keymap.set("v", "=", ":s/", { noremap = true })
 vim.keymap.set("n", "º", ":!", { noremap = true })
 vim.keymap.set("v", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("i", "º", "!", { noremap = true, silent = true })
--- command mode, ie quando scrivi in cmdline
+
+-- ============================================================================
+-- KEYMAPS GLOBALI PER cOMMAND MODE
+-- ============================================================================
+
 vim.keymap.set("c", "º", function()
     return "!"
 end, { noremap = true, expr = true })
+
+vim.keymap.set("c", "\\\\", "//", { noremap = true })
 
 -- ### moving ###
 
 -- horizontal
 vim.keymap.set("n", "h", "b", { noremap = true, silent = true })
 vim.keymap.set("n", "l", "e", { noremap = true, silent = true })
-vim.keymap.set("v", "h", "b", { noremap = true, silent = true })
 vim.keymap.set("v", "l", "e", { noremap = true, silent = true })
 
 vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
@@ -253,23 +258,33 @@ vim.keymap.set(
 )
 
 -- folding
+-- Close all folds recursively
 vim.keymap.set("n", "--", "zM", {
     noremap = true,
     silent = true,
-    desc = "close all folds",
+    desc = "close all folds recursively",
 })
 
-vim.keymap.set("n", "b", "zO", {
+-- Open current fold (non-recursive)
+vim.keymap.set("n", "b", "zo", {
     noremap = true,
     silent = true,
-    desc = "open fold",
+    desc = "open fold (non-recursive)",
 })
-vim.keymap.set("n", "B", "zc", {
+
+-- Open all nested folds (recursive)
+vim.keymap.set("n", "B", "zO", {
+    noremap = true,
+    silent = true,
+    desc = "open folds recursively",
+})
+
+-- Close current fold
+vim.keymap.set("n", "c", "zc", {
     noremap = true,
     silent = true,
     desc = "close fold",
 })
-
 -- navigating through indentation --- questo serve per python...
 
 -- Funzione locale che effettua il require solo al primo utilizzo
@@ -350,7 +365,7 @@ vim.keymap.set("n", "S", ":%s/")
 
 vim.keymap.set("v", "$", "g_")
 
-vim.keymap.set("n", "ª", ":%s/", { desc = "Cerca carattere e vai sul successivo" })
+vim.keymap.set("n", "ª", ":?", { desc = "Cerca carattere e vai sul successivo" })
 
 -- terminal commands
 vim.keymap.set("n", "•", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
@@ -482,56 +497,65 @@ vim.keymap.set("n", "gsf", go_to_start_of_function, {
     desc = "Go to start of function (treesitter)",
 })
 
--- go to note_veloci
-vim.keymap.set("n", "<leader>n", ":e $nt/note_veloci.md<CR>", { noremap = true })
+-- quick open files
+vim.keymap.set("n", "<leader>n", ":e $nt/note_veloc*<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>h", ":e $nt/cred*<CR>", { noremap = true })
 
--- copy abs path of file in current buffer
-vim.keymap.set("n", "5", ":terminal <CR>", { noremap = true })
+-- ============================================================================
+-- KEYMAPS GLOBALI PER TERMINAL MODE
+-- ============================================================================
 
---  #terminal mode
+-- Apri terminale (globale)
+vim.keymap.set({ "n", "t" }, "5", [[<C-\><C-n>:terminal<CR>]], {
+    noremap = true,
+    desc = "Open terminal",
+})
+
+-- Esci e vai al buffer precedente
+vim.keymap.set("t", ",", "<C-\\><C-n>:bprevious<CR>", {
+    buffer = buf,
+    noremap = true,
+    silent = true,
+    desc = "Exit terminal and go to previous buffer",
+})
+
+-- Chiudi terminale senza conferma
+vim.keymap.set("t", "jw", "<C-\\><C-n>:bd!<CR>", {
+    buffer = buf,
+    noremap = true,
+    silent = true,
+    desc = "Close terminal buffer",
+})
+
+-- terminal substitutions
 --
---
---
---
--- clear terminal when in terminal mode
-vim.keymap.set("t", "jm", function()
-    vim.api.nvim_feedkeys("clear", "t", false)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<CR>", true, false, true), "t", false)
-end, { noremap = true, silent = true, desc = "Clear terminal" })
+vim.api.nvim_create_autocmd("TermOpen", {
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "t", "gg", "gcloud ", { noremap = true, silent = true })
+    end,
+})
 
--- interrupt current command (same as Ctrl+C)
-vim.keymap.set("t", "jn", function()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, false, true), "t", false)
-end, { noremap = true, silent = true, desc = "Interrupt command (Ctrl+C)" })
+vim.keymap.set("n", "æ", ":?", { noremap = true })
 
--- Fine linea (Cmd+→)
-vim.keymap.set("t", "jl", [[<C-\><C-n>i<C-e>]], { noremap = true })
--- Inizio linea (Cmd+←)
-vim.keymap.set("t", "jh", [[<C-\><C-n>i<C-a>]], { noremap = true })
+-- commands abbreviations
+vim.cmd("cabbrev a qa") -- esempio: lanci :a e esegue :qa
 
--- Leader + h in terminal mode = Alt-b (word back)
-vim.keymap.set("t", "jj", function()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<M-b>", true, false, true), "t", false)
-end, { noremap = true, silent = true })
+-- Usa la clipboard di sistema
+vim.opt.clipboard:append("unnamedplus")
 
--- Leader + k in terminal mode = Alt-f (word forward)
-vim.keymap.set("t", "jk", function()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<M-f>", true, false, true), "t", false)
-end, { noremap = true, silent = true })
+-- :CopyPath [format]  (default = "%:p" = path assoluto)
+vim.api.nvim_create_user_command("CopyPath", function(opts)
+    local fmt = (opts.args ~= "" and opts.args) or "%:p"
+    local path = vim.fn.expand(fmt)
+    if path == "" then
+        vim.notify("Nessun nome file per il buffer corrente", vim.log.levels.WARN)
+        return
+    end
+    -- copia negli appunti (+ e * per compatibilità)
+    vim.fn.setreg("+", path)
+    pcall(vim.fn.setreg, "*", path)
+    print("Copied to clipboard: " .. path)
+end, { nargs = "?" })
 
--- mapping di chiavi a keywords in modalita terminale
--- map gg to the completion of the word "gcloud"
-vim.keymap.set("t", "gg", function()
-    vim.api.nvim_feedkeys("gcloud ", "t", false)
-end, { noremap = true, silent = true, nowait = true })
-
--- Escape in terminal mode = exit terminal mode and go to previous buffer
-vim.keymap.set(
-    "t",
-    ",",
-    [[<C-\><C-n>:bprevious<CR>]],
-    { noremap = true, silent = true, desc = "Exit terminal and go to previous buffer" }
-)
-
--- terminal mode mapping per chiudere terminal senza conferma
-vim.keymap.set("t", "jw", [[<C-\><C-n>:bd!<CR>]], { noremap = true, silent = true })
+-- Abbreviazione command-line: :p -> :CopyPath
+vim.cmd("cnoreabbrev p CopyPath")
