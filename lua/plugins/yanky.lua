@@ -12,6 +12,10 @@ return {
                 history_length = 50, -- Lunghezza della cronologia: quante copie memorizzare
                 storage = "sqlite", -- Persistenza tra le sessioni di Neovim tramite SQLite
             },
+            highlight = {
+                on_put = false, -- Disabilita il flash quando incolli
+                on_yank = false, -- Disabilita il flash quando fai yank
+            },
         },
         keys = {
             -- Mappatura per visualizzare la cronologia degli yank
