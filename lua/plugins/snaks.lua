@@ -27,21 +27,13 @@ return {
 
                 -- 2. Tasti rapidi (vengono mostrati dalla sezione “keys”)
                 keys = {
-                    { icon = "🌐 THE ONLY", key = "LIMIT 🌐", desc = "", action = ":Telescope find_files" },
+                    { icon = "GOD", key = "IS", desc = "", action = ":Telescope find_files" },
                     {
-                        icon = "🩸 IS",
-                        key = "YOUR MIND 🩸",
+                        icon = "IN ",
+                        key = " DETAILS",
                         desc = "",
                         action = ":lua Snacks.dashboard.pick('oldfiles')",
                     },
-                    {
-                        icon = "",
-                        key = ".",
-                        desc = "",
-                        action = ":Lazy",
-                        enabled = package.loaded.lazy ~= nil,
-                    },
-                    { icon = "", key = ".", desc = "", action = ":qa" },
                 },
             },
 

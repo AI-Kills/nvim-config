@@ -30,7 +30,7 @@ require("lazy").setup({
         version = false, -- always use the latest git commit
     },
     checker = {
-        enabled = true, -- check for plugin updates periodically
+        enabled = false, -- check for plugin updates periodically
         notify = false, -- notify on update
     }, -- automatically check for plugin updates
     performance = {

@@ -367,7 +367,6 @@ vim.keymap.set("v", "$", "g_")
 
 vim.keymap.set("n", "ª", ":?", { desc = "Cerca carattere e vai sul successivo" })
 
--- terminal commands
 vim.keymap.set("n", "•", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
 
 -- ### Moversi all'inzio o alla fine della funzione in cui ci si trova ###
@@ -500,40 +499,6 @@ vim.keymap.set("n", "gsf", go_to_start_of_function, {
 -- quick open files
 vim.keymap.set("n", "<leader>n", ":e $nt/note_veloc*<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>h", ":e $nt/cred*<CR>", { noremap = true })
-
--- ============================================================================
--- KEYMAPS GLOBALI PER TERMINAL MODE
--- ============================================================================
-
--- Apri terminale (globale)
-vim.keymap.set({ "n", "t" }, "5", [[<C-\><C-n>:terminal<CR>]], {
-    noremap = true,
-    desc = "Open terminal",
-})
-
--- Esci e vai al buffer precedente
-vim.keymap.set("t", ",", "<C-\\><C-n>:bprevious<CR>", {
-    buffer = buf,
-    noremap = true,
-    silent = true,
-    desc = "Exit terminal and go to previous buffer",
-})
-
--- Chiudi terminale senza conferma
-vim.keymap.set("t", "jw", "<C-\\><C-n>:bd!<CR>", {
-    buffer = buf,
-    noremap = true,
-    silent = true,
-    desc = "Close terminal buffer",
-})
-
--- terminal substitutions
---
-vim.api.nvim_create_autocmd("TermOpen", {
-    callback = function()
-        vim.api.nvim_buf_set_keymap(0, "t", "gg", "gcloud ", { noremap = true, silent = true })
-    end,
-})
 
 vim.keymap.set("n", "æ", ":?", { noremap = true })
 

@@ -35,30 +35,6 @@ vim.opt.shellcmdflag = "-i -c"
 vim.opt.shellxquote = ""
 vim.opt.shellxescape = ""
 
--- Funzione per refreshare l'ambiente della shell
-_G.refresh_shell_env = function()
-    -- Salva la directory corrente
-    local cwd = vim.fn.getcwd()
-
-    -- Esegue un comando che ricarica l'ambiente
-    local result = vim.fn.system("source ~/.zshrc 2>/dev/null; env")
-
-    -- Parse delle variabili d'ambiente e aggiornamento
-    for line in result:gmatch("[^\r\n]+") do
-        local key, value = line:match("^([^=]+)=(.*)$")
-        if key and value and key ~= "_" then
-            vim.fn.setenv(key, value)
-        end
-    end
-
-    print("Ambiente shell refreshato")
-end
-
--- Comando per refreshare l'ambiente
-vim.api.nvim_create_user_command("RefreshEnv", function()
-    _G.refresh_shell_env()
-end, { desc = "Refresh shell environment variables" })
-
 -- Auto-refresh dell'ambiente quando si cambia directory
 vim.api.nvim_create_autocmd("DirChanged", {
     pattern = "*",
@@ -73,28 +49,4 @@ vim.api.nvim_create_autocmd("DirChanged", {
         end
     end,
     desc = "Auto-activate virtual environment when changing directory",
-})
-
--- Funzione per eseguire comandi Python con l'ambiente corretto
-_G.run_python_with_env = function(cmd)
-    local python_cmd = "python"
-
-    -- Controlla se siamo in un virtual environment
-    local venv = vim.fn.getenv("VIRTUAL_ENV")
-    if venv and venv ~= vim.NIL then
-        python_cmd = venv .. "/bin/python"
-    end
-
-    -- Esegue il comando con il Python corretto
-    local full_cmd = python_cmd .. " " .. cmd
-    vim.cmd("!" .. full_cmd)
-end
-
--- Comando per eseguire Python con ambiente corretto
-vim.api.nvim_create_user_command("PyRun", function(opts)
-    _G.run_python_with_env(opts.args)
-end, {
-    nargs = "*",
-    desc = "Run Python command with correct environment",
-    complete = "file",
 })
