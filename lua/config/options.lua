@@ -1,5 +1,7 @@
--- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+--
+-- 1. status line
+-- 2. hide numbering of rows
 
 -- Enable Neovim's built-in status line after disabling lualine
 vim.opt.laststatus = 0
@@ -26,12 +28,13 @@ vim.opt.fillchars = {
     eob = " ",
 }
 
--- have functiontions and aliases in nvim cmdline
+-- M) Miglioramento per sincronizzazione ambiente shell
+
+-- M1. Avere aliases e functions dell'env nella commandline di nvim
 vim.opt.shell = "/bin/zsh"
 vim.opt.shellcmdflag = "-i -c"
 
--- Miglioramento per sincronizzazione ambiente shell
--- Forza il reload delle variabili d'ambiente e configurazioni shell
+-- M2. Forza il reload delle variabili d'ambiente e configurazioni shell
 vim.opt.shellxquote = ""
 vim.opt.shellxescape = ""
 

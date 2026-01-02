@@ -4,13 +4,13 @@ return {
         opts = {
             ensure_installed = {
                 -- LSP
-                "rust-analyzer",
+                -- "rust-analyzer",
                 "lua-language-server",
                 "clangd",
                 "json-lsp",
                 "typescript-language-server",
-                "intelephense",
-                "css-lsp",
+                -- "intelephense",
+                -- "css-lsp",
                 -- Formatters
                 "stylua",
                 -- "rustfmt", -- Removing rustfmt as it should not be installed via rustup/mason
