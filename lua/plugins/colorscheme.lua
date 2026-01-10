@@ -31,6 +31,9 @@ return {
         "LazyVim/LazyVim",
         opts = {
             colorscheme = "github_dark_default",
+            defaults = {
+                autocmds = false, -- Disabilita gli autocmd di default (incluso highlight yank)
+            },
         },
     },
 }

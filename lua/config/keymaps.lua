@@ -367,7 +367,7 @@ vim.keymap.set("v", "$", "g_")
 
 vim.keymap.set("n", "ª", ":?", { desc = "Cerca carattere e vai sul successivo" })
 
-vim.keymap.set("n", "•", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
+vim.keymap.set("n", "µ", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
 
 -- ### Moversi all'inzio o alla fine della funzione in cui ci si trova ###
 -- Funzione per andare alla fine della funzione corrente usando treesitter
