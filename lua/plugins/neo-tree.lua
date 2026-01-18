@@ -31,7 +31,7 @@ return {
                         ["s"] = false,
                         ["l"] = "open",
                         ["h"] = "close_node",
-                        ["<space>"] = "toggle_preview",
+                        ["p"] = "toggle_preview",
                         ["."] = "toggle_hidden",
                     },
                 },
@@ -68,7 +68,7 @@ return {
         config = function(_, opts)
             -- Forziamo il colore delle frecce ad essere molto visibile (Bianco/Grigio chiaro)
             vim.api.nvim_set_hl(0, "NeoTreeExpander", { fg = "#ffffff", bold = true })
-            
+
             require("neo-tree").setup(opts)
         end,
     },

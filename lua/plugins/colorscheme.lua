@@ -8,17 +8,6 @@ return {
             require("github-theme").setup({
                 options = {
                     transparent = false,
-                    styles = {
-                        functions = "italic",
-                        comments = "italic",
-                        keywords = "bold",
-                    },
-                    darken = {
-                        sidebars = {
-                            enable = true, -- CORREZIONE: 'enable' invece di 'enabled'
-                            list = { "qf", "terminal", "lazy" },
-                        },
-                    },
                 },
             })
 
@@ -26,13 +15,13 @@ return {
         end,
     },
 
-    -- 2. Override di LazyVim
+    -- 2. Override di LazyVim per disabilitare highlight allo yank
     {
         "LazyVim/LazyVim",
         opts = {
             colorscheme = "github_dark_default",
             defaults = {
-                autocmds = false, -- Disabilita gli autocmd di default (incluso highlight yank)
+                autocmds = false,
             },
         },
     },
