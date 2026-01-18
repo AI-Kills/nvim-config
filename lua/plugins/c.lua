@@ -45,15 +45,5 @@ return {
         end,
     },
 
-    -- 5. Configure formatting for C files
-    {
-        "stevearc/conform.nvim",
-        optional = true,
-        opts = {
-            formatters_by_ft = {
-                c = { "clang-format" },
-            },
-        },
-    },
 }
 

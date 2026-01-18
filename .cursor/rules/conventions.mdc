@@ -7,9 +7,6 @@ the following is a list of conventions that map specific prompt forms to specifi
 they are in the form: alias -> corresponding task
 
 
-attenzione: non usare mai npm; al posto di npm usa pnpm
-
-
 you should always respond in a very concise style. 
 we don't have time to loose, if i have a question, i will ask. 
 always keep a motivating propositive attitude.

@@ -13,11 +13,10 @@ vim.opt.cmdheight = 1 -- nascondi commandline quando inattivo
 vim.opt.number = false
 vim.opt.relativenumber = false
 
--- Folding settings (Treesitter based)
+-- Folding settings (indent based - faster than treesitter)
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldmethod = "indent"
 vim.opt.foldcolumn = "1" -- Mostra la colonna dei fold per chiarezza
 vim.opt.fillchars = {
     foldopen = "▾",
@@ -32,7 +31,7 @@ vim.opt.fillchars = {
 
 -- M1. Avere aliases e functions dell'env nella commandline di nvim
 vim.opt.shell = "/bin/zsh"
-vim.opt.shellcmdflag = "-i -c"
+vim.opt.shellcmdflag = "-c"
 
 -- M2. Forza il reload delle variabili d'ambiente e configurazioni shell
 vim.opt.shellxquote = ""

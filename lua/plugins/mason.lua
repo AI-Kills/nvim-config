@@ -13,8 +13,7 @@ return {
                 -- "css-lsp",
                 -- Formatters
                 "stylua",
-                -- "rustfmt", -- Removing rustfmt as it should not be installed via rustup/mason
-                "clang-format",
+                "shfmt",
                 "prettierd",
             },
         },
