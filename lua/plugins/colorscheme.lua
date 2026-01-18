@@ -15,7 +15,7 @@ return {
         end,
     },
 
-    -- 2. Override di LazyVim per disabilitare highlight allo yank
+    -- 2. Override di LazyVim
     {
         "LazyVim/LazyVim",
         opts = {
@@ -23,6 +23,14 @@ return {
             defaults = {
                 autocmds = false,
             },
+            news = {
+                lazyvim = false,
+                neovim = false,
+            },
         },
     },
+
+    -- 3. Disabilita noice.nvim (usa cmdline classica in basso)
+    { "folke/noice.nvim", enabled = false },
+    { "rcarriga/nvim-notify", enabled = false },
 }

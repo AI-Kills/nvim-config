@@ -1,5 +1,6 @@
 return {
   "NStefan002/visual-surround.nvim",
+  event = "ModeChanged *:[vV\x16]*",
   config = function()
     require("visual-surround").setup({
       -- if set to false, the user must manually add keymaps

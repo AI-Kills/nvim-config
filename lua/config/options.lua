@@ -1,5 +1,8 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
---
+
+-- Disabilita LazyVim news/tips
+vim.g.lazyvim_news = false
+
 -- 1. status line
 -- 2. hide numbering of rows
 
@@ -12,6 +15,9 @@ vim.opt.cmdheight = 1 -- nascondi commandline quando inattivo
 -- non fare comparire numerazione delle righe
 vim.opt.number = false
 vim.opt.relativenumber = false
+
+-- Mantieni la stessa forma del cursore in tutte le modalità
+vim.opt.guicursor = ""
 
 -- Folding settings (indent based - faster than treesitter)
 vim.opt.foldlevel = 99
