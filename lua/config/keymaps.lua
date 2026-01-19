@@ -220,18 +220,15 @@ vim.keymap.set("c", "\\\\", "//", { noremap = true })
 -- ### moving ###
 
 -- horizontal
-vim.keymap.set("n", "h", "b", { noremap = true, silent = true })
-vim.keymap.set("n", "l", "e", { noremap = true, silent = true })
-vim.keymap.set("v", "l", "e", { noremap = true, silent = true })
+--vim.keymap.set("n", "h", "b", { noremap = true, silent = true })
+--vim.keymap.set("n", "l", "e", { noremap = true, silent = true })
+--vim.keymap.set("v", "l", "e", { noremap = true, silent = true })
 
-vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
-vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
-
-vim.keymap.set("i", "∂", "@", { noremap = true, silent = true })
-vim.keymap.set("n", "∂", "@", { noremap = true, silent = true })
-vim.keymap.set("v", "∂", "@", { noremap = true, silent = true })
+--vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
+--vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
 
 -- vertical
+--[[
 vim.keymap.set(
     "n",
     "k",
@@ -256,24 +253,25 @@ vim.keymap.set(
     next_textline_with_count,
     { desc = "j con count → normale; senza count → skip a testo/fold" }
 )
+]]
 
 -- folding
 -- Close all folds recursively
-vim.keymap.set("n", "--", "zM", {
+vim.keymap.set("n", "C", "zM", {
     noremap = true,
     silent = true,
     desc = "close all folds recursively",
 })
 
 -- Open current fold (non-recursive)
-vim.keymap.set("n", "b", "zo", {
+vim.keymap.set("n", "<leader>c", "zo", {
     noremap = true,
     silent = true,
     desc = "open fold (non-recursive)",
 })
 
 -- Open all nested folds (recursive)
-vim.keymap.set("n", "B", "zO", {
+vim.keymap.set("n", "<leader>C", "zO", {
     noremap = true,
     silent = true,
     desc = "open folds recursively",
@@ -433,73 +431,11 @@ vim.keymap.set("n", "gf", go_to_end_of_function, {
     desc = "Go to end of function (treesitter)",
 })
 
--- Funzione per andare all'inizio della funzione corrente usando treesitter
-local function go_to_start_of_function()
-    local ts_utils = require("nvim-treesitter.ts_utils")
-    local parsers = require("nvim-treesitter.parsers")
-
-    -- Verifica se treesitter è disponibile per il buffer corrente
-    if not parsers.has_parser() then
-        vim.notify("Treesitter parser not available for this filetype", vim.log.levels.WARN)
-        return
-    end
-
-    -- Ottieni il nodo corrente sotto il cursore
-    local node = vim.treesitter.get_node()
-    if not node then
-        vim.notify("No treesitter node found", vim.log.levels.WARN)
-        return
-    end
-
-    -- Tipi di nodi che rappresentano funzioni per diversi linguaggi
-    local function_node_types = {
-        "function_definition", -- Python, Lua
-        "function_declaration", -- JavaScript, TypeScript, C
-        "function_item", -- Rust
-        "method_definition", -- Python (metodi di classe)
-        "arrow_function", -- JavaScript/TypeScript
-        "function_expression", -- JavaScript
-        "method_declaration", -- TypeScript/Java
-        "constructor_declaration", -- TypeScript/Java
-        "function", -- Generic
-    }
-
-    -- Cerca il nodo genitore che rappresenta una funzione
-    local function_node = node
-    while function_node do
-        local node_type = function_node:type()
-        for _, func_type in ipairs(function_node_types) do
-            if node_type == func_type then
-                -- Trovata la funzione! Vai all'inizio
-                local start_row, start_col = function_node:start()
-                -- Treesitter usa 0-based indexing, vim usa 1-based
-                vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
-                vim.notify("Moved to start of " .. node_type, vim.log.levels.INFO)
-                return
-            end
-        end
-        function_node = function_node:parent()
-    end
-
-    vim.notify("Not inside a function", vim.log.levels.WARN)
-end
-
--- Mappa gsf in visual mode e normal mode per andare all'inizio della funzione
-vim.keymap.set("v", "gsf", go_to_start_of_function, {
-    noremap = true,
-    silent = true,
-    desc = "Go to start of function (treesitter)",
-})
-vim.keymap.set("n", "gsf", go_to_start_of_function, {
-    noremap = true,
-    silent = true,
-    desc = "Go to start of function (treesitter)",
-})
-
--- quick open files
+-- quick open important global files
 vim.keymap.set("n", "<leader>n", ":e $nt/note_veloc*<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>h", ":e $nt/cred*<CR>", { noremap = true })
 
+-- search backwards
 vim.keymap.set("n", "æ", ":?", { noremap = true })
 
 -- commands abbreviations

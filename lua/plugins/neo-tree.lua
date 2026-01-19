@@ -9,7 +9,7 @@ return {
         },
         cmd = "Neotree",
         keys = {
-            { "e", "<cmd>Neotree toggle filesystem left<CR>", desc = "Neo-tree file explorer" },
+            { "<leader>e", "<cmd>Neotree toggle filesystem left<CR>", desc = "Neo-tree file explorer" },
         },
         opts = {
             sources = { "filesystem", "buffers", "git_status" },

@@ -16,7 +16,6 @@ return {
             formatters_by_ft = {
                 sh = { "shfmt" },
             },
-            format_on_save = { timeout_ms = 3000, lsp_format = "fallback" },
         },
     },
 }

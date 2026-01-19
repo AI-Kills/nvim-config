@@ -18,10 +18,6 @@ return {
                     stdin = true,
                 },
             },
-            format_on_save = { timeout_ms = 3000, lsp_format = "fallback" },
-        },
-        keys = {
-            { "<leader>cf", function() require("conform").format() end, ft = "python", desc = "Format" },
         },
     },
 }
