@@ -363,7 +363,7 @@ vim.keymap.set("n", "S", ":%s/")
 
 vim.keymap.set("v", "$", "g_")
 
-vim.keymap.set("n", "ª", ":?", { desc = "Cerca carattere e vai sul successivo" })
+vim.keymap.set("n", "ª", "?", { desc = "Cerca all'indietro" })
 
 vim.keymap.set("n", "µ", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
 
@@ -431,18 +431,31 @@ vim.keymap.set("n", "gf", go_to_end_of_function, {
     desc = "Go to end of function (treesitter)",
 })
 
--- quick open important global files
+-- quick open important global files & run scripts
+-- <leader><leader> -- for scripts
 vim.keymap.set("n", "<leader>n", ":e $nt/note_veloc*<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>h", ":e $nt/cred*<CR>", { noremap = true })
 
+vim.keymap.set("n", "<leader>t", ":e /Users/a.i./reminders_list_shortcuts/reminders.json<CR>", { noremap = true })
+vim.keymap.set(
+    "n",
+    "∆",
+    ":!  /Users/a.i./reminders_list_shortcuts/upd* <CR>",
+    { noremap = true, desc = "update reminders" }
+)
+
 -- search backwards
-vim.keymap.set("n", "æ", ":?", { noremap = true })
+vim.keymap.set("n", "æ", "?", { noremap = true })
 
 -- commands abbreviations
 vim.cmd("cabbrev a qa") -- esempio: lanci :a e esegue :qa
 
 -- Usa la clipboard di sistema
 vim.opt.clipboard:append("unnamedplus")
+
+-- Visual mode indentation with Tab/Shift-Tab
+vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true, desc = "Indent selection" })
+vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true, desc = "De-indent selection" })
 
 -- :CopyPath [format]  (default = "%:p" = path assoluto)
 vim.api.nvim_create_user_command("CopyPath", function(opts)
@@ -460,3 +473,17 @@ end, { nargs = "?" })
 
 -- Abbreviazione command-line: :p -> :CopyPath
 vim.cmd("cnoreabbrev p CopyPath")
+
+-- LSP rename (intelligent refactoring across all references/imports)
+vim.keymap.set("n", "r", vim.lsp.buf.rename, {
+    noremap = true,
+    silent = true,
+    desc = "LSP rename symbol",
+})
+
+-- Global project search (live grep)
+vim.keymap.set("n", "w", "<cmd>Telescope live_grep<cr>", {
+    noremap = true,
+    silent = true,
+    desc = "Search string in project",
+})
