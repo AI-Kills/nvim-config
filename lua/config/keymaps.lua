@@ -201,7 +201,7 @@ vim.keymap.set("n", "=", ":", { noremap = true })
 --  ../g for global substitution in rows
 vim.keymap.set("v", "=", ":s/", { noremap = true })
 
--- j and k + option for "?" and "!"
+-- j and k + option for "!"
 
 vim.keymap.set("n", "º", ":!", { noremap = true })
 vim.keymap.set("v", "º", "!", { noremap = true, silent = true })
@@ -363,8 +363,6 @@ vim.keymap.set("n", "S", ":%s/")
 
 vim.keymap.set("v", "$", "g_")
 
-vim.keymap.set("n", "ª", "?", { desc = "Cerca all'indietro" })
-
 vim.keymap.set("n", "µ", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
 
 -- ### Moversi all'inzio o alla fine della funzione in cui ci si trova ###
@@ -432,20 +430,13 @@ vim.keymap.set("n", "gf", go_to_end_of_function, {
 })
 
 -- quick open important global files & run scripts
--- <leader><leader> -- for scripts
+-- <leader> + lettera
 vim.keymap.set("n", "<leader>n", ":e $nt/note_veloc*<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>h", ":e $nt/cred*<CR>", { noremap = true })
 
-vim.keymap.set("n", "<leader>t", ":e /Users/a.i./reminders_list_shortcuts/reminders.json<CR>", { noremap = true })
-vim.keymap.set(
-    "n",
-    "∆",
-    ":!  /Users/a.i./reminders_list_shortcuts/upd* <CR>",
-    { noremap = true, desc = "update reminders" }
-)
-
 -- search backwards
-vim.keymap.set("n", "æ", "?", { noremap = true })
+vim.keymap.set("n", "ª", "?", { desc = "Cerca all'indietro" })
+vim.keymap.set("v", "ª", "?", { desc = "Cerca all'indietro" })
 
 -- commands abbreviations
 vim.cmd("cabbrev a qa") -- esempio: lanci :a e esegue :qa

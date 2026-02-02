@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("i", "_i", "import ()<Left>", { buffer = true })
         vim.keymap.set("i", "__", 'import ("fmt"; "os"; "sync")', { buffer = true })
 
-        vim.keymap.set("i", "_f", "func () {\n}<Up><End><Left><Left><Left><Left>", { buffer = true })
+        vim.keymap.set("n", "<leader>f", "ifunc () {\n}<Up><End><Left><Left><Left><Left>", { buffer = true })
         vim.keymap.set("i", "_p", 'fmt.Printf("", )<Left><Left><Left><Left>', { buffer = true })
         vim.keymap.set("i", "_err", "if err != nil {\n}<Left>", { buffer = true })
         vim.keymap.set("i", "_str", "type  struct{\n}<Up><Right><Right><Right><Right>", { buffer = true })

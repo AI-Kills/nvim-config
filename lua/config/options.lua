@@ -3,6 +3,14 @@
 -- Disabilita LazyVim news/tips
 vim.g.lazyvim_news = false
 
+-- quando esco da modalita' insert con escape,
+-- non fare indietreggiare di 1 il cursore
+vim.api.nvim_create_autocmd("InsertLeave", {
+    callback = function()
+        vim.cmd("normal! `^")
+    end,
+})
+
 -- 1. status line
 -- 2. hide numbering of rows
 
