@@ -1,10 +1,12 @@
 {
-  "extras": [
-
-  ],
+  "extras": [],
   "install_version": 8,
   "news": {
+<<<<<<< HEAD
     "NEWS.md": "11866"
+=======
+    "NEWS.md": "99999"
+>>>>>>> refactor
   },
   "version": 8
 }

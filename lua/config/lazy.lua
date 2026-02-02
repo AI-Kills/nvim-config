@@ -16,20 +16,18 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = {
-        { "LazyVim/LazyVim", import = "lazyvim.plugins" }, -- add LazyVim and import its plugins
+        { "LazyVim/LazyVim", import = "lazyvim.plugins" },
         { import = "lazyvim.plugins.extras.lang.typescript" },
         { import = "lazyvim.plugins.extras.lang.json" },
-        { import = "lazyvim.plugins.extras.lang.rust" }, -- add Rust language support (disabled to remove nvim-dap)
-        { import = "lazyvim.plugins.extras.lang.python" }, -- add Python language support (disabled to remove nvim-dap)
-        { import = "lazyvim.plugins.extras.editor.neo-tree" }, -- add Neo-tree file explorer
+        { import = "lazyvim.plugins.extras.editor.neo-tree" },
         { import = "plugins" },
     },
     defaults = {
-        lazy = false,
+        lazy = true,
         version = false, -- always use the latest git commit
     },
     checker = {
-        enabled = true, -- check for plugin updates periodically
+        enabled = false, -- check for plugin updates periodically
         notify = false, -- notify on update
     }, -- automatically check for plugin updates
     performance = {

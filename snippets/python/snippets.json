@@ -116,13 +116,6 @@
     ],
     "description": "patate debug"
   },
-  "langchain messages": {
-    "prefix": "lcmess",
-    "body": [
-      "from langchain_core.messages import HumanMessage, SystemMessage"
-    ],
-    "description": "import langchain messages objects"
-  },
   "lambda": {
     "prefix": "lmb",
     "body": [
@@ -198,7 +191,21 @@
     ],
     "description": "Try-except-else-finally block"
   },
-  "LangChain prompt template": {
+  "langchain messages": {
+    "prefix": "Λmess",
+    "body": [
+      "from langchain_core.messages import HumanMessage, SystemMessage"
+    ],
+    "description": "messages objects"
+  },
+  "langchain tool": {
+    "prefix": "Λtool",
+    "body": [
+      "from langchain_core.messages import HumanMessage, SystemMessage"
+    ],
+    "description": "use tool"
+  },
+  "langChain prompt template": {
     "prefix": "lcpt",
     "body": [
       "from langchain.prompts import PromptTemplate",
@@ -214,15 +221,16 @@
     ],
     "description": "Create a LangChain prompt template"
   },
-  "LangChain model": {
-    "prefix": "Λllm",
+  "Λ LangChain model": {
+    "prefix": "Λchat",
     "body": [
+      "from langchain_core.language_models import init_chat_model",
       "llm = init_chat_model(\"gpt-4o-mini\", model_provider=\"openai\", temperature=0.0)"
     ],
-    "description": "Initialize a LangChain model"
+    "description": "Initialize a chat model"
   },
   "Pydantic model": {
-    "prefix": "Λpm",
+    "prefix": "model",
     "body": [
       "class ${1:Model}(BaseModel):",
       "\t${2:field_name}: ${3:field_type} = Field(..., description=\"${4:Field description}\")"
@@ -243,13 +251,27 @@
       "parser = PydanticOutputParser(pydantic_object=model)",
       "similarity_llm = prompt | llm | parser"
     ],
-    "description": "Create a Pydantic output parser for LangChain"
+    "description": "Create a Pydantic output parser"
   },
   "main": {
-    "prefix": "Μ",
+    "prefix": "_main",
     "body": [
       "if __name__ == '__main__':"
     ],
     "description": "call a script directly"
+  },
+  "pytorch": {
+    "prefix": "5",
+    "body": [
+      "torch"
+    ],
+    "description": "shortcut for pytorch"
+  },
+  "tensor": {
+    "prefix": "tt",
+    "body": [
+      "tensor"
+    ],
+    "description": "shortcut for tensor"
   }
 }

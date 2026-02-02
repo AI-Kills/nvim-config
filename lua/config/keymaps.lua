@@ -201,32 +201,34 @@ vim.keymap.set("n", "=", ":", { noremap = true })
 --  ../g for global substitution in rows
 vim.keymap.set("v", "=", ":s/", { noremap = true })
 
--- j and k + option for "?" and "!"
+-- j and k + option for "!"
 
 vim.keymap.set("n", "º", ":!", { noremap = true })
 vim.keymap.set("v", "º", "!", { noremap = true, silent = true })
 vim.keymap.set("i", "º", "!", { noremap = true, silent = true })
--- command mode, ie quando scrivi in cmdline
+
+-- ============================================================================
+-- KEYMAPS GLOBALI PER cOMMAND MODE
+-- ============================================================================
+
 vim.keymap.set("c", "º", function()
     return "!"
 end, { noremap = true, expr = true })
 
+vim.keymap.set("c", "\\\\", "//", { noremap = true })
+
 -- ### moving ###
 
 -- horizontal
-vim.keymap.set("n", "h", "b", { noremap = true, silent = true })
-vim.keymap.set("n", "l", "e", { noremap = true, silent = true })
-vim.keymap.set("v", "h", "b", { noremap = true, silent = true })
-vim.keymap.set("v", "l", "e", { noremap = true, silent = true })
+--vim.keymap.set("n", "h", "b", { noremap = true, silent = true })
+--vim.keymap.set("n", "l", "e", { noremap = true, silent = true })
+--vim.keymap.set("v", "l", "e", { noremap = true, silent = true })
 
-vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
-vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
-
-vim.keymap.set("i", "∂", "@", { noremap = true, silent = true })
-vim.keymap.set("n", "∂", "@", { noremap = true, silent = true })
-vim.keymap.set("v", "∂", "@", { noremap = true, silent = true })
+--vim.keymap.set("n", "e", smart_percent_next, { noremap = true, silent = true })
+--vim.keymap.set("v", "e", smart_percent_next, { noremap = true, silent = true })
 
 -- vertical
+--[[
 vim.keymap.set(
     "n",
     "k",
@@ -251,25 +253,36 @@ vim.keymap.set(
     next_textline_with_count,
     { desc = "j con count → normale; senza count → skip a testo/fold" }
 )
+]]
 
 -- folding
-vim.keymap.set("n", "--", "zM", {
+-- Close all folds recursively
+vim.keymap.set("n", "C", "zM", {
     noremap = true,
     silent = true,
-    desc = "close all folds",
+    desc = "close all folds recursively",
 })
 
-vim.keymap.set("n", "b", "zO", {
+-- Open current fold (non-recursive)
+vim.keymap.set("n", "<leader>c", "zo", {
     noremap = true,
     silent = true,
-    desc = "open fold",
+    desc = "open fold (non-recursive)",
 })
-vim.keymap.set("n", "B", "zc", {
+
+-- Open all nested folds (recursive)
+vim.keymap.set("n", "<leader>C", "zO", {
+    noremap = true,
+    silent = true,
+    desc = "open folds recursively",
+})
+
+-- Close current fold
+vim.keymap.set("n", "c", "zc", {
     noremap = true,
     silent = true,
     desc = "close fold",
 })
-
 -- navigating through indentation --- questo serve per python...
 
 -- Funzione locale che effettua il require solo al primo utilizzo
@@ -350,10 +363,7 @@ vim.keymap.set("n", "S", ":%s/")
 
 vim.keymap.set("v", "$", "g_")
 
-vim.keymap.set("n", "ª", ":%s/", { desc = "Cerca carattere e vai sul successivo" })
-
--- terminal commands
-vim.keymap.set("n", "•", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
+vim.keymap.set("n", "µ", ":! open -a 'cursor' . <CR>", { desc = "apre cursor sulla directory corrente" })
 
 -- ### Moversi all'inzio o alla fine della funzione in cui ci si trova ###
 -- Funzione per andare alla fine della funzione corrente usando treesitter
@@ -419,68 +429,52 @@ vim.keymap.set("n", "gf", go_to_end_of_function, {
     desc = "Go to end of function (treesitter)",
 })
 
--- Funzione per andare all'inizio della funzione corrente usando treesitter
-local function go_to_start_of_function()
-    local ts_utils = require("nvim-treesitter.ts_utils")
-    local parsers = require("nvim-treesitter.parsers")
+-- quick open important global files & run scripts
+-- <leader> + lettera
+vim.keymap.set("n", "<leader>n", ":e $nt/note_veloc*<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>h", ":e $nt/cred*<CR>", { noremap = true })
 
-    -- Verifica se treesitter è disponibile per il buffer corrente
-    if not parsers.has_parser() then
-        vim.notify("Treesitter parser not available for this filetype", vim.log.levels.WARN)
+-- search backwards
+vim.keymap.set("n", "ª", "?", { desc = "Cerca all'indietro" })
+vim.keymap.set("v", "ª", "?", { desc = "Cerca all'indietro" })
+
+-- commands abbreviations
+vim.cmd("cabbrev a qa") -- esempio: lanci :a e esegue :qa
+
+-- Usa la clipboard di sistema
+vim.opt.clipboard:append("unnamedplus")
+
+-- Visual mode indentation with Tab/Shift-Tab
+vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true, desc = "Indent selection" })
+vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true, desc = "De-indent selection" })
+
+-- :CopyPath [format]  (default = "%:p" = path assoluto)
+vim.api.nvim_create_user_command("CopyPath", function(opts)
+    local fmt = (opts.args ~= "" and opts.args) or "%:p"
+    local path = vim.fn.expand(fmt)
+    if path == "" then
+        vim.notify("Nessun nome file per il buffer corrente", vim.log.levels.WARN)
         return
     end
+    -- copia negli appunti (+ e * per compatibilità)
+    vim.fn.setreg("+", path)
+    pcall(vim.fn.setreg, "*", path)
+    print("Copied to clipboard: " .. path)
+end, { nargs = "?" })
 
-    -- Ottieni il nodo corrente sotto il cursore
-    local node = vim.treesitter.get_node()
-    if not node then
-        vim.notify("No treesitter node found", vim.log.levels.WARN)
-        return
-    end
+-- Abbreviazione command-line: :p -> :CopyPath
+vim.cmd("cnoreabbrev p CopyPath")
 
-    -- Tipi di nodi che rappresentano funzioni per diversi linguaggi
-    local function_node_types = {
-        "function_definition", -- Python, Lua
-        "function_declaration", -- JavaScript, TypeScript, C
-        "function_item", -- Rust
-        "method_definition", -- Python (metodi di classe)
-        "arrow_function", -- JavaScript/TypeScript
-        "function_expression", -- JavaScript
-        "method_declaration", -- TypeScript/Java
-        "constructor_declaration", -- TypeScript/Java
-        "function", -- Generic
-    }
-
-    -- Cerca il nodo genitore che rappresenta una funzione
-    local function_node = node
-    while function_node do
-        local node_type = function_node:type()
-        for _, func_type in ipairs(function_node_types) do
-            if node_type == func_type then
-                -- Trovata la funzione! Vai all'inizio
-                local start_row, start_col = function_node:start()
-                -- Treesitter usa 0-based indexing, vim usa 1-based
-                vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
-                vim.notify("Moved to start of " .. node_type, vim.log.levels.INFO)
-                return
-            end
-        end
-        function_node = function_node:parent()
-    end
-
-    vim.notify("Not inside a function", vim.log.levels.WARN)
-end
-
--- Mappa gsf in visual mode e normal mode per andare all'inizio della funzione
-vim.keymap.set("v", "gsf", go_to_start_of_function, {
+-- LSP rename (intelligent refactoring across all references/imports)
+vim.keymap.set("n", "r", vim.lsp.buf.rename, {
     noremap = true,
     silent = true,
-    desc = "Go to start of function (treesitter)",
-})
-vim.keymap.set("n", "gsf", go_to_start_of_function, {
-    noremap = true,
-    silent = true,
-    desc = "Go to start of function (treesitter)",
+    desc = "LSP rename symbol",
 })
 
--- go to note_veloci
-vim.keymap.set("n", "<leader>n", ":e $nt/note_veloci.md<CR>", { noremap = true })
+-- Global project search (live grep)
+vim.keymap.set("n", "w", "<cmd>Telescope live_grep<cr>", {
+    noremap = true,
+    silent = true,
+    desc = "Search string in project",
+})
